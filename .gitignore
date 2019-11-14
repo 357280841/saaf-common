@@ -1,0 +1,30 @@
+.DS_Store
+node_modules
+package-lock.json
+
+# local env files
+.env.local
+.env.*.local
+
+mock-back
+.history
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+
+作者：IT_WH
+链接：https://www.jianshu.com/p/3c1d9475f708
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
