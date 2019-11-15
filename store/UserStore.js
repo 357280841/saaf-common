@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-14 17:58:23
+ * @Last Modified time: 2019-11-15 16:35:09
  */
 
 import { localStorageTool, sessionStorageTool } from '../index'
@@ -11,6 +11,7 @@ import StoreCommon from './StoreCommon'
 import creatTree from '@/config/tree'
 import Vue from 'vue'
 import routerController from '@/page/pageConfig/routerController'
+import platform from '@/config/platform'
 
 export default {
   state: {
@@ -62,8 +63,17 @@ export default {
       // localStorageTool.remove('userInfo')
       // localStorageTool.remove('lookup')
       // StoreCommon.commit('CLEAN_TAB')
+      state.certificate = null
+      state.userInfo = {}
+      state.lookup = {}
+      state.userRespList = []
+      state.currentResp = {}
+      state.menuList = []
+      state.languageList = []
+      state.currentLanguage = {}
       sessionStorage.clear()
       localStorage.clear()
+      debugger
       // window.location.href = '/'
       routerController.replace('/')
     },
@@ -110,7 +120,7 @@ export default {
     GET_MENU_BY_RESP: ({ commit, state })=>{
       fetch.baseAccreditService_findBaseMenuByRespId({
         "isValid":true,
-        "systemCode":"BASE",
+        "systemCode":platform.systemCode,
         "responsibilityId": state.currentResp.responsibilityId,
         "lan":state.currentLanguage.lookupCode
       }).then(res=>{
