@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 16:42:04
+ * @Last Modified time: 2019-11-15 16:46:06
  */
 
 import { localStorageTool, sessionStorageTool } from '../index'
@@ -63,6 +63,14 @@ export default {
       // localStorageTool.remove('userInfo')
       // localStorageTool.remove('lookup')
       StoreCommon.commit('CLEAN_TAB')
+      state.certificate = null
+      state.userInfo = {}
+      state.lookup = {}
+      state.userRespList = []
+      state.currentResp = {}
+      state.menuList = []
+      state.languageList = []
+      state.currentLanguage = {}
       sessionStorage.clear()
       localStorage.clear()
       // window.location.href = '/'
