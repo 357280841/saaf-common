@@ -1,22 +1,52 @@
 {
-  "name": "saaf-common",
-  "version": "1.0.13",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_args": [
+    [
+      "saaf-common@1.0.13",
+      "/Users/sola/work/code/NewSaaf/saafweb"
+    ]
+  ],
+  "_from": "saaf-common@1.0.13",
+  "_id": "saaf-common@1.0.13",
+  "_inBundle": false,
+  "_integrity": "sha512-/Rlnv3LhO0On1IivCtT3FjhHdZdIQ9xywutQwmVWRT6XmoH3N8DU3Mb66+xb5j7L0VbdI6R/m1fTrh8i3yJ/6Q==",
+  "_location": "/saaf-common",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "saaf-common@1.0.13",
+    "name": "saaf-common",
+    "escapedName": "saaf-common",
+    "rawSpec": "1.0.13",
+    "saveSpec": null,
+    "fetchSpec": "1.0.13"
   },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/saaf-common/-/saaf-common-1.0.13.tgz",
+  "_spec": "1.0.13",
+  "_where": "/Users/sola/work/code/NewSaaf/saafweb",
+  "author": {
+    "name": "sola"
+  },
+  "bugs": {
+    "url": "https://github.com/357280841/saaf-common/issues"
+  },
+  "description": "",
+  "homepage": "https://github.com/357280841/saaf-common#readme",
+  "keywords": [
+    "saaf-common"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "saaf-common",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/357280841/saaf-common.git"
   },
-  "keywords": [
-    "saaf-common"
-  ],
-  "author": "sola",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/357280841/saaf-common/issues"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/357280841/saaf-common#readme"
+  "version": "1.0.13"
 }

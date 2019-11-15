@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:26:49
+ * @Last Modified time: 2019-11-15 10:03:46
  */
 
 import store from '../store/StoreCommon'
@@ -11,9 +11,9 @@ import { getState } from './storeTool'
 import { urlTool } from "../index"
 
 export default class tabsTool{
-    constructor(){
-        this.rootWindow = window.parent!=window?window.parent:window
-    }
+    // constructor(){
+    //     this.rootWindow = window.parent!=window?window.parent:window
+    // }
     static openTab(item){
         // this.rootWindow.tabsService.openTab(item)
         this.openIframeTab(item)
@@ -61,3 +61,4 @@ export default class tabsTool{
         this.rootWindow.tabsService.openTab(menu)
     }
 }
+tabsTool.rootWindow = window.parent!=window?window.parent:window
