@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:42:10
+ * @Last Modified time: 2019-11-19 14:22:38
  */
 
 <template>
@@ -104,6 +104,8 @@ export default {
         })
       },
       getFirstPage(){
+        // console.log(this.$refs.SaafTable)
+        // this.$refs.SaafTable.scrollTop = 0
         this.$refs.SaafTable.getFirstPage()
       },
       resetTableHeight(){

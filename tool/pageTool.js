@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-14 17:57:23
+ * @Last Modified time: 2019-11-19 14:16:46
  */
 
 
@@ -21,7 +21,10 @@ pageTool.createrPage = ()=>{
 }
 pageTool.update = (res,page)=>{
     if(res.page){
-        return res.page
+        return {
+            ...res.page,
+            pageIndex: res.page.curIndex
+        }
     }else if(res.count>=0){
         page.pagesCount = Math.ceil(res.count/page.pageSize)
         page.count = res.count
