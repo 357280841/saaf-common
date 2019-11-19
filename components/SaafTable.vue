@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:20:44
+ * @Last Modified time: 2019-11-19 11:48:40
  */
 
 
@@ -127,11 +127,13 @@ import pageTool from '../tool/pageTool'
         },
         pageSizeChange(size){
           this.page.pageSize = size
+          this.page.pageIndex = 1
+          this.page.nextIndex = 1
           this.$emit("update:page", this.page)
-          if(this.current == 1){
-            this.page.nextIndex = 1
-            this.$emit("update:page", this.page)
-          }
+          // if(this.current == 1){
+          //   this.page.nextIndex = 1
+          //   this.$emit("update:page", this.page)
+          // }
           this.getData(this.page)
         },
         getFirstPage(){
