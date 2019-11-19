@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 10:54:51
+ * @Last Modified time: 2019-11-19 11:25:27
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -31,7 +31,7 @@ export default {
       try {
         state.userInfo = localStorageTool.get('userInfo')
         if(!state.userInfo){
-          routerController.replace('/')
+          StoreCommon.commit('LOGOUT')
         }
         state.userRespList = state.userInfo?state.userInfo.userRespList:null
         state.certificate = state.userInfo?state.userInfo.certificate:null
@@ -57,6 +57,8 @@ export default {
       localStorageTool.save('lookup', data)
     },
     LOGOUT (state) {
+      sessionStorage.clear()
+      localStorage.clear()
       StoreCommon.commit('CLEAN_TAB')
       // state.certificate = null
       // state.userInfo = {}
@@ -66,9 +68,8 @@ export default {
       // state.menuList = []
       // state.languageList = []
       // state.currentLanguage = {}
-      sessionStorage.clear()
-      localStorage.clear()
       // tabsTool.rootWindow.location.href = '/'
+      console.log(tabsTool.rootWindow)
       tabsTool.goto({url:'/'})
       // routerController.replace('/')
     },
