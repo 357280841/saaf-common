@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 10:03:46
+ * @Last Modified time: 2019-11-19 10:49:49
  */
 
 import store from '../store/StoreCommon'
@@ -59,6 +59,9 @@ export default class tabsTool{
         menu.close = menu.close===false?false:true
         menu.url = '/main'+menu.url
         this.rootWindow.tabsService.openTab(menu)
+    }
+    static goto(item){
+        this.rootWindow.tabsService.goto(item)
     }
 }
 tabsTool.rootWindow = window.parent!=window?window.parent:window

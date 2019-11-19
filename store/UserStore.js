@@ -2,10 +2,10 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 16:46:06
+ * @Last Modified time: 2019-11-19 10:54:51
  */
 
-import { localStorageTool, sessionStorageTool } from '../index'
+import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
 import { fetch } from '@/page/pageConfig/index'
 import StoreCommon from './StoreCommon'
 import creatTree from '@/config/tree'
@@ -57,24 +57,20 @@ export default {
       localStorageTool.save('lookup', data)
     },
     LOGOUT (state) {
-      // state.certificate = null
-      // state.userInfo = null
-      // state.lookup = null
-      // localStorageTool.remove('userInfo')
-      // localStorageTool.remove('lookup')
       StoreCommon.commit('CLEAN_TAB')
-      state.certificate = null
-      state.userInfo = {}
-      state.lookup = {}
-      state.userRespList = []
-      state.currentResp = {}
-      state.menuList = []
-      state.languageList = []
-      state.currentLanguage = {}
+      // state.certificate = null
+      // state.userInfo = {}
+      // state.lookup = {}
+      // state.userRespList = []
+      // state.currentResp = {}
+      // state.menuList = []
+      // state.languageList = []
+      // state.currentLanguage = {}
       sessionStorage.clear()
       localStorage.clear()
-      // window.location.href = '/'
-      routerController.replace('/')
+      // tabsTool.rootWindow.location.href = '/'
+      tabsTool.goto({url:'/'})
+      // routerController.replace('/')
     },
     SET_CURRENT_RESP (state,data){
       state.currentResp = data
@@ -99,7 +95,7 @@ export default {
       StoreCommon.commit('CLEAN_TAB')
       sessionStorageTool.save('currentLanguage', data)
       // window.location.href = '/#/main'
-      routerController.replace('main')
+      // routerController.replace('/main')
       window.location.reload()
     },
   },

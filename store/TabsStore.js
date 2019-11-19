@@ -2,12 +2,12 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:05
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-10-14 15:20:54
+ * @Last Modified time: 2019-11-19 10:52:44
  */
 
 import Vue from 'vue'
 import StoreCommon from './StoreCommon'
-import { sessionStorageTool } from '../index'
+import { sessionStorageTool,tabsTool } from '../index'
 export default {
   state: {
     tabList:  {},
@@ -54,6 +54,8 @@ export default {
         state.tabList = tabStore.tabList
         state.activeTab = tabStore.activeTab
         state.keyEnumerate = tabStore.keyEnumerate
+      }else{
+        StoreCommon.commit('INIT_HOME')
       }
     },
     CLEAN_TAB(state){
@@ -61,6 +63,14 @@ export default {
       state.activeTab = {}
       state.keyEnumerate = {}
       sessionStorageTool.remove('tabStore')
+      StoreCommon.commit('INIT_HOME')
+    },
+    INIT_HOME(state){
+      tabsTool.openRouterTab({
+        name: '我的主页',
+        url: '/home',
+        close: false
+      })
     }
   },
   actions: {
