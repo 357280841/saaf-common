@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-10-10 22:03:50
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-10-18 15:13:01
+ * @Last Modified time: 2019-11-20 09:06:39
  */
 
 import store from './store/StoreCommon'
@@ -17,6 +17,7 @@ import sessionStorageTool from './tool/sessionStorageTool'
 import pinYinTool from './tool/pinYinTool'
 import initApp from './initApp'
 import urlTool from './tool/urlTool'
+import onresizeTool from './tool/onresizeTool'
 
 export {
     store,
@@ -32,5 +33,6 @@ export {
     sessionStorageTool,
     urlTool,
     pinYinTool,
+    onresizeTool,
     // 工具 end
 }

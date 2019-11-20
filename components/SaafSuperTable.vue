@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 14:22:38
+ * @Last Modified time: 2019-11-19 18:02:59
  */
 
 <template>
@@ -85,6 +85,7 @@ export default {
       getPage(page){
         this.currentRow=null;
         this.resetTableHeight()
+        this.$refs.SaafTable.scrollTop()
         return new Promise((resolve, reject)=>{
           this.loading = true
           fetchTool.postSimpleness(api[this.tableConfig.findApi],{
@@ -109,8 +110,11 @@ export default {
         this.$refs.SaafTable.getFirstPage()
       },
       resetTableHeight(){
+        // console.log($(window).innerHeight())
+        // console.log(this.$store.state.system.screenHeight)
+        // console.log($(this.$refs.SaafListPageHeader.$el).offset())
         setTimeout(()=>{
-          this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-35
+          this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-10
         })
       },
       formatFunctionList(){

@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 14:26:25
+ * @Last Modified time: 2019-11-19 15:33:07
  */
 
 
@@ -137,7 +137,6 @@ import pageTool from '../tool/pageTool'
           this.getData(this.page)
         },
         getFirstPage(){
-          this.$refs.Table.$el.querySelector('.ivu-table-body').scrollTop = 0
           this.page.pageIndex = 1
           this.page.nextIndex = 1
           this.$emit("update:page", this.page)
@@ -148,6 +147,9 @@ import pageTool from '../tool/pageTool'
           this.$emit("update:page", this.page)
           this.getData(this.page)
         },
+        scrollTop(){
+          this.$refs.Table.$el.querySelector('.ivu-table-body').scrollTop = 0
+        }
       },
       watch:{
         columns: {
