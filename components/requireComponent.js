@@ -20,6 +20,7 @@ import SaafFileUpload from './Upload/SaafFileUpload'
 import SaafDelModalV2 from './SaafDelModalV2'
 import VueUploadComponent from 'vue-upload-component'
 import SaafImportExcel from './Upload/SaafImportExcel'
+import SaafAutoScroll from './SaafAutoScroll'
 
 
 Vue.component('SaafListPageHeader', SaafListPageHeader)
@@ -44,3 +45,4 @@ Vue.component('SaafFileUpload', SaafFileUpload)
 Vue.component('SaafDelModalV2', SaafDelModalV2)
 Vue.component('file-upload', VueUploadComponent)
 Vue.component('SaafImportExcel', SaafImportExcel)
+Vue.component('SaafAutoScroll', SaafAutoScroll)
