@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-20 16:43:10 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-21 17:00:03
+ * @Last Modified time: 2019-11-22 15:09:59
  */
 
 
@@ -19,7 +19,7 @@
 
         <!-- :style="{height: boxHeight}" -->
     <GeminiScrollbar 
-        :class="{'type-x':type=='x','type-y':type=='y','type-auto':type=='auto',}" 
+        :class="{'type-x':type=='x','type-y':type=='y','type-auto':type=='auto',}"
         ref="SaafAutoScroll" >
         <div ref="Content">
             <slot></slot>
@@ -75,7 +75,13 @@ export default {
             }
             $(this.$refs.SaafAutoScroll.$el).height(this.boxHeight)
             $(this.$refs.SaafAutoScroll.$el.querySelector('.gm-scroll-view')).height((this.boxHeight))
-            
+            // if(this.type == 'x'){
+            //     $(this.$refs.SaafAutoScroll.$el.querySelector('.gm-scrollbar-container')).addClass('type-x')
+            // }else if(this.type == 'y'){
+            //     $(this.$refs.SaafAutoScroll.$el.querySelector('.gm-scrollbar-container')).addClass('type-y')
+            // }else if(this.type == 'auto'){
+            //     $(this.$refs.SaafAutoScroll.$el.querySelector('.gm-scrollbar-container')).addClass('auto')
+            // }
         }
     },
     watch:{
@@ -98,4 +104,5 @@ export default {
     .type-auto {
         overflow: auto;
     }
+    .type-hidden {}
 </style>

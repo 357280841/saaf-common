@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-07 14:00:34
+ * @Last Modified time: 2019-11-22 13:40:00
  */
 
 
@@ -14,7 +14,11 @@
           <Tree :data="treeData" @on-select-change="selectChange"></Tree>
         </div>
       </Poptip>
-      <Tree v-if="type === 'tree'" :data="treeData" @on-select-change="selectChange"></Tree>
+      <div class="tree-box" v-if="type === 'tree'">
+        <Button size="small" type="primary" @click="getData">{{$i18n.t('刷新')}}<Icon size="16" type="ios-refresh" /></Button>
+        <!-- <Icon type="md-refresh-circle" size="20" /> -->
+        <Tree :data="treeData" @on-select-change="selectChange"></Tree>
+      </div>
     </div>
 </template>
 <script>

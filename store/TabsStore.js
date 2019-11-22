@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:05
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 10:52:44
+ * @Last Modified time: 2019-11-22 10:36:00
  */
 
 import Vue from 'vue'
@@ -67,7 +67,7 @@ export default {
     },
     INIT_HOME(state){
       tabsTool.openRouterTab({
-        name: '我的主页',
+        name: i18n.t('我的主页'),
         url: '/home',
         close: false
       })
