@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 15:33:07
+ * @Last Modified time: 2019-11-22 17:42:48
  */
 
 
@@ -89,7 +89,7 @@ import pageTool from '../tool/pageTool'
             {
               title: '序号',
               type: 'index',
-              width: 60,
+              width: 70,
               align: 'center'
             },
           ]

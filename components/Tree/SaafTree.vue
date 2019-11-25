@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 13:40:00
+ * @Last Modified time: 2019-11-22 17:16:46
  */
 
 
@@ -15,8 +15,8 @@
         </div>
       </Poptip>
       <div class="tree-box" v-if="type === 'tree'">
-        <Button size="small" type="primary" @click="getData">{{$i18n.t('刷新')}}<Icon size="16" type="ios-refresh" /></Button>
-        <!-- <Icon type="md-refresh-circle" size="20" /> -->
+        <!-- <Button size="small" type="primary" @click="getData">{{$i18n.t('刷新')}}<Icon size="16" type="ios-refresh" /></Button> -->
+        <Icon class="refresh" @click="getData" type="md-refresh-circle" size="20" />
         <Tree :data="treeData" @on-select-change="selectChange"></Tree>
       </div>
     </div>
@@ -106,5 +106,11 @@
 <style lang="less" scoped>
 .tree-box {
   max-height: 300px;
+  position: relative;
+}
+.refresh {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
 }
 </style>
