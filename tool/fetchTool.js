@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-08-21 11:50:06
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:40:25
+ * @Last Modified time: 2019-11-25 17:09:41
  */
 // axios  ajax
 import axios from 'axios'
@@ -141,20 +141,20 @@ let fetch = {
     // if(!v){
     //   v = url.indexOf('/v1/') != -1 ? 'v1' : 'v0'
     // }
-
-    // if(v === "v0"){
-    //   headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-    //   if(systemHook&&systemHook.PostParams){
-    //     params.params =  Object.assign(systemHook.PostParams(),params.params)
-    //   }
-    //   params.params = params.params ? JSON.stringify(params.params) : JSON.stringify({})
-    //   params = qs.stringify(params)
-    // }else if(v === "v1"){
+    if(url.indexOf("ausnutria.com")>=0){
+      headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+      headers.certificate = systemHook.oaCertificate
+      if(systemHook&&systemHook.PostParams){
+        params.params =  Object.assign(systemHook.PostParams(),params)
+      }
+      params.params = params.params ? JSON.stringify(params.params) : JSON.stringify({})
+      params = qs.stringify(params)
+    }else{
       headers['Content-Type'] = 'application/json;charset=UTF-8'
       if(systemHook&&systemHook.PostParams){
         params =  Object.assign(systemHook.PostParams(), params)
       }
-    // }
+    }
     
     return new Promise((resolve, reject) => {
       axios.post(url, params,{
