@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:05
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-10-18 14:53:50
+ * @Last Modified time: 2019-11-26 16:00:31
  */
 import StoreCommon from './StoreCommon'
 import { sessionStorageTool } from '../index'
@@ -11,6 +11,7 @@ export default {
   state: {
     screenWidth: 0,
     screenHeight: 0,
+    isFullscreen:true
   },
   getters: {
   },
@@ -18,6 +19,9 @@ export default {
     ONRESIZE(state,data){
       state.screenWidth = data.clientWidth
       state.screenHeight = data.clientHeight
+    },
+    FULLSCREEN (state) {
+      state.isFullscreen = !state.isFullscreen
     }
   },
   actions: {

@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 14:37:41
+ * @Last Modified time: 2019-11-26 16:00:47
  */
 
 
@@ -253,7 +253,7 @@ export default {
       tabs: state => state.tabs,
       tabKey: state => state.tabs.tabKey,
       menuList: state => state.user.menuList,
-      isFullscreen:state => state.custom.isFullscreen,
+      isFullscreen:state => state.system.isFullscreen,
     })
   },
   created() {
@@ -264,7 +264,7 @@ export default {
   
   methods: {
       hhh(){
-        this.$store.commit("Fullscreen");
+        this.$store.commit("FULLSCREEN");
       },
     //   确认修改密码
     okChange() {
