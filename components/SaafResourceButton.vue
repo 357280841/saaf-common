@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 17:55:42 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:19:39
+ * @Last Modified time: 2019-11-26 17:21:00
 
 
 
@@ -42,6 +42,7 @@ export default {
     data () {
         return {
             btnList: [],
+            btnMap: {},
             currentMenu: null
         }
     },
@@ -64,8 +65,10 @@ export default {
                 menuId: this.menuId,
                 respId: this.respId
             }).then(res=>{
-
                 this.btnList = res.data
+                res.data.map((item)=>{
+                    this.btnMap[item.resourceCode] = item
+                })
             })
         }
     }
