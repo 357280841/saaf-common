@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 16:00:47
+ * @Last Modified time: 2019-11-26 16:54:00
  */
 
 
@@ -10,7 +10,7 @@
 <template>
   <div class="main-box">
     <div class="layout">
-      <div class="header-line"  v-show="isFullscreen">
+      <div class="header-line"  v-show="!isFullscreen">
         <div class="sie_img">
           <img src="../../assets/image/sie.png" alt />
         </div>
@@ -19,15 +19,10 @@
             class="header"
             :style="{background: '#2d8cf0',height: '50px', lineHeight: '50px'}"
           >
-            <!-- <div>
-                        <Icon type="md-menu" size="24" :style="{marginRight: '30px'}" />
-                        <Icon type="md-home" size="20" />
-                        <span>首页</span>
-            </div>-->
+
             <div class="user">
               <div class="user-item" @click="pswdModal = true">{{$i18n.t('修改密码')}}</div>
               <div class="language user-item">
-                <!-- <span>{{$t('Language')}}: {{$store.state.user.currentLanguage.lookupCode}}</span> -->
                 <SaafLanguageSelect />
               </div>
               <div class="resp user-item">
@@ -35,14 +30,13 @@
               </div>
               <div class="logout user-item" @click="userLogout()">
                 {{$store.state.user.userInfo.userName}} {{$i18n.t('退出')}}
-                <!-- <Logout/> -->
               </div>
             </div>
           </Header>
         </Layout>
       </div>
       
-      <Sider :class="{moveStar:isFullscreen,moveEnd:!isFullscreen}"
+      <Sider :class="{moveStar:!isFullscreen,moveEnd:isFullscreen}"
         :style="{position: 'fixed', height: '100vh',width: '240px', left: 0, overflow: 'auto',minWidth: '240px',maxWidth: '240px'}"
       >
         <!-- <Row>
@@ -57,7 +51,6 @@
             <Menu :theme="theme2" :open-names="['1']" accordion>
               <Submenu :name="index" v-for="(x,index) in menuList" :key="index">
                 <template slot="title">
-                  <!-- <Icon type="ios-paper" /> -->
                   <span :class="x.imageLink"></span>
                   {{x.name}}
                 </template>
@@ -68,7 +61,6 @@
                   <template v-if="y.children&&y.children.length>0">
                     <Submenu :name="index+'-'+eq" :key="eq">
                       <template slot="title">
-                        <!-- <Icon type="ios-paper" /> -->
                         <span :class="y.imageLink"></span>
                         {{y.name}}
                       </template>
@@ -90,21 +82,11 @@
         </Row>-->
       </Sider>
        
-      <Layout :class="{marginLeft:isFullscreen,Fullscreen:!isFullscreen}">
-        <!-- <Header class="header" :style="{borderTop: 'solid 1px #eee',borderBottom: 'solid 1px #eee',display: 'flex',paddingRight: '10px',paddingLeft:'10px',whiteSpace: 'nowrap', height: '32px', lineHeight: '30px'}"> -->
-        <!-- tab标签 -->
-        <!-- <div class="scroll-style tab-box"> -->
-        <!-- <Tag
-                        v-for="item in tabs.tabList"
-                        :closable="item.close"
-                        v-bind:key="item[tabKey]"
-                        :color="tabs.activeTab[tabKey] == item[tabKey]?'primary':'default'"
-                        @on-close="closeTab(item)"
-                        @click.native="activeTab(item)">{{item.name}}
-        </Tag>-->
+      <Layout :class="{marginLeft:!isFullscreen,Fullscreen:isFullscreen}">
+        
         <div>
           
-          <SaafAutoScroll v-show="isFullscreen" type="x" :height="32" class="tab-box">
+          <SaafAutoScroll v-show="!isFullscreen" type="x" :height="32" class="tab-box">
             <div
               v-for="item in tabs.tabList"
               class="tag"
@@ -239,9 +221,6 @@ export default {
       // 缓存管理
       cachePage: "",
       theme2: "dark",
-      // menuList:[],
-      // tempList:[]
-      // cachePage: [],
       iframeHeight: 0,
       interval: null,
       modal: false,
@@ -343,30 +322,17 @@ export default {
     clearInterval(this.interval);
   },
   mounted() {
-    // tabsTool.openRouterTab({
-    //     name: '我的主页',
-    //     url: '/home',
-    //     close: false
-    // })
     this.interval = setInterval(() => {
       // this.$refs.MenuList.changeHeight()
       this.setPageWindowHeight();
       // this.setMenuHeight()
     }, 1000);
-    // var _this = this;
-    // window.onresize = function(){
-    //     _this.setPageWindowHeight()
-    //     _this.$store.commit('ONRESIZE', document.documentElement)
-    // };
     onresizeTool.addFunction({
       key: "mainHeihgt",
       fun: () => {
         this.setPageWindowHeight();
       }
     });
-    // onresizeTool.addFunction({key:'menuHeihgt', fun:()=>{
-    //     this.setMenuHeight()
-    // }})
   }
 };
 </script>

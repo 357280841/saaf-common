@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:05
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 16:00:31
+ * @Last Modified time: 2019-11-26 16:57:01
  */
 import StoreCommon from './StoreCommon'
 import { sessionStorageTool } from '../index'
@@ -11,7 +11,7 @@ export default {
   state: {
     screenWidth: 0,
     screenHeight: 0,
-    isFullscreen:true
+    isFullscreen:false
   },
   getters: {
   },
