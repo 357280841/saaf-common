@@ -10,5 +10,6 @@ module.exports = {
     "搜索": "Query",
     "重置": "Reset",
     "刷新": "Refresh",
-    "修改密码": "Change password"
+    "修改密码": "Change password",
+    "序号": "NO"
 }

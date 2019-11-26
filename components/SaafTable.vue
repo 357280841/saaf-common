@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 17:42:48
+ * @Last Modified time: 2019-11-26 10:12:49
  */
 
 
@@ -87,7 +87,7 @@ import pageTool from '../tool/pageTool'
           let column = []
           column = [
             {
-              title: '序号',
+              title: this.$i18n.t('序号'),
               type: 'index',
               width: 70,
               align: 'center'
