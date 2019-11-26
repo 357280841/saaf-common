@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 10:52:48
+ * @Last Modified time: 2019-11-26 10:02:07
  */
 
 <template>
@@ -83,7 +83,7 @@ export default {
         this.getPage(this.tablePage)
       },
       getPage(page){
-        this.currentRow=null;
+        this.$refs.SaafTable.$refs.Table.clearCurrentRow()
         this.resetTableHeight()
         this.$refs.SaafTable.scrollTop()
         return new Promise((resolve, reject)=>{
@@ -105,8 +105,6 @@ export default {
         })
       },
       getFirstPage(){
-        // console.log(this.$refs.SaafTable)
-        // this.$refs.SaafTable.scrollTop = 0
         this.$refs.SaafTable.getFirstPage()
       },
       resetTableHeight(){
