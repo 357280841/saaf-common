@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:18:18 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:37:28
+ * @Last Modified time: 2019-11-27 14:38:34
  */
 
 <i18n>
@@ -41,7 +41,7 @@
         <div class="p10">传入height参数，会根据参数固定table内容列；不传即自动根据屏幕剩余高度显示；</div>
     </div>
 
-    <SaafSimpleTable ref="SaafSimpleTable" :height="100" :tableConfig="tableConfig" :currentRow.sync="currentRow"></SaafSimpleTable>
+    <SaafSimpleTable class="mb30" ref="SaafSimpleTable" :height="100" :tableConfig="tableConfig" :currentRow.sync="currentRow"></SaafSimpleTable>
 
     <SaafSimpleTable ref="SaafSimpleTable2" :tableConfig="tableConfig" :currentRow.sync="currentRow"></SaafSimpleTable>
     
