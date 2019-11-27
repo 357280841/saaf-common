@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 17:16:46
+ * @Last Modified time: 2019-11-27 16:12:06
  */
 
 
@@ -79,7 +79,7 @@
           fetch[this.config.api](this.config.params).then(res=>{
             let tree = []
             res.data.map((item,key)=>{
-              if(item[this.config.parentKey] === 0){
+              if(item[this.config.parentKey] === 0 || item[this.config.parentKey] === -1){
                 item.title = item[this.config.name]
                 item.expand = true
                 tree.push(item)
