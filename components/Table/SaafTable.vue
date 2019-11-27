@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 10:12:49
+ * @Last Modified time: 2019-11-27 14:00:01
  */
 
 
@@ -37,7 +37,7 @@
 </template>
 <script>
 import { setTimeout } from 'timers';
-import pageTool from '../tool/pageTool'
+import pageTool from '../../tool/pageTool'
     export default {
       props:{
         columns:{

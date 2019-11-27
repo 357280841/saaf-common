@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 10:02:07
+ * @Last Modified time: 2019-11-27 14:00:13
  */
 
 <template>
@@ -47,7 +47,7 @@
   
 import {fetch,api} from '@/page/pageConfig/index'
 import { Promise, resolve, reject } from 'q';
-import { fetchTool, pageTool, tabsTool, gridButton, getUrl } from '../index'
+import { fetchTool, pageTool, tabsTool, gridButton, getUrl } from '../../index'
 
 export default {
     props:{

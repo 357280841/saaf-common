@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import SaafListPageHeader from './SaafListPageHeader'
 import SaafParamForm from './SaafParamForm'
-import SaafSuperTable from './SaafSuperTable'
-import SaafTable from './SaafTable'
+import SaafSuperTable from './Table/SaafSuperTable'
+import SaafTable from './Table/SaafTable'
 import SaafDelModal from './SaafDelModal'
 import SaafLookupSelect from './SaafLookupSelect'
 import SaafRespSelect from './SaafRespSelect'
@@ -21,6 +21,7 @@ import SaafDelModalV2 from './SaafDelModalV2'
 import VueUploadComponent from 'vue-upload-component'
 import SaafImportExcel from './Upload/SaafImportExcel'
 import SaafAutoScroll from './SaafAutoScroll'
+import SaafSimpleTable from './Table/SaafSimpleTable'
 
 
 Vue.component('SaafListPageHeader', SaafListPageHeader)
@@ -46,3 +47,4 @@ Vue.component('SaafDelModalV2', SaafDelModalV2)
 Vue.component('file-upload', VueUploadComponent)
 Vue.component('SaafImportExcel', SaafImportExcel)
 Vue.component('SaafAutoScroll', SaafAutoScroll)
+Vue.component('SaafSimpleTable', SaafSimpleTable)

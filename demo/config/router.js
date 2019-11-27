@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen 
  * @Date: 2019-05-24 17:37:33 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 14:00:26
+ * @Last Modified time: 2019-11-27 14:17:59
  */
 
 
@@ -25,8 +25,14 @@ let router = [
             {
                 path: 'SuperTableDemo',
                 url: 'SuperTableDemo?menuId=1872&respId=390006',
-                urlName: '列表页大组件<br/>SaafSuperTableDemo',
+                urlName: '超级列表组件<br/>SaafSuperTableDemo',
                 component: () => import('../SuperTableDemo.vue'),
+            },
+            {
+                path: 'SimpleTableDemo',
+                url: 'SimpleTableDemo',
+                urlName: 'table组件<br/>SaafSimpleTable',
+                component: () => import('../SimpleTableDemo.vue'),
             },
             {
                 path: 'ParamFormDemo',
