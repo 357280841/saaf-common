@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 14:06:20 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:37:35
+ * @Last Modified time: 2019-11-27 10:48:40
  */
 <i18n>
 {
@@ -125,7 +125,7 @@ export default {
           searchItems:{
             lookupType_like:{
               label:this.$t("lookup type"), type:"text", change:(val)=>{
-                // console.log(val)
+                console.log(val)
                 console.log(this.$refs.SaafSuperTable.searchParams)
               }
             },

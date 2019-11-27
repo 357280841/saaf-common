@@ -2,13 +2,18 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-01 11:52:55
+ * @Last Modified time: 2019-11-27 11:38:05
  */
 
 
 <template>
     <div class="list-page-header">
-      <div class="title">{{title}}</div>
+      <div class="title">
+        <!-- {{title}} -->
+        <ButtonGroup size="small">
+          <Button type="error" size="small" icon="ios-albums-outline" @click="fullscreen">数据全屏</Button>
+        </ButtonGroup>
+      </div>
       <div class="btn-group">
         <slot></slot>
       </div>
@@ -16,6 +21,7 @@
     </div>
 </template>
 <script>
+    import {iframeTool} from '../index'
     export default {
       props:{
         title: String
@@ -31,7 +37,9 @@
 
       },
       methods: {
-
+        fullscreen(){
+          iframeTool.run('FULLSCREEN')
+        }
       }
     }
 </script>
@@ -42,8 +50,8 @@
   border-bottom: 1px solid #f3f3f3;
 }
 .title {
-  font-size: 16px;
-  font-weight: bold;
+  // font-size: 16px;
+  // font-weight: bold;
   float: left;
 }
 .btn-group {

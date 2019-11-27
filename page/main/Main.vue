@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 16:54:00
+ * @Last Modified time: 2019-11-27 11:32:36
  */
 
 
@@ -172,7 +172,7 @@ import { mapState, mapMutations } from "vuex";
 import { stat } from "fs";
 import { fetch } from "@/page/pageConfig/index";
 import creatTree from "@/config/tree";
-import { tabsTool, onresizeTool } from "saaf-common";
+import { tabsTool, onresizeTool, iframeTool } from "saaf-common";
 import Md5 from "js-md5";
 export default {
   data() {
@@ -333,6 +333,9 @@ export default {
         this.setPageWindowHeight();
       }
     });
+    iframeTool.add('FULLSCREEN',()=>{
+      this.$store.commit("FULLSCREEN");
+    })
   }
 };
 </script>
