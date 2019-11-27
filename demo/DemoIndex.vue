@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen 
  * @Date: 2019-05-24 17:55:36 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:30:39
+ * @Last Modified time: 2019-11-27 14:48:12
  */
 
 <template>
@@ -14,7 +14,9 @@
         </Col>
         <Col span="20">
           <div class="page-content">
-            <router-view></router-view>
+            <div>
+              <router-view></router-view>
+            </div>
           </div>
         </Col>
     </Row>
@@ -55,6 +57,6 @@ export default {
   }
 }
 .page-content {
-  padding: 15px;
+  margin: 15px;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:32:29
+ * @Last Modified time: 2019-11-27 14:48:59
  */
 
 <template>
@@ -87,7 +87,7 @@ export default {
             this.tableHeight = this.height
         }else{
             setTimeout(()=>{
-                this.tableHeight = this.$store.state.system.screenHeight - $(this.$refs.SaafTable.$el).offset().top - 50
+                this.tableHeight = this.$store.state.system.screenHeight - $(this.$refs.SaafTable.$el).offset().top - 65
             })
         }
       },
