@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 11:32:36
+ * @Last Modified time: 2019-11-27 18:22:37
  */
 
 
@@ -86,11 +86,12 @@
         
         <div>
           
-          <SaafAutoScroll v-show="!isFullscreen" type="x" :height="32" class="tab-box">
+          <SaafAutoScroll v-show="!isFullscreen" type="x" :height="32" class="tab-box" id="tabs-tag-box">
             <div
               v-for="item in tabs.tabList"
               class="tag"
               :class="tabs.activeTab[tabKey] == item[tabKey]?'tag-active':''"
+              :id="`tabs-tag-${item.menuId}`"
             >
               <span class="tab-title" @click="activeTab(item)">{{item.name}}</span>
               <Icon
