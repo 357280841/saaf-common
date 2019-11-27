@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 11:38:05
+ * @Last Modified time: 2019-11-27 15:22:18
  */
 
 
@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-    import {iframeTool} from '../index'
+    import {iframeTool} from '../../index'
     export default {
       props:{
         title: String
