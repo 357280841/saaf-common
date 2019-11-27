@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 18:21:39
+ * @Last Modified time: 2019-11-27 18:29:22
  */
 
 import store from '../store/StoreCommon'
@@ -20,9 +20,11 @@ export default class tabsService{
                 return
             }
         }
+        setTimeout(()=>{
+            $('#tabs-tag-box').find('.gm-scroll-view').scrollLeft($('#tabs-tag-'+item.menuId).position().left)
+        },300)
         store.commit("ADD_TAB",item)
         store.commit("ACTIVE_TAB",item)
-        $('#tabs-tag-box').find('.gm-scroll-view').scrollLeft($('#tabs-tag-'+item.menuId).position().left)
         this.goto(item)
     }
     static activeTab(item){
