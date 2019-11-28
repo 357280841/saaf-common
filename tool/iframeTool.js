@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 11:05:40 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 11:38:37
+ * @Last Modified time: 2019-11-28 16:45:16
  */
 
 export default class iframeTool {
@@ -13,6 +13,9 @@ export default class iframeTool {
         return this.getList()[key]
     }
     static run(key,params){
+        if(!this.getList()[key]){
+            throw `没有找到函数【${key}】`
+        }
         return this.getList()[key](params)
     }
     static remove(key){
