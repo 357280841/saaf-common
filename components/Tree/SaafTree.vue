@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 15:48:43
+ * @Last Modified time: 2019-11-28 16:15:35
  */
 
 
@@ -68,32 +68,9 @@
       mounted () {
       },
       methods: {
-        // checkChild(list,currentItem){
-        //   list.map((item,key)=>{
-        //     if(!currentItem.children){
-        //       currentItem.children = []
-        //     }
-        //     if(currentItem[this.config.key] === item[this.config.parentKey]){
-        //       item.title = item[this.config.name]
-        //       item.expand = false
-        //       currentItem.children.push(item)
-        //       this.checkChild(list,item)
-        //     }
-        //   })
-        // },
         getData(){
           fetch[this.config.api](this.config.params).then(res=>{
             this.list = JSON.parse(JSON.stringify(res.data))
-            // let tree = []
-            // res.data.map((item,key)=>{
-            //   if(item[this.config.parentKey] === 0 || item[this.config.parentKey] === -1){
-            //     item.title = item[this.config.name]
-            //     item.expand = true
-            //     tree.push(item)
-            //     // this.checkChild(res.data,item)
-            //     treeTool.checkChild(res.data, item, this.config.key, this.config.parentKey, this.config.name)
-            //   }
-            // })
             this.treeData = treeTool.getTreeCmp(res.data, this.config.key, this.config.parentKey, this.config.name)
             this.$emit('load-after')
           })
