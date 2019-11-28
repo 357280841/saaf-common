@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 16:12:06
+ * @Last Modified time: 2019-11-28 15:48:43
  */
 
 
@@ -11,18 +11,19 @@
       <Poptip :disabled="disabled" v-if="type === 'select'" placement="bottom" v-model="visible" transfer>
         <Input :disabled="disabled" :value="name" readonly suffix="ios-search"></Input>
         <div slot="content" class="tree-box">
-          <Tree :data="treeData" @on-select-change="selectChange"></Tree>
+          <Tree :data="treeData" @on-select-change="selectChange" :show-checkbox="checkbox"></Tree>
         </div>
       </Poptip>
       <div class="tree-box" v-if="type === 'tree'">
         <!-- <Button size="small" type="primary" @click="getData">{{$i18n.t('刷新')}}<Icon size="16" type="ios-refresh" /></Button> -->
         <Icon class="refresh" @click="getData" type="md-refresh-circle" size="20" />
-        <Tree :data="treeData" @on-select-change="selectChange"></Tree>
+        <Tree :data="treeData" @on-select-change="selectChange" @on-check-change="checkChange" :show-checkbox="checkbox"></Tree>
       </div>
     </div>
 </template>
 <script>
     import {fetch} from "@/page/pageConfig"
+    import { treeTool } from "saaf-common"
     export default {
       props:{
         value: String | Number,
@@ -39,6 +40,11 @@
         disabled: {
           type: Boolean,
           required: false
+        },
+        checkbox: {
+          type: Boolean,
+          required: false,
+          default: false
         }
       },
       // model: {
@@ -49,7 +55,7 @@
       },
       data () {
         return {
-          // list: [],
+          list: [],
           treeData: [],
           visible:false,
           row: {},
@@ -62,40 +68,49 @@
       mounted () {
       },
       methods: {
-        checkChild(list,currentItem){
-          list.map((item,key)=>{
-            if(!currentItem.children){
-              currentItem.children = []
-            }
-            if(currentItem[this.config.key] === item[this.config.parentKey]){
-              item.title = item[this.config.name]
-              item.expand = false
-              currentItem.children.push(item)
-              this.checkChild(list,item)
-            }
-          })
-        },
+        // checkChild(list,currentItem){
+        //   list.map((item,key)=>{
+        //     if(!currentItem.children){
+        //       currentItem.children = []
+        //     }
+        //     if(currentItem[this.config.key] === item[this.config.parentKey]){
+        //       item.title = item[this.config.name]
+        //       item.expand = false
+        //       currentItem.children.push(item)
+        //       this.checkChild(list,item)
+        //     }
+        //   })
+        // },
         getData(){
           fetch[this.config.api](this.config.params).then(res=>{
-            let tree = []
-            res.data.map((item,key)=>{
-              if(item[this.config.parentKey] === 0 || item[this.config.parentKey] === -1){
-                item.title = item[this.config.name]
-                item.expand = true
-                tree.push(item)
-                this.checkChild(res.data,item)
-              }
-            })
-            this.treeData = tree
+            this.list = JSON.parse(JSON.stringify(res.data))
+            // let tree = []
+            // res.data.map((item,key)=>{
+            //   if(item[this.config.parentKey] === 0 || item[this.config.parentKey] === -1){
+            //     item.title = item[this.config.name]
+            //     item.expand = true
+            //     tree.push(item)
+            //     // this.checkChild(res.data,item)
+            //     treeTool.checkChild(res.data, item, this.config.key, this.config.parentKey, this.config.name)
+            //   }
+            // })
+            this.treeData = treeTool.getTreeCmp(res.data, this.config.key, this.config.parentKey, this.config.name)
             this.$emit('load-after')
           })
         },
         selectChange(list,row){
+          if(this.checkbox){
+            return
+          }
           this.$emit('on-change',row)
           this.row = row
           this.$emit('update:value', row[this.config.key])
           this.$emit('update:name', row[this.config.name])
           this.visible = false
+        },
+        checkChange(rows, current){
+          let list = treeTool.getTreeForParent(this.list, rows, this.config.key, this.config.parentKey)
+          this.$emit('on-change', list, rows, current)
         }
       },
       watch:{

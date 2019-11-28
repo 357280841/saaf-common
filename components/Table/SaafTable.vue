@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:00:01
+ * @Last Modified time: 2019-11-28 15:45:18
  */
 
 
@@ -99,7 +99,7 @@ import pageTool from '../../tool/pageTool'
                 ...item,
                 align: item.align?item.align:'center',
                 render: (h, params) => {
-                  let flag = params.row[item.key] == 'Y'? true : false
+                  let flag = params.row[item.key] == 'Y' || params.row[item.key] === true ? true : false
                     return h('div', [
                         h('Icon', {
                             props: {

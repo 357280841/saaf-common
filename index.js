@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-10-10 22:03:50
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 11:22:10
+ * @Last Modified time: 2019-11-28 10:39:04
  */
 
 import store from './store/StoreCommon'
@@ -21,6 +21,7 @@ import onresizeTool from './tool/onresizeTool'
 import SaafCN from './language/SaafCN'
 import SaafEN from './language/SaafEN'
 import iframeTool from './tool/iframeTool'
+import treeTool from './tool/treeTool'
 
 export {
     store,
@@ -38,6 +39,7 @@ export {
     pinYinTool,
     onresizeTool,
     iframeTool,
+    treeTool,
     // 工具 end
 
     // 语言包 start
