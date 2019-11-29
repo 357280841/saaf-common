@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-05 15:02:02 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 16:42:10
+ * @Last Modified time: 2019-11-29 10:00:01
  */
 
 
@@ -12,7 +12,7 @@
     <p class="p5">import { tabsTool } from "saaf-common";</p>
     <p class="p5">打开界面：tabsTool.openTab({url: `/LookupTypeEdit?id=0`, name:`${this.$t('dict edit')}:新增`})</p>
     <p class="p5">关闭当前界面：tabsTool.closeCurrentTab()</p>
-    <p class="p5">关闭指定界面：tabsTool.openTab({url: `/#/iframeBox/lookuptype?menuId=1872&respId=390006`}) 【通过host取得当前路径；】</p>
+    <p class="p5">关闭指定界面：tabsTool.closeTab({url: `/#/iframeBox/lookuptype?menuId=1872&respId=390006`}) 【通过host取得当前路径；】</p>
   </div>
 </template>
 
