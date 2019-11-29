@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:48:59
+ * @Last Modified time: 2019-11-29 10:41:00
  */
 
 <template>
@@ -15,7 +15,8 @@
      :page.sync="tablePage"
      :getData="getData"
      :loading="loading"
-     :currentRow.sync="currentRow" />
+     :currentRow.sync="currentRow"
+     @on-current-change="onCurrentChange" />
   </div>
 </template>
 
@@ -91,6 +92,9 @@ export default {
             })
         }
       },
+      onCurrentChange(currentRow,oldCurrentRow){
+        this.$emit('on-current-change',currentRow,oldCurrentRow)
+      }
     },
     watch:{
       currentRow(val){

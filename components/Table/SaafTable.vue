@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 15:45:18
+ * @Last Modified time: 2019-11-29 10:37:19
  */
 
 
@@ -119,6 +119,7 @@ import pageTool from '../../tool/pageTool'
         },
         currentChange(currentRow,oldCurrentRow){
           this.$emit('update:currentRow',currentRow)
+          this.$emit('on-current-change',currentRow,oldCurrentRow)
         },
         pageChange(index){
           this.page.nextIndex = index

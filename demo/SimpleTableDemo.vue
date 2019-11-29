@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:18:18 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:49:36
+ * @Last Modified time: 2019-11-29 10:42:39
  */
 
 <i18n>
@@ -43,7 +43,7 @@
 
     <SaafSimpleTable class="mb30" ref="SaafSimpleTable" :height="100" :tableConfig="tableConfig" :currentRow.sync="currentRow"></SaafSimpleTable>
 
-    <SaafSimpleTable ref="SaafSimpleTable2" :tableConfig="tableConfig" :currentRow.sync="currentRow"></SaafSimpleTable>
+    <SaafSimpleTable ref="SaafSimpleTable2" :tableConfig="tableConfig" :currentRow.sync="currentRow" @on-current-change="onCurrentChange"></SaafSimpleTable>
     
 
   </div>
@@ -104,6 +104,9 @@ export default {
         this.$refs.SaafSimpleTable.getFirstPage()
         this.$refs.SaafSimpleTable2.getFirstPage()
       },
+      onCurrentChange(){
+        alert('选中行发生变化')
+      }
     }
 }
 </script>
