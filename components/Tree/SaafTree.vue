@@ -2,14 +2,14 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 16:15:35
+ * @Last Modified time: 2019-12-02 14:22:25
  */
 
 
 <template>
     <div>
       <Poptip :disabled="disabled" v-if="type === 'select'" placement="bottom" v-model="visible" transfer>
-        <Input :disabled="disabled" :value="name" readonly suffix="ios-search"></Input>
+        <Input :disabled="disabled" :value="name" readonly suffix="ios-search" clearable @on-clear="onClear"></Input>
         <div slot="content" class="tree-box">
           <Tree :data="treeData" @on-select-change="selectChange" :show-checkbox="checkbox"></Tree>
         </div>
@@ -88,6 +88,15 @@
         checkChange(rows, current){
           let list = treeTool.getTreeForParent(this.list, rows, this.config.key, this.config.parentKey)
           this.$emit('on-change', list, rows, current)
+        },
+        onClear(){
+          if(this.checkbox){
+            this.$emit('on-change', null, null, null)
+          }else{
+            this.$emit('on-change',{})
+            this.$emit('update:value', null)
+            this.$emit('update:name', null)
+          }
         }
       },
       watch:{

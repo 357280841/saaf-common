@@ -2,14 +2,15 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-27 09:09:17 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-07 10:08:41
+ * @Last Modified time: 2019-12-02 14:35:12
  */
 
 
 <template>
     <div>
-        <Input :disabled="disabled" v-if="showInput" v-model="value" readonly suffix="ios-search" @click.native="open">
+        <Input class="saaf-select-clear" :disabled="disabled" v-if="showInput" v-model="value" readonly clearable @on-clear="clear">
             <!-- <Button icon="ios-search" slot="suffix" /> -->
+            <Button slot="append" icon="ios-search" @click.native="open"></Button>
         </Input>
         <Modal
             v-model="modal"
@@ -27,7 +28,7 @@
                         :selectConfig="selectConfig"
                         :currentRow.sync="currentRow"></SaafModalTableList>
                 <div class="modal-btn">
-                    <Button class="mr10" @click="cancel">取消</Button>
+                    <Button class="mr10" @click="clear">清空</Button>
                     <Button type="primary" :disabled="type=='radio'&&!currentRow" @click="ok">确定</Button>
                 </div>
         </Modal>
@@ -107,6 +108,14 @@ export default {
 
             }
             this.sTableConfig = tableConfig
+        },
+        clear(){
+            if(this.type=="radio"){
+                this.$emit('on-change', {})
+            }else  if(this.type=="checkbox"){
+                this.$emit('on-change', [])
+            }
+            this.close()
         }
     },
     watch:{
