@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 15:01:16
+ * @Last Modified time: 2019-12-02 15:04:43
  */
 
 
@@ -165,27 +165,27 @@ import pageTool from '../../tool/pageTool'
         },
 
         onSelect(selection, row){
-          if(this.events['on-select']){
+          if(this.events && this.events['on-select']){
             this.events['on-select'](selection, row)
           }
         },
         onSelectCancel(selection, row){
-          if(this.events['on-select-cancel']){
+          if(this.events && this.events['on-select-cancel']){
             this.events['on-select-cancel'](selection, row)
           }
         },
         onSelectAll(selection){
-          if(this.events['on-select-all']){
+          if(this.events && this.events['on-select-all']){
             this.events['on-select-all'](selection)
           }
         },
         onSelectAllCancel(selection){
-          if(this.events['on-select-all-cancel']){
+          if(this.events && this.events['on-select-all-cancel']){
             this.events['on-select-all-cancel'](selection)
           }
         },
         onSelectionChange(selection){
-          if(this.events['on-selection-change']){
+          if(this.events && this.events['on-selection-change']){
             this.events['on-selection-change'](selection)
           }
         }
