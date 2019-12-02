@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-19 10:49:49
+ * @Last Modified time: 2019-11-28 16:32:51
  */
 
 import store from '../store/StoreCommon'
@@ -62,6 +62,9 @@ export default class tabsTool{
     }
     static goto(item){
         this.rootWindow.tabsService.goto(item)
+    }
+    static closeCurrentTab(){
+        this.closeTab(store.state.tabs.activeTab)
     }
 }
 tabsTool.rootWindow = window.parent!=window?window.parent:window

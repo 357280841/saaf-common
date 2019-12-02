@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:46:53 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-07 14:02:56
+ * @Last Modified time: 2019-11-28 16:00:46
  */
 
 
@@ -30,7 +30,7 @@
         {{treeItem}}
       </div>
       <div class="mb50" style="height:500px; overflow: auto;">
-        <div class="pb5">树</div>
+        <div class="pb5">可选择树，返回3个参数，list：含父节点,rows：已勾选节点,current 当前项</div>
         <SaafTree 
         type='tree'
         :config="{
@@ -40,8 +40,9 @@
           api: 'MenuManager_findMenuList',
           params: {systemCode: 'BASE'}
         }"
-        @on-change="changeTree"></SaafTree>
-        {{treeRow}}
+        @on-change="checkboxChange"
+        :checkbox="true"></SaafTree>
+        <!-- {{treeRow}} -->
       </div>
     </div>
     <div>
@@ -90,10 +91,10 @@ export default {
         { title: '顶层组织架构', orgName: '顶层组织架构', orgId: 0 },
         ...this.$refs.SaafSelectDepartmentTree.treeData
       ]
-      console.log(this.$refs.SaafSelectDepartmentTree.treeData)
+      // console.log(this.$refs.SaafSelectDepartmentTree.treeData)
     },
     changeTree(row){
-      console.log(row);
+      // console.log(row);
       
       let data = JSON.parse(JSON.stringify(row))
       delete data.children
@@ -104,8 +105,13 @@ export default {
         { title: '测试-修改树数据', menuName: '测试-修改树数据', menuId: 0 },
         ...this.$refs.SaafTree.treeData
       ]
-      console.log(this.$refs.SaafTree.treeData)
+      // console.log(this.$refs.SaafTree.treeData)
     },
+    checkboxChange(list,rows,current){
+      console.log(list)
+      console.log(rows)
+      console.log(current)
+    }
   }
 }
 </script>

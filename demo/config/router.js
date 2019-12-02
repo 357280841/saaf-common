@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen 
  * @Date: 2019-05-24 17:37:33 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:17:59
+ * @Last Modified time: 2019-11-28 16:38:05
  */
 
 
@@ -68,7 +68,18 @@ let router = [
                 path: 'I18nDemo',
                 urlName: '国际化',
                 component: () => import('../I18nDemo')
-            }
+            },
+            {
+                path: 'TabsToolDemo',
+                urlName: 'tabs函数工具使用',
+                component: () => import('../TabsToolDemo')
+            },
+            {
+                path: 'iframeToolDemo',
+                urlName: '全局操作函数，跨iframe可运行',
+                component: () => import('../iframeToolDemo')
+            },
+            
         ]
     },
 ]

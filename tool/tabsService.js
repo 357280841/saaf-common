@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 18:29:22
+ * @Last Modified time: 2019-11-28 08:55:18
  */
 
 import store from '../store/StoreCommon'
@@ -22,7 +22,7 @@ export default class tabsService{
         }
         setTimeout(()=>{
             $('#tabs-tag-box').find('.gm-scroll-view').scrollLeft($('#tabs-tag-'+item.menuId).position().left)
-        },300)
+        })
         store.commit("ADD_TAB",item)
         store.commit("ACTIVE_TAB",item)
         this.goto(item)

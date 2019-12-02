@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-15 09:17:23
+ * @Last Modified time: 2019-11-29 11:37:52
  */
 
 <template>
@@ -79,6 +79,7 @@ export default {
       },
       getPage(page){
         this.resetTableHeight()
+        this.$refs.SaafTable.$refs.Table.clearCurrentRow()
         return new Promise((resolve, reject)=>{
           let params = {
             ...this.searchParams,
@@ -132,6 +133,10 @@ export default {
             this.$emit('update:currentRow',val)
           } else if(this.type === 'checkbox'){
             this.pushData(val)
+          }
+        }else{
+          if(this.type==='radio'){
+            this.$emit('update:currentRow',val)
           }
         }
       },

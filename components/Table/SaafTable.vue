@@ -2,13 +2,12 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 14:00:01
+ * @Last Modified time: 2019-12-02 15:04:43
  */
 
 
 <template>
     <div>
-
         <Table
           ref="Table"
           :height="height"
@@ -19,7 +18,13 @@
           @on-current-change="currentChange"
           column
           border
-          size="small"></Table>
+          size="small"
+          @on-select="onSelect"
+          @on-select-cancel="onSelectCancel"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-selection-change="onSelectionChange"
+          ></Table>
           <!-- stripe -->
 
         <Page 
@@ -32,7 +37,9 @@
           :total="page.count" 
           :page-size="page.pageSize" 
           @on-change="pageChange" 
-          @on-page-size-change="pageSizeChange" /> 
+          @on-page-size-change="pageSizeChange"
+           /> 
+           
     </div>
 </template>
 <script>
@@ -43,6 +50,11 @@ import pageTool from '../../tool/pageTool'
         columns:{
           type: Array,
           required: true
+        },
+        events:{
+          type: Object,
+          required: false,
+          // default:{}
         },
         page:{
           type: Object,
@@ -99,7 +111,7 @@ import pageTool from '../../tool/pageTool'
                 ...item,
                 align: item.align?item.align:'center',
                 render: (h, params) => {
-                  let flag = params.row[item.key] == 'Y'? true : false
+                  let flag = params.row[item.key] == 'Y' || params.row[item.key] === true ? true : false
                     return h('div', [
                         h('Icon', {
                             props: {
@@ -119,6 +131,7 @@ import pageTool from '../../tool/pageTool'
         },
         currentChange(currentRow,oldCurrentRow){
           this.$emit('update:currentRow',currentRow)
+          this.$emit('on-current-change',currentRow,oldCurrentRow)
         },
         pageChange(index){
           this.page.nextIndex = index
@@ -149,6 +162,32 @@ import pageTool from '../../tool/pageTool'
         },
         scrollTop(){
           this.$refs.Table.$el.querySelector('.ivu-table-body').scrollTop = 0
+        },
+
+        onSelect(selection, row){
+          if(this.events && this.events['on-select']){
+            this.events['on-select'](selection, row)
+          }
+        },
+        onSelectCancel(selection, row){
+          if(this.events && this.events['on-select-cancel']){
+            this.events['on-select-cancel'](selection, row)
+          }
+        },
+        onSelectAll(selection){
+          if(this.events && this.events['on-select-all']){
+            this.events['on-select-all'](selection)
+          }
+        },
+        onSelectAllCancel(selection){
+          if(this.events && this.events['on-select-all-cancel']){
+            this.events['on-select-all-cancel'](selection)
+          }
+        },
+        onSelectionChange(selection){
+          if(this.events && this.events['on-selection-change']){
+            this.events['on-selection-change'](selection)
+          }
         }
       },
       watch:{
