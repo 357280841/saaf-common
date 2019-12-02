@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 14:45:18
+ * @Last Modified time: 2019-12-02 15:39:13
  */
 
 <template>
@@ -20,9 +20,6 @@
         :menuId="$route.query.menuId"
         :respId="$route.query.respId"
         :functionList="functionList">
-          <template slot="btnGroup">
-            <slot name="btnGroup"></slot>
-          </template> 
         </SaafResourceButton>
     </SaafListPageHeader>
     <SaafParamForm ref="SaafParamForm" :items="tableConfig.searchItems">

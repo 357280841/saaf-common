@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-29 11:42:13
+ * @Last Modified time: 2019-12-02 15:27:16
  */
 
 <template>
@@ -11,6 +11,7 @@
      ref="SaafTable"
      :height="tableHeight"
      :columns="tableConfig.tableColumns"
+     :events="tableConfig.tableEvents"
      :list="tableList" 
      :page.sync="tablePage"
      :getData="getData"
