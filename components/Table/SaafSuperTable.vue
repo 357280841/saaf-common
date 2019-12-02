@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 15:39:13
+ * @Last Modified time: 2019-12-02 17:26:26
  */
 
 <template>
@@ -27,7 +27,8 @@
         <slot :name="key" v-if="item.type === 'slot'" v-bind="scope"></slot>
       </template>
     </SaafParamForm>
-    <SaafTable
+
+    <!-- <SaafTable
      ref="SaafTable"
      :height="tableHeight"
      :columns="tableConfig.tableColumns"
@@ -36,7 +37,13 @@
      :page.sync="tablePage"
      :getData="getData"
      :loading="loading"
-     :currentRow.sync="currentRow" />
+     :currentRow.sync="currentRow" /> -->
+
+    <SaafSimpleTable
+     ref="SaafSimpleTable" 
+     :tableConfig="tableConfig" 
+     :currentRow.sync="currentRow"></SaafSimpleTable>
+
     <SaafDelModalV2 ref="SaafDelModalV2"></SaafDelModalV2>
   </div>
 </template>
@@ -72,46 +79,47 @@ export default {
     },
     methods:{
       refreshData(){
-        this.getPage({
-          ...this.tablePage,
-          nextIndex: 1,
-        })
+        // this.getPage({
+        //   ...this.tablePage,
+        //   nextIndex: 1,
+        // })
+        this.$refs.SaafSimpleTable.refreshData()
       },
       getData(){
-        this.getPage(this.tablePage)
+        // this.getPage(this.tablePage)
+        this.$refs.SaafSimpleTable.getData(this.$refs.SaafSimpleTable.tablePage)
       },
       getPage(page){
-        this.$refs.SaafTable.$refs.Table.clearCurrentRow()
-        this.resetTableHeight()
-        this.$refs.SaafTable.scrollTop()
-        return new Promise((resolve, reject)=>{
-          this.loading = true
-          fetchTool.postSimpleness(api[this.tableConfig.findApi],{
-            ...this.$refs.SaafParamForm.getParams(),
-            ...this.tableConfig.searchParams,
-            pageIndex: page.nextIndex,
-            pageRows: page.pageSize
-          }).then(res=>{
-            this.loading = false
-            this.tableList = res.data
-            this.tablePage = pageTool.update(res,this.tablePage)
-            resolve()
-          }).catch(err=>{
-            this.loading = false
-            this.$Message.error(error.msg)
-            reject(err)
-          })
-        })
+        this.$refs.SaafSimpleTable.getPage(page)
+        // this.$refs.SaafTable.$refs.Table.clearCurrentRow()
+        // this.resetTableHeight()
+        // this.$refs.SaafTable.scrollTop()
+        // return new Promise((resolve, reject)=>{
+        //   this.loading = true
+        //   fetchTool.postSimpleness(api[this.tableConfig.findApi],{
+        //     ...this.$refs.SaafParamForm.getParams(),
+        //     ...this.tableConfig.searchParams,
+        //     pageIndex: page.nextIndex,
+        //     pageRows: page.pageSize
+        //   }).then(res=>{
+        //     this.loading = false
+        //     this.tableList = res.data
+        //     this.tablePage = pageTool.update(res,this.tablePage)
+        //     resolve()
+        //   }).catch(err=>{
+        //     this.loading = false
+        //     this.$Message.error(error.msg)
+        //     reject(err)
+        //   })
+        // })
       },
       getFirstPage(){
-        this.$refs.SaafTable.getFirstPage()
+        // this.$refs.SaafTable.getFirstPage()
+        this.$refs.SaafSimpleTable.getFirstPage()
       },
       resetTableHeight(){
-        // console.log($(window).innerHeight())
-        // console.log(this.$store.state.system.screenHeight)
-        // console.log($(this.$refs.SaafListPageHeader.$el).offset())
         setTimeout(()=>{
-          this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-15
+          // this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-15
         })
       },
       formatFunctionList(){
@@ -149,9 +157,9 @@ export default {
       currentRow(val){
         this.$emit('update:currentRow',val)
       },
-      "$store.state.system.screenHeight":function(val){
-        this.resetTableHeight()
-      },
+      // "$store.state.system.screenHeight":function(val){
+      //   this.resetTableHeight()
+      // },
       "tableConfig.pageHeader.functionList": function(val){
         this.formatFunctionList()
       }
