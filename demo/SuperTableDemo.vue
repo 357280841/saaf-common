@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 14:06:20 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 10:48:40
+ * @Last Modified time: 2019-12-02 15:00:39
  */
 <i18n>
 {
@@ -142,7 +142,19 @@ export default {
               label:"员工ID", type:"slot",
             },
           },
+          tableEvents:{
+            'on-select':(selection, row)=>{debugger},
+            'on-select-cancel':(selection, row)=>{debugger},
+            'on-select-all':(selection)=>{debugger},
+            'on-select-all-cancel':(selection)=>{debugger},
+            'on-selection-change':(selection)=>{debugger}
+          },
           tableColumns: [
+            {
+              type: 'selection',
+              width: 60,
+              align: 'center'
+            },
             {
               title: this.$t("lookup type"),
               key: 'lookupType',
