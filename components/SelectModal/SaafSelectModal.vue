@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-27 09:09:17 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 14:35:12
+ * @Last Modified time: 2019-12-02 15:09:56
  */
 
 
@@ -10,7 +10,7 @@
     <div>
         <Input class="saaf-select-clear" :disabled="disabled" v-if="showInput" v-model="value" readonly clearable @on-clear="clear">
             <!-- <Button icon="ios-search" slot="suffix" /> -->
-            <Button slot="append" icon="ios-search" @click.native="open"></Button>
+            <Button slot="append" :disabled="disabled" icon="ios-search" @click.native="open"></Button>
         </Input>
         <Modal
             v-model="modal"
