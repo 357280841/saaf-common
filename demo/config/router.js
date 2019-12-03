@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen 
  * @Date: 2019-05-24 17:37:33 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 16:38:05
+ * @Last Modified time: 2019-12-02 18:01:08
  */
 
 
@@ -27,6 +27,18 @@ let router = [
                 url: 'SuperTableDemo?menuId=1872&respId=390006',
                 urlName: '超级列表组件<br/>SaafSuperTableDemo',
                 component: () => import('../SuperTableDemo.vue'),
+            },
+            {
+                path: 'MergeTableDemo',
+                url: 'MergeTableDemo?menuId=1872&respId=390006',
+                urlName: '多个零碎组件组合使用',
+                component: () => import('../MergeTableDemo.vue'),
+            },
+            {
+                path: 'HeaderDemo',
+                url: 'HeaderDemo?menuId=1872&respId=390006',
+                urlName: '抬头组件',
+                component: () => import('../HeaderDemo.vue'),
             },
             {
                 path: 'SimpleTableDemo',

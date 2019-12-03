@@ -48,3 +48,11 @@ Vue.component('file-upload', VueUploadComponent)
 Vue.component('SaafImportExcel', SaafImportExcel)
 Vue.component('SaafAutoScroll', SaafAutoScroll)
 Vue.component('SaafSimpleTable', SaafSimpleTable)
+
+
+import SaafEditHeader from './BtnGroup/SaafEditHeader'
+Vue.component('SaafEditHeader', SaafEditHeader)
+import SaafFlowHeader from './BtnGroup/SaafFlowHeader'
+Vue.component('SaafFlowHeader', SaafFlowHeader)
+import SaafListHeader from './BtnGroup/SaafListHeader'
+Vue.component('SaafListHeader', SaafListHeader)
