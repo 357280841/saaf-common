@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 10:58:41
+ * @Last Modified time: 2019-12-03 11:05:54
  */
 
 
@@ -138,7 +138,7 @@
               }else if(item.type == 'month'){
                 format = 'YYYY-MM'
               }
-              data[key] = this.formValue[key]?moment(this.formValue[key]).format(format):""
+              data[key] = this.formValue[key]?moment(this.formValue[key]).format(format):null
             }else{
               data[key] = this.formValue[key]
             }
