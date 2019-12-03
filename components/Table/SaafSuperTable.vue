@@ -2,12 +2,12 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 10:53:40
+ * @Last Modified time: 2019-12-03 14:18:26
  */
 
 <template>
   <div ref="SaafSuperTableContent">
-    <SaafListPageHeader ref="SaafListPageHeader" :title="tableConfig.pageHeader.title">
+    <!-- <SaafListPageHeader ref="SaafListPageHeader" :title="tableConfig.pageHeader.title">
       <ButtonGroup size="small" class="mr10" v-if="!tableConfig.pageHeader.hideQueryBtn">
         <Button size="small" @click="getFirstPage()"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
         <Button size="small" @click="$refs.SaafParamForm.resetFormValue()"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
@@ -21,11 +21,15 @@
         :respId="$route.query.respId"
         :functionList="functionList">
         </SaafResourceButton>
-    </SaafListPageHeader>
+    </SaafListPageHeader> -->
 
-    <!-- <SaafListHeader :pageHeader="tableConfig.pageHeader" :currentRow="currentRow">
+    <SaafListHeader 
+      :pageHeader="tableConfig.pageHeader" 
+      @getFirstPage="getFirstPage"
+      @resetFormValue="resetFormValue"
+      :currentRow="currentRow">
       <template v-slot:btnGroup><slot name="btnGroup"></slot></template>
-    </SaafListHeader> -->
+    </SaafListHeader>
 
     <SaafParamForm ref="SaafParamForm" :items="tableConfig.searchItems">
       <template v-for="(item,key) in tableConfig.searchItems" v-slot:[key]="scope">
@@ -48,7 +52,8 @@
      ref="SaafSimpleTable" 
      :tableConfig="tableConfig" 
      :currentRow.sync="currentRow"
-     :saafParamForm="$refs.SaafParamForm"></SaafSimpleTable>
+     @getParamForm="getParamForm"
+     ></SaafSimpleTable>
 
     <SaafDelModalV2 ref="SaafDelModalV2"></SaafDelModalV2>
   </div>
@@ -81,7 +86,7 @@ export default {
     created(){
     },
     mounted(){
-      this.formatFunctionList()
+      // this.formatFunctionList()
     },
     methods:{
       refreshData(){
@@ -123,41 +128,53 @@ export default {
         // this.$refs.SaafTable.getFirstPage()
         this.$refs.SaafSimpleTable.getFirstPage()
       },
-      resetTableHeight(){
-        setTimeout(()=>{
-          // this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-15
-        })
+      resetFormValue(){
+        this.$refs.SaafParamForm.resetFormValue()
       },
-      formatFunctionList(){
-        let val = this.tableConfig.pageHeader.functionList
-        let functionList = {}
-        for(let key in val){
-          if((key == 'btnModify') && !val[key].disabled){
-            functionList[key] = {
-              fun: val[key],
-              disabled: ()=>{ return this.currentRow ? false : true },
-              ...val[key]
-            }
-          }else if((key == 'btnDel') && !val[key].disabled){
-            let fun = null
-            if(val[key] && val[key].fun){
-              fun = val[key].fun
-            }else{
-              fun = val[key]
-            }
-            functionList[key] = {
-              fun: ()=>{
-                this.$refs.SaafDelModalV2.open(()=>{fun();this.currentRow=null;})
-              },
-              disabled: ()=>{ return this.currentRow ? false : true },
-              ...val[key]
-            }
-          }else{
-            functionList[key] = val[key]
-          }
-        }
-        this.functionList = functionList
+      getParamForm(f){
+        f(this.$refs.SaafParamForm.getParams())
       },
+      // resetTableHeight(){
+      //   setTimeout(()=>{
+      //     // this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-15
+      //   })
+      // },
+      // formatFunctionList(){
+      //   let val = this.tableConfig.pageHeader.functionList
+      //   let functionList = {}
+      //   for(let key in val){
+      //     if((key == 'btnModify') && !val[key].disabled){
+      //       functionList[key] = {
+      //         fun: val[key],
+      //         disabled: ()=>{ return this.currentRow ? false : true },
+      //         ...val[key]
+      //       }
+      //     }else if((key == 'btnDel') && !val[key].disabled){
+      //       let fun = null
+      //       if(val[key] && val[key].fun){
+      //         fun = val[key].fun
+      //       }else{
+      //         fun = val[key]
+      //       }
+      //       functionList[key] = {
+      //         fun: ()=>{
+      //           this.$refs.SaafDelModalV2.open(()=>{fun();this.currentRow=null;})
+      //         },
+      //         disabled: ()=>{ return this.currentRow ? false : true },
+      //         ...val[key]
+      //       }
+      //     }else{
+      //       functionList[key] = val[key]
+      //     }
+      //   }
+      //   this.functionList = functionList
+      // },
+      // getTable(){
+      //   return this.$refs.SaafSimpleTable
+      // },
+      // getParamForm(){
+      //   return this.$refs.SaafParamForm
+      // }
     },
     watch:{
       currentRow(val){
@@ -166,9 +183,9 @@ export default {
       // "$store.state.system.screenHeight":function(val){
       //   this.resetTableHeight()
       // },
-      "tableConfig.pageHeader.functionList": function(val){
-        this.formatFunctionList()
-      }
+      // "tableConfig.pageHeader.functionList": function(val){
+      //   this.formatFunctionList()
+      // }
     }
 }
 </script>
