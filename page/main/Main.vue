@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 10:20:02
+ * @Last Modified time: 2019-12-03 15:41:23
  */
 
 
@@ -19,8 +19,9 @@
             class="header"
             :style="{background: '#2d8cf0',height: '50px', lineHeight: '50px'}"
           >
-
+            <!-- <div class="system-name">{{platform.systemCode}}</div> -->
             <div class="user">
+              <div class="user-item">{{platform.systemName}}</div>
               <div class="user-item" @click="pswdModal = true">{{$i18n.t('修改密码')}}</div>
               <div class="language user-item">
                 <SaafLanguageSelect />
@@ -176,9 +177,11 @@ import creatTree from "@/config/tree";
 import { tabsTool, onresizeTool, iframeTool, fetchTool } from "saaf-common";
 import api from "../config/api"
 import Md5 from "js-md5";
+import platform from '@/config/platform'
 export default {
   data() {
     return {
+      platform: platform,
       pswdModal: false, //显示改密模态框
       formValidate: {
         oldPassword: null, //旧密码

@@ -2,13 +2,13 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:18
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 14:39:26
+ * @Last Modified time: 2019-12-03 15:24:05
  */
 
 <template>
     <div class="login-page">
         <div class="login-box">
-            <h1 class="main-title">{{$i18n.t('SAAF平台管理系统')}}</h1>
+            <h1 class="main-title">{{systemName}}</h1>
             <div class="login-panel">
                 <h5 class="login-title">{{$i18n.t('用户登录')}}</h5>
                 <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
@@ -46,7 +46,7 @@
     import { fetch } from '@/page/pageConfig/index'
     import Md5 from 'js-md5';
     import { Base64 } from 'js-base64';
-
+    import platform from '@/config/platform'
 
     export default {
         data () {
@@ -64,7 +64,8 @@
                         { required: true, message: '密码不能空', trigger: 'blur' },
                         { type: 'string', min: 6, message: '最少6位', trigger: 'blur' }
                     ]
-                }
+                },
+                systemName: this.$i18n.t(platform.systemName?platform.systemName:'SAAF平台管理系统')
             }
         },
         created(){
