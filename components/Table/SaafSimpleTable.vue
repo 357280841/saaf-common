@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 13:50:36
+ * @Last Modified time: 2019-12-03 14:49:18
  */
 
 <template>
@@ -84,7 +84,7 @@ export default {
             resolve()
           }).catch(err=>{
             this.loading = false
-            this.$Message.error(error.msg)
+            this.$Message.error(err.msg)
             reject(err)
           })
         })
