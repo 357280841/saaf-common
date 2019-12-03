@@ -19,8 +19,15 @@
           <span>上传判断规则：</span>
           <Input disabled type="textarea" v-model="description"/>
         </div>
-        <div class="import-btn">
-          <Button type="success" @click="click"><Icon size="20" class="pr10" type="md-cloud-upload" />导入</Button>
+        <div class="row">
+          <div class="import-btn">
+            <Button type="success" @click="click"><Icon size="20" class="pr10" type="md-cloud-upload" />导入</Button>
+          </div>
+          <div class="pb20 import-btn">
+            <a href="/excel_template/xgm/excel模板导入.xlsx" download="模板.xlsx">
+              <Button><Icon size="20" class="pr10" type="md-cloud-download" />模板下载</Button>
+            </a>
+          </div>
         </div>
         <input
           v-show="false" 
@@ -94,6 +101,10 @@ export default {
         },
         click() {
           this.$refs.import.dispatchEvent(new MouseEvent('click'))
+        },
+        download() {
+          console.log(this.$root)
+          window.location.href = `${window.location.host}/public/excel_template/xgm/excel模板导入.xlsx` 
         },
         submitData() {
           console.log('submit')

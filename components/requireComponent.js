@@ -19,7 +19,7 @@ import SaafImageUpload from './Upload/SaafImageUpload'
 import SaafFileUpload from './Upload/SaafFileUpload'
 import SaafDelModalV2 from './SaafDelModalV2'
 import VueUploadComponent from 'vue-upload-component'
-import SaafImportExcel from './Upload/SaafImportExcel'
+import SaafImportExcel from './Upload/ImportExcel'
 import SaafAutoScroll from './SaafAutoScroll'
 import SaafSimpleTable from './Table/SaafSimpleTable'
 
