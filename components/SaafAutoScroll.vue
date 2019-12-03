@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-20 16:43:10 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 15:09:59
+ * @Last Modified time: 2019-12-03 10:18:43
  */
 
 
@@ -58,6 +58,9 @@ export default {
     },
     created(){
 
+    },
+    destroyed() {
+        onresizeTool.removeFunction(this.key)
     },
     methods: {
         setHeight(){

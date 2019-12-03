@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 14:06:20 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 15:05:07
+ * @Last Modified time: 2019-12-03 10:57:23
  */
 <i18n>
 {
@@ -141,6 +141,9 @@ export default {
             personId:{
               label:"员工ID", type:"slot",
             },
+            dateTest:{
+              label:"date", type:"date",
+            },
           },
           tableEvents:{
             'on-select':(selection, row)=>{debugger},
@@ -212,6 +215,7 @@ export default {
         tabsTool.openTab({url: `/LookupTypeEdit?id=${this.currentRow.lookupTypeId}`, name:`${this.$t('dict edit')}:${this.currentRow.lookupTypeId}`})
       },
       changeRadio(data, scope){
+        debugger
         scope.formValue.personId = data.personId
         scope.formValue.personName = data.personName
       }

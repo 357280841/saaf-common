@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-20 08:58:11 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-20 11:41:04
+ * @Last Modified time: 2019-12-03 10:18:12
  */
 
 import { store } from '../index'
@@ -26,6 +26,9 @@ export default class onresizeTool{
             throw '属性重名'
         }
         this.functionList[obj.key] = obj.fun
+    }
+    static removeFunction(key){
+        delete this.functionList[key]
     }
 }
 onresizeTool.functionList = {}

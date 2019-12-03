@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 17:26:26
+ * @Last Modified time: 2019-12-03 10:53:40
  */
 
 <template>
@@ -22,6 +22,11 @@
         :functionList="functionList">
         </SaafResourceButton>
     </SaafListPageHeader>
+
+    <!-- <SaafListHeader :pageHeader="tableConfig.pageHeader" :currentRow="currentRow">
+      <template v-slot:btnGroup><slot name="btnGroup"></slot></template>
+    </SaafListHeader> -->
+
     <SaafParamForm ref="SaafParamForm" :items="tableConfig.searchItems">
       <template v-for="(item,key) in tableConfig.searchItems" v-slot:[key]="scope">
         <slot :name="key" v-if="item.type === 'slot'" v-bind="scope"></slot>
@@ -42,7 +47,8 @@
     <SaafSimpleTable
      ref="SaafSimpleTable" 
      :tableConfig="tableConfig" 
-     :currentRow.sync="currentRow"></SaafSimpleTable>
+     :currentRow.sync="currentRow"
+     :saafParamForm="$refs.SaafParamForm"></SaafSimpleTable>
 
     <SaafDelModalV2 ref="SaafDelModalV2"></SaafDelModalV2>
   </div>
@@ -52,7 +58,7 @@
   
 import {fetch,api} from '@/page/pageConfig/index'
 import { Promise, resolve, reject } from 'q';
-import { fetchTool, pageTool, tabsTool, gridButton, getUrl } from '../../index'
+import { fetchTool, pageTool, tabsTool, gridButton, getUrl, btnGroupTool } from '../../index'
 
 export default {
     props:{

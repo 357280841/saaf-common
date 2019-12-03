@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-10-10 22:03:50
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-28 10:39:04
+ * @Last Modified time: 2019-12-03 10:26:23
  */
 
 import store from './store/StoreCommon'
@@ -22,6 +22,7 @@ import SaafCN from './language/SaafCN'
 import SaafEN from './language/SaafEN'
 import iframeTool from './tool/iframeTool'
 import treeTool from './tool/treeTool'
+import btnGroupTool from './tool/btnGroupTool'
 
 export {
     store,
@@ -40,6 +41,7 @@ export {
     onresizeTool,
     iframeTool,
     treeTool,
+    btnGroupTool,
     // 工具 end
 
     // 语言包 start

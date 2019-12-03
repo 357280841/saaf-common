@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-08-21 11:50:06
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-25 17:09:41
+ * @Last Modified time: 2019-12-03 09:57:17
  */
 // axios  ajax
 import axios from 'axios'
@@ -80,6 +80,9 @@ axios.interceptors.response.use((res) => {
     }
   } else {
     errMsg = '服务器没响应'
+  }
+  if(err.response && err.response.data && err.response.data.msg){
+    errMsg = err.response.data.msg
   }
   return Promise.reject({msg: errMsg, status: 'E'})
 })

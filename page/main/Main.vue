@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-27 18:22:37
+ * @Last Modified time: 2019-12-03 10:20:02
  */
 
 
@@ -147,17 +147,17 @@
     <Modal v-model="pswdModal" title="修改密码">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
         <FormItem label="旧密码" prop="oldPassword">
-          <Input v-model="formValidate.oldPassword"></Input>
+          <Input type="password" password v-model="formValidate.oldPassword"></Input>
         </FormItem>
         <FormItem label="新密码" prop="newPassword">
           <Input
-            type="password"
+            type="password" password
             v-model="formValidate.newPassword"
             placeholder="只能输入6-20位,可字母、数字、下划线"
           ></Input>
         </FormItem>
         <FormItem label="确认密码" prop="newPassword2">
-          <Input type="password" v-model="formValidate.newPassword2" placeholder="请再次输入密码"></Input>
+          <Input type="password" password v-model="formValidate.newPassword2" placeholder="请再次输入密码"></Input>
         </FormItem>
       </Form>
       <div slot="footer">
@@ -173,7 +173,8 @@ import { mapState, mapMutations } from "vuex";
 import { stat } from "fs";
 import { fetch } from "@/page/pageConfig/index";
 import creatTree from "@/config/tree";
-import { tabsTool, onresizeTool, iframeTool } from "saaf-common";
+import { tabsTool, onresizeTool, iframeTool, fetchTool } from "saaf-common";
+import api from "../config/api"
 import Md5 from "js-md5";
 export default {
   data() {
@@ -282,11 +283,19 @@ export default {
     // 修改密码请求
     changePassword(pswd) {
       fetch.changePassword(pswd).then(res => {
-        if (status == "S") {
-        //   this.pswdModal = false;
-            this.LOGOUT()
-        }
+        // if (status == "S") {
+        this.pswdModal = false;
+        this.$Message.success("密码修改成功，需重新登录!");
+        setTimeout(()=>{
+           this.LOGOUT()
+        },1500)
+        // }
       });
+      // fetchTool.postSimpleness(api.changePassword, pswd).then(res=>{
+      //   this.LOGOUT()
+      // }).catch(err=>{
+      //   debugger
+      // })
     },
     ...mapMutations(["LOGOUT"]),
     userLogout() {
@@ -321,6 +330,7 @@ export default {
   components: {},
   destroyed() {
     clearInterval(this.interval);
+    onresizeTool.removeFunction('mainHeihgt')
   },
   mounted() {
     this.interval = setInterval(() => {

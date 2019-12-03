@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 15:27:16
+ * @Last Modified time: 2019-12-03 10:54:54
  */
 
 <template>
@@ -33,7 +33,11 @@ export default {
         type: Object,
         required: true,
       },
-      height: String | Number
+      height: String | Number,
+      saafParamForm:{
+        type: Object,
+        required: false
+      }
     },
     data(){
       return {
@@ -65,8 +69,9 @@ export default {
         this.$refs.SaafTable.scrollTop()
         return new Promise((resolve, reject)=>{
           this.loading = true
+          let paramForm = this.saafParamForm?this.saafParamForm.getParams():{}
           fetchTool.postSimpleness(api[this.tableConfig.findApi],{
-            // ...this.$refs.SaafParamForm.getParams(),
+            ...paramForm,
             ...this.tableConfig.searchParams,
             pageIndex: page.nextIndex,
             pageRows: page.pageSize

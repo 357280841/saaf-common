@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-05 15:28:03
+ * @Last Modified time: 2019-12-03 10:58:41
  */
 
 
@@ -143,7 +143,7 @@
               data[key] = this.formValue[key]
             }
           }
-          this.paramValue = data
+          this.paramValue = Object.assign({},this.formValue,data)
           this.$emit('update:params', data)
         },
         setFormValue(val){
