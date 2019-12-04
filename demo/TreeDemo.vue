@@ -29,6 +29,25 @@
         @on-change="changeTree"></SaafTree>
         {{treeItem}}
       </div>
+      <div class="pb20">
+        <div class="pb5">多选选择窗</div>
+        <SaafTree 
+        ref="SaafTree"
+        :disabled="false"
+        type='select'
+        :config="{
+          key: 'menuId',
+          parentKey: 'menuParentId',
+          name: 'menuName',
+          api: 'MenuManager_findMenuList',
+          params: {systemCode: 'BASE'}
+        }"
+        :value.sync="treeItem.menuId"
+        :name.sync="treeItem.menuName"
+        @on-change="checkboxChange"
+        :checkbox="true"></SaafTree>
+        {{treeItem}}
+      </div>
       <div class="mb50" style="height:500px; overflow: auto;">
         <div class="pb5">可选择树，返回3个参数，list：含父节点,rows：已勾选节点,current 当前项</div>
         <SaafTree 

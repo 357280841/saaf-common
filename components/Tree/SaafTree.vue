@@ -11,7 +11,11 @@
       <Poptip :disabled="disabled" v-if="type === 'select'" placement="bottom" v-model="visible" transfer>
         <Input :disabled="disabled" :value="name" readonly suffix="ios-search" clearable @on-clear="onClear"></Input>
         <div slot="content" class="tree-box">
-          <Tree :data="treeData" @on-select-change="selectChange" :show-checkbox="checkbox"></Tree>
+          <Tree :data="treeData" @on-select-change="selectChange" @on-check-change="checkChange" :show-checkbox="checkbox"></Tree>
+          <!-- <div class="button-group">
+            <Button size="small">取消</Button>
+            <Button size="small">确定</Button>
+          </div> -->
         </div>
       </Poptip>
       <div class="tree-box" v-if="type === 'tree'">
@@ -108,10 +112,15 @@
 .tree-box {
   max-height: 300px;
   position: relative;
+  overflow-y:scroll;
 }
 .refresh {
   cursor: pointer;
   position: absolute;
   right: 20px;
+}
+.button-group {
+  position: flex;
+  margin: 0;
 }
 </style>
