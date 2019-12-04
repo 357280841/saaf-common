@@ -12,7 +12,7 @@
         <!-- <Button @click="click">导入</Button>
         <SaafImportExcel v-model="show" :templetId="139"></SaafImportExcel> -->
         <div>
-            <SaafImportExcel :header-config="headerConfig"/>
+            <SaafImportExcel :header-config="headerConfig" :desc="desc" @callback="callback"/>
         </div>
     </div>
 </template>
@@ -25,35 +25,75 @@ export default {
     data () {
         return {
             show: false,
+            desc: '请确保上传模板格式正确。只接受excel文件，接受多个sheet，第一个sheet将自动忽略，第一个sheet标题只能命名为"模板注意事项"',
             headerConfig: {
                 "sheet1": [
                     {
                         name: '育婴顾问姓名',
-                        require: true
+                        require: true,
+                        desc: 'guideName'
                     },
                     {
                         name: '是否发薪',
-                        require: true
+                        require: true,
+                        desc: 'guideIsPaySalary'
                     },
                     {
-                        name: '是否仅报销量'
+                        name: '是否仅报销量',
+                        desc: 'guideIsSubSales'
+                    },
+                    {
+                        name: '入职日期',
+                        require: true,
+                        desc: 'guideWorkDate'
+                    },
+                    {
+                        name: '性别',
+                        require: true,
+                        desc: 'guideSex'
+                    },
+                    {
+                        name: '现居住地址',
+                        desc: 'guideAddress'
+                    },
+                    {
+                        name: '身份证号码',
+                        require: true,
+                        desc: 'guideId'
+                    },
+                    {
+                        name: '身份证地址',
+                        desc: 'guideIdAddress'
+                    },
+                    {
+                        name: '民族',
+                        require: true,
+                        desc: 'guideNationality'
+                    },
+                    {
+                        name: '户籍类型',
+                        desc: 'guideHouseholdType'
                     }
                 ],
                 "sheet2": [
                     {
                         name: '入职日期',
-                        require: true
+                        require: true,
+                        desc: 'guideWorkDate'
                     },
                     {
-                        name: '性别'
+                        name: '性别',
+                        desc: 'guideSex'
                     },
                     {
                         name: '现居住地址',
-                        require: true
+                        require: true,
+                        desc: 'guideAddress'
                     },
                     {
                         name: '身份证号码',
-                        require: true
+                        require: true,
+                        desc: 'guideId'
                     }
                 ],
             }
@@ -64,6 +104,9 @@ export default {
     methods: {
         click(){
             this.show = true
+        },
+        callback(data) {
+            console.log(data)
         }
     }
 }
