@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-05 13:56:35
+ * @Last Modified time: 2019-12-05 13:59:57
  */
 
 <template>
@@ -60,9 +60,9 @@ export default {
         this.getPage(this.tablePage)
       },
       getPage(page){
-        
+
         if(!api[this.tableConfig.findApi]){
-          throw `api中没找到${this.tableConfig.findApi}`
+          throw `tableConfig.findApi参数有误，api中没找到${this.tableConfig.findApi}`
         }
 
         this.$refs.SaafTable.$refs.Table.clearCurrentRow()
