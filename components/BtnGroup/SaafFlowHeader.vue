@@ -1,8 +1,8 @@
 /*
  * @Author: zhengxiaowen; 357280841@qq.com; 
- * @Date: 2019-12-02 18:00:12 
+ * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 16:21:06
+ * @Last Modified time: 2019-12-05 08:54:05
  */
 
 
@@ -10,10 +10,6 @@
 <template>
     <div>
         <SaafListPageHeader ref="SaafListPageHeader">
-            <!-- <ButtonGroup size="small" class="mr10" v-if="!pageHeader.hideQueryBtn">
-                <Button size="small" @click="getFirstPage()"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
-                <Button size="small" @click="$refs.SaafParamForm.resetFormValue()"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
-            </ButtonGroup> -->
             <div style="display: inline-block">
                 <slot name="btnGroup"></slot>
             </div>
@@ -21,32 +17,43 @@
             style="display: inline-block;" 
             :menuId="$route.query.menuId"
             :respId="$route.query.respId"
-            :functionList="functionList">
+            :functionList="pageHeader.functionList">
             </SaafResourceButton>
+
+            <ButtonGroup size="small" class="pl10">
+                <Button size="small"><span class="pr5 fa fa-paper-plane-o"></span>提交</Button>
+                <Button size="small"><span class="pr5 fa fa-undo"></span>撤回</Button>
+
+                <Button size="small"><span class="pr5 fa fa-gavel"></span>通过</Button>
+                <Button size="small"><span class="pr5 fa fa-undo"></span>驳回</Button>
+                <Button size="small"><span class="pr5 fa fa-undo"></span>驳回重审</Button>
+                <Button size="small"><span class="pr5 fa fa-comment-o"></span>发消息</Button>
+                <Button size="small"><span class="pr5 fa fa-address-book-o"></span>增加助审</Button>
+            </ButtonGroup>
         </SaafListPageHeader>
     </div>
 </template>
 <script>
-
+    import {btnGroupTool} from 'saaf-common'
+    // import {btnGroupTool} from 'saaf-flow'
     export default {
       props:{
           pageHeader: {
               type: Object,
               required: false
-          }
+          },
       },
       components: {
       },
       data () {
         return {
-          
         }
       },
       mounted () {
-
       },
       methods: {
-
+      },
+      watch:{
       }
     }
 </script>

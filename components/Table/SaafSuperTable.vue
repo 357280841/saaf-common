@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 14:18:26
+ * @Last Modified time: 2019-12-04 16:59:19
  */
 
 <template>
@@ -25,8 +25,8 @@
 
     <SaafListHeader 
       :pageHeader="tableConfig.pageHeader" 
-      @getFirstPage="getFirstPage"
-      @resetFormValue="resetFormValue"
+      @find="getFirstPage"
+      @reset="resetFormValue"
       :currentRow="currentRow">
       <template v-slot:btnGroup><slot name="btnGroup"></slot></template>
     </SaafListHeader>

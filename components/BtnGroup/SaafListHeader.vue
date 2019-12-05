@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 14:05:23
+ * @Last Modified time: 2019-12-04 16:59:30
  */
 
 
@@ -11,8 +11,8 @@
     <div>
         <SaafListPageHeader ref="SaafListPageHeader">
             <ButtonGroup size="small" class="mr10" v-if="!pageHeader.hideQueryBtn">
-                <Button size="small" @click="$emit('getFirstPage')"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
-                <Button size="small" @click="$emit('resetFormValue')"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
+                <Button size="small" @click="$emit('find')"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
+                <Button size="small" @click="$emit('reset')"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
             </ButtonGroup>
             <div style="display: inline-block">
                 <slot name="btnGroup"></slot>
