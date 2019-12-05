@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-11-27 14:02:55 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 14:49:18
+ * @Last Modified time: 2019-12-05 13:56:35
  */
 
 <template>
@@ -60,6 +60,11 @@ export default {
         this.getPage(this.tablePage)
       },
       getPage(page){
+        
+        if(!api[this.tableConfig.findApi]){
+          throw `api中没找到${this.tableConfig.findApi}`
+        }
+
         this.$refs.SaafTable.$refs.Table.clearCurrentRow()
         this.resetTableHeight()
         this.$refs.SaafTable.scrollTop()
@@ -71,7 +76,6 @@ export default {
         return new Promise((resolve, reject)=>{
           this.loading = true
           // let paramForm = this.saafParamForm?this.saafParamForm.getParams():{}
-          
           fetchTool.postSimpleness(api[this.tableConfig.findApi],{
             ...paramForm,
             ...this.tableConfig.searchParams,
