@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:36:35
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-26 14:18:28
+ * @Last Modified time: 2019-12-05 14:20:58
  */
 
 import platform from '@/config/platform'
@@ -10,6 +10,7 @@ import platform from '@/config/platform'
 let host = platform.host
 
 let api = {
+    baseLookupTypeService_find: `${host}/baseServer/baseLookupTypeService/find`,
     baseLoginService_login: `${host}/baseServer/baseLoginService/login`,
     baseLookupValuesService_findDic: `${host}/baseServer/baseLookupValuesService/findDic`, // 查询快码
     baseLookupValuesService_find: `${host}/baseServer/baseLookupValuesService/find`,

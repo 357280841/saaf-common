@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-25 15:51:09
+ * @Last Modified time: 2019-12-05 17:52:33
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -57,8 +57,9 @@ export default {
       localStorageTool.save('lookup', data)
     },
     LOGOUT (state) {
-      sessionStorage.clear()
-      localStorage.clear()
+      // sessionStorage.clear()
+      // localStorage.clear()
+      localStorageTool.remove('userInfo')
       StoreCommon.commit('CLEAN_TAB')
       // state.certificate = null
       // state.userInfo = {}

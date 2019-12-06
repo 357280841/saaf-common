@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-31 16:24:45 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 14:22:25
+ * @Last Modified time: 2019-12-05 15:44:12
  */
 
 
@@ -83,7 +83,9 @@
           if(this.checkbox){
             return
           }
-          this.$emit('on-change',row)
+          let data = JSON.parse(JSON.stringify(row))
+          delete data.children
+          this.$emit('on-change',data)
           this.row = row
           this.$emit('update:value', row[this.config.key])
           this.$emit('update:name', row[this.config.name])

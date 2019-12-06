@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:36
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 15:41:23
+ * @Last Modified time: 2019-12-05 18:00:11
  */
 
 
@@ -178,6 +178,7 @@ import { tabsTool, onresizeTool, iframeTool, fetchTool } from "saaf-common";
 import api from "../config/api"
 import Md5 from "js-md5";
 import platform from '@/config/platform'
+import systemHook from '@/config/systemHook'
 export default {
   data() {
     return {
@@ -238,12 +239,16 @@ export default {
       tabKey: state => state.tabs.tabKey,
       menuList: state => state.user.menuList,
       isFullscreen:state => state.system.isFullscreen,
+      userInfo: state => state.user.userInfo
     })
   },
   created() {
     this.$store.commit("INIT_USER_INFO");
     this.$store.commit("INIT_TAB");
     this.$store.dispatch("GET_LOOKUP");
+    if(systemHook.mainPageInit){
+      systemHook.mainPageInit()
+    }
   },
   
   methods: {
@@ -258,7 +263,7 @@ export default {
       }
       this.$refs["formValidate"].validate(valid => {
         if (valid) {
-          let userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+          let userInfo = this.userInfo;
           let pswd = {
             oldPassword: Md5(
               "" + this.formValidate.oldPassword + "lo0.1l@g9v#"
@@ -323,8 +328,7 @@ export default {
     },
     setPageWindowHeight() {
       // this.iframeHeight = (this.$refs.PageContent.$el.clientHeight-50)
-      this.iframeHeight =
-        $(window).innerHeight() - $(this.$refs.IframeBox).offset().top;
+      this.iframeHeight = $(window).innerHeight() - $(this.$refs.IframeBox).offset().top;
     }
     // setMenuHeight(){
     //     this.menuBoxHeight = $(window).innerHeight() - $(this.$refs.menuList).offset().top

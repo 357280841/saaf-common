@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:18
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 15:24:05
+ * @Last Modified time: 2019-12-06 14:33:44
  */
 
 <template>
@@ -96,6 +96,14 @@
                         // }
                     }).then(res=>{
                         this.$store.commit('CLEAN_TAB')
+                        let userInfo = res.data
+                        let resp = []
+                        userInfo.userRespList.map((item)=>{
+                            if(item.systemCode == platform.systemCode){
+                                resp.push(item)
+                            }
+                        })
+                        userInfo.userRespList = resp
                         this.$store.commit("SET_USER_INFO",res.data)
                         this.$router.push("/main/home")
                     }).catch(err=>{
