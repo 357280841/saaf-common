@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 17:55:42 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-10-26 17:31:39
+ * @Last Modified time: 2019-12-06 11:43:28
  */
 
 
@@ -41,6 +41,7 @@ export default {
     methods: {
         formChange(val){
             this.$emit('event', val);
+            this.$emit('on-change', val)
         }
     }
 }
