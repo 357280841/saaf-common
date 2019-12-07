@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:18
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-06 14:33:44
+ * @Last Modified time: 2019-12-07 11:28:55
  */
 
 <template>
@@ -103,6 +103,10 @@
                                 resp.push(item)
                             }
                         })
+                        if(resp.length == 0){
+                            this.$Message.error('当前用户没有当前系统职责')
+                            return
+                        }
                         userInfo.userRespList = resp
                         this.$store.commit("SET_USER_INFO",res.data)
                         this.$router.push("/main/home")
