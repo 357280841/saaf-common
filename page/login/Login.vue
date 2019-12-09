@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:55:18
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-07 11:28:55
+ * @Last Modified time: 2019-12-09 11:55:26
  */
 
 <template>
@@ -95,7 +95,6 @@
                             lan: 'CN'
                         // }
                     }).then(res=>{
-                        this.$store.commit('CLEAN_TAB')
                         let userInfo = res.data
                         let resp = []
                         userInfo.userRespList.map((item)=>{
@@ -109,7 +108,8 @@
                         }
                         userInfo.userRespList = resp
                         this.$store.commit("SET_USER_INFO",res.data)
-                        this.$router.push("/main/home")
+                        this.$store.commit('CLEAN_TAB')
+                        // this.$router.push("/main/home")
                     }).catch(err=>{
                         console.error("失败！！！")
                     })

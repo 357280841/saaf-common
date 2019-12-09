@@ -2,12 +2,12 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-02 17:52:38
+ * @Last Modified time: 2019-12-09 14:46:14
  */
 
 
 <template>
-    <div>
+    <div ref="SaafTable">
         <Table
           ref="Table"
           :height="height"
@@ -25,13 +25,28 @@
           @on-select-all-cancel="onSelectAllCancel"
           @on-selection-change="onSelectionChange"
           ></Table>
-          <!-- stripe -->
-
+          
         <Page 
+          v-if="simple"
           ref="Page"
           class="pt10"
-          show-elevator 
-          show-sizer 
+          :simple="simple"
+          :show-elevator="!simple"
+          :show-sizer="!simple"
+          :show-total="!simple"
+          :current="page.pageIndex"
+          :total="page.count" 
+          :page-size="page.pageSize" 
+          @on-change="pageChange" 
+          @on-page-size-change="pageSizeChange"
+           /> 
+
+          <Page 
+          v-if="!simple"
+          ref="Page"
+          class="pt10"
+          show-elevator
+          show-sizer
           show-total
           :current="page.pageIndex"
           :total="page.count" 
@@ -86,13 +101,18 @@ import pageTool from '../../tool/pageTool'
       },
       data () {
         return {
-          tableColumns:[]
+          tableColumns:[],
+          simple: false
         }
       },
       created(){
+        // console.log(this.$refs.SaafTable.clientWidth)
       },
       mounted () {
         this.initTable()
+        if(this.$refs.SaafTable.clientWidth < 500 && this.$refs.SaafTable.clientWidth!=0){
+          this.simple = true
+        }
       },
       methods: {
         initTable(){

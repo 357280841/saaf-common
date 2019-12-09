@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-10-10 22:03:50
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 10:26:23
+ * @Last Modified time: 2019-12-09 09:25:04
  */
 
 import store from './store/StoreCommon'
@@ -23,6 +23,7 @@ import SaafEN from './language/SaafEN'
 import iframeTool from './tool/iframeTool'
 import treeTool from './tool/treeTool'
 import btnGroupTool from './tool/btnGroupTool'
+import flowTool from './tool/flowTool'
 
 export {
     store,
@@ -42,6 +43,7 @@ export {
     iframeTool,
     treeTool,
     btnGroupTool,
+    flowTool,
     // 工具 end
 
     // 语言包 start
