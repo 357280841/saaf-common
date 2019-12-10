@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-10 15:24:16
+ * @Last Modified time: 2019-12-10 17:57:45
  */
 
 
@@ -21,8 +21,8 @@
             </SaafResourceButton>
 
             <ButtonGroup size="small" class="pl10">
-                <Button size="small" @click="open('submit')"><span class="pr5 fa fa-paper-plane-o"></span>提交</Button>
-                <Button size="small" @click="open('revoke')"><span class="pr5 fa fa-undo"></span>撤回</Button>
+                <Button size="small" @click="submit"><span class="pr5 fa fa-paper-plane-o"></span>提交</Button>
+                <Button size="small" @click="revoke"><span class="pr5 fa fa-undo"></span>撤回</Button>
                 <Button size="small" @click="open('pass')"><span class="pr5 fa fa-gavel"></span>通过</Button>
                 <Button size="small" @click="open('reject')"><span class="pr5 fa fa-undo"></span>驳回</Button>
                 <Button size="small" @click="open('retrial')"><span class="pr5 fa fa-undo"></span>驳回重审</Button>
@@ -39,13 +39,18 @@
                 <FormItem label="意见">
                     <Input v-model="formItem.opinion" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder=""></Input>
                 </FormItem>
-                <FormItem label="快捷回复">
+                <!-- <FormItem label="快捷回复">
                     <Select v-model="formItem.select">
                         <Option value="s">New</Option>
                     </Select>
+                </FormItem> -->
+                <FormItem label="选择节点" v-if="type == 'retrial'">
+                    <Select v-model="formItem.taskItem" clearable>
+                        <Option v-for="row in typeObj.retrial.nodes" :value="row.taskDefinitionId">{{row.taskName}}</Option>
+                    </Select>
                 </FormItem>
             </Form>
-            <div>备注：{{typeObj[type].description}}</div>
+            <div class="description" v-if="typeObj[type].description"><span class="red strong">备注：</span>{{typeObj[type].description}}</div>
         </Modal>
     </div>
 </template>
@@ -66,14 +71,26 @@
             modal: false,
             type: '',
             typeObj: {
-                submit:{
-                    title: '通过',
-                    description: '',
-                },
                 reject:{
                     title: '驳回',
                     description: '只能将单据驳回到提交人，提交人再次提交后将重新调用系统中配置的审批流，所有审批人都需要进行审批操作。',
                 },
+                retrial: {
+                    title: '驳回重审',
+                    description: '可将单据驳回到当前操作人之前的任意节点，包括提交人和审批人。被驳回人再次提交（或审批通过）时可提交（或审批通过）到之前已经审批过的任意节点。',
+                    nodes: [
+                        // {taskDefinitionId:1,taskName:'111'},{taskDefinitionId:2,taskName:'222'}
+                    ]
+                },
+                message: {
+                    title: '发消息'
+                },
+                pass: {
+                    title: '审批'
+                },
+                addSubTask: {
+                    title: '增加助审'
+                }
             },
             formItem: {
                 opinion:''
@@ -83,6 +100,7 @@
       mounted () {
       },
       methods: {
+          // 提交
           submit(){
               alert(1)
           },
@@ -140,6 +158,14 @@
           },
           ok(){
               this[this.type]()
+          },
+          findTaskNodes(){
+              flowTool.findTaskNodes({
+                  taskId: '',
+                  type: 1
+              }).then(res=>{
+                  this.typeObj.retrial.nodes = res.data
+              })
           }
       },
       watch:{
@@ -147,5 +173,9 @@
     }
 </script>
 <style lang="less" scoped>
-
+.description {
+    font-size: 14px;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
 </style>
