@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-29 11:37:52
+ * @Last Modified time: 2019-12-10 15:44:24
  */
 
 <template>
@@ -22,13 +22,14 @@
      :page="tablePage"
      :getData="getData"
      :currentRow.sync="currentRow"
+     :loading="loading"
      />
   </div>
 </template>
 
 <script>
   
-import {fetch} from '@/page/pageConfig/index'
+import {fetch,api} from '@/page/pageConfig/index'
 import { Promise, resolve, reject } from 'q';
 import { fetchTool, pageTool, tabsTool, gridButton, getUrl } from '../../index'
 
@@ -56,7 +57,8 @@ export default {
         currentRow: null,
         tableHeight: null,
         value: '',
-        selectList: []
+        selectList: [],
+        loading: false
       }
     },
     created(){
@@ -78,9 +80,13 @@ export default {
         this.getPage(this.tablePage)
       },
       getPage(page){
+        if(!api[this.tableConfig.findApi]){
+          throw `tableConfig.findApi参数有误，api中没找到${this.tableConfig.findApi}`
+        }
         this.resetTableHeight()
+        this.$refs.SaafTable.scrollTop()
         this.$refs.SaafTable.$refs.Table.clearCurrentRow()
-        return new Promise((resolve, reject)=>{
+
           let params = {
             ...this.searchParams,
             ...this.tableConfig.searchParams,
@@ -90,12 +96,36 @@ export default {
           if(this.selectConfig.key){
             params[this.selectConfig.key] = this.value
           }
-          fetch[this.tableConfig.findApi](params).then(res=>{
+          
+        return new Promise((resolve, reject)=>{
+          this.loading = true
+          fetchTool.postSimpleness(api[this.tableConfig.findApi],params).then(res=>{
+            this.loading = false
             this.tableList = res.data
             this.tablePage = pageTool.update(res,this.tablePage)
             resolve()
-          }).catch(err=>reject(err))
+          }).catch(err=>{
+            this.loading = false
+            this.$Message.error(err.msg)
+            reject(err)
+          })
         })
+        // return new Promise((resolve, reject)=>{
+          // let params = {
+          //   ...this.searchParams,
+          //   ...this.tableConfig.searchParams,
+          //   pageIndex: page.nextIndex,
+          //   pageRows: page.pageSize,
+          // }
+          // if(this.selectConfig.key){
+          //   params[this.selectConfig.key] = this.value
+          // }
+        //   fetch[this.tableConfig.findApi](params).then(res=>{
+        //     this.tableList = res.data
+        //     this.tablePage = pageTool.update(res,this.tablePage)
+        //     resolve()
+        //   }).catch(err=>reject(err))
+        // })
       },
       getFirstPage(){
         this.$refs.SaafTable.getFirstPage()

@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2019-05-24 17:36:35
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-05 14:20:58
+ * @Last Modified time: 2019-12-10 15:35:26
  */
 
 import platform from '@/config/platform'
@@ -361,7 +361,7 @@ let api = {
     // ------------------------------
     // ***** 郑晓文 start *****
     // ------------------------------
-    // baseUsersService_findPagination: `${host}/baseServer/baseUsersService/findPagination`,
+    baseUsersService_findPagination: `${host}/baseServer/baseUsersService/findPagination`,
     // basePersonService_findPagination: `${host}/baseServer/basePersonService/findPagination`,
     // baseUsersService_save: `${host}/baseServer/baseUsersService/save`,
     // baseUsersService_findById: `${host}/baseServer/baseUsersService/findById`,
