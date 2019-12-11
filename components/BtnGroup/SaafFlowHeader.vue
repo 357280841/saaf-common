@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-10 17:57:45
+ * @Last Modified time: 2019-12-11 15:01:34
  */
 
 
@@ -49,6 +49,38 @@
                         <Option v-for="row in typeObj.retrial.nodes" :value="row.taskDefinitionId">{{row.taskName}}</Option>
                     </Select>
                 </FormItem>
+
+                <FormItem label="助审人" v-if="type == 'addSubTask'">
+                    <SaafSelectModal
+                        type="radio" 
+                        :showInput="true"
+                        :selectConfig="{
+                            title: '姓名或职位',
+                            key: 'keyword'
+                        }" 
+                        :tableConfig="{
+                            findApi: 'baseOrgStructureService_findAllInfoOnlyOnePosition',
+                            searchParams:{
+                                // systemCode: '',
+                            },
+                            tableColumns: [
+                            {
+                                title: '工号',
+                                key: 'employeeNumber',
+                                sortable:true
+                            },{
+                                title: '姓名',
+                                key: 'personName',
+                                sortable:true
+                            },{
+                                title: '职位',
+                                key: 'positionName',
+                                sortable:true
+                            }]
+                        }" 
+                        :value="typeObj.addSubTask.member.personName"
+                        @on-change="addTaskMember"></SaafSelectModal>
+                </FormItem>
             </Form>
             <div class="description" v-if="typeObj[type].description"><span class="red strong">备注：</span>{{typeObj[type].description}}</div>
         </Modal>
@@ -89,7 +121,10 @@
                     title: '审批'
                 },
                 addSubTask: {
-                    title: '增加助审'
+                    title: '增加助审',
+                    member: {
+                        personName: ''
+                    }
                 }
             },
             formItem: {
@@ -102,7 +137,11 @@
       methods: {
           // 提交
           submit(){
-              alert(1)
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.submit){
+                  this.pageHeader.flowFunctionList.submit()
+              }else{
+                  throw '请绑定提交程序'
+              }
           },
           // 撤回
           revoke(){
@@ -166,6 +205,9 @@
               }).then(res=>{
                   this.typeObj.retrial.nodes = res.data
               })
+          },
+          addTaskMember(row){
+              this.typeObj.addSubTask.member = row
           }
       },
       watch:{
