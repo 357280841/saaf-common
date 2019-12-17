@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-11 15:01:34
+ * @Last Modified time: 2019-12-13 16:07:27
  */
 
 
@@ -21,13 +21,13 @@
             </SaafResourceButton>
 
             <ButtonGroup size="small" class="pl10">
-                <Button size="small" @click="submit"><span class="pr5 fa fa-paper-plane-o"></span>提交</Button>
-                <Button size="small" @click="revoke"><span class="pr5 fa fa-undo"></span>撤回</Button>
-                <Button size="small" @click="open('pass')"><span class="pr5 fa fa-gavel"></span>通过</Button>
-                <Button size="small" @click="open('reject')"><span class="pr5 fa fa-undo"></span>驳回</Button>
-                <Button size="small" @click="open('retrial')"><span class="pr5 fa fa-undo"></span>驳回重审</Button>
-                <Button size="small" @click="open('message')"><span class="pr5 fa fa-comment-o"></span>发消息</Button>
-                <Button size="small" @click="open('addSubTask')"><span class="pr5 fa fa-address-book-o"></span>增加助审</Button>
+                <Button size="small" v-if="stateTree.submit" @click="submit"><span class="pr5 fa fa-paper-plane-o"></span>提交</Button>
+                <Button size="small" v-if="stateTree.revoke" @click="revoke"><span class="pr5 fa fa-undo"></span>撤回</Button>
+                <Button size="small" v-if="stateTree.pass" @click="open('pass')"><span class="pr5 fa fa-gavel"></span>通过</Button>
+                <Button size="small" v-if="stateTree.reject" @click="open('reject')"><span class="pr5 fa fa-undo"></span>驳回</Button>
+                <Button size="small" v-if="stateTree.retrial" @click="open('retrial')"><span class="pr5 fa fa-undo"></span>驳回重审</Button>
+                <Button size="small" v-if="stateTree.message" @click="open('message')"><span class="pr5 fa fa-comment-o"></span>发消息</Button>
+                <Button size="small" v-if="stateTree.addSubTask" @click="open('addSubTask')"><span class="pr5 fa fa-address-book-o"></span>增加助审</Button>
             </ButtonGroup>
         </SaafListPageHeader>
         <Modal
@@ -95,6 +95,7 @@
               type: Object,
               required: false
           },
+          flow: Object
       },
       components: {
       },
@@ -127,12 +128,22 @@
                     }
                 }
             },
+            stateTree:{
+                submit: false,
+                revoke: false,
+                pass: false,
+                reject: false,
+                retrial: false,
+                message: false,
+                addSubTask: false
+            },
             formItem: {
                 opinion:''
             }
         }
       },
       mounted () {
+          this.checkState()
       },
       methods: {
           // 提交
@@ -208,9 +219,30 @@
           },
           addTaskMember(row){
               this.typeObj.addSubTask.member = row
+          },
+          getStartUrl(){
+              flowTool.getStartUrl(this.flow)
+          },
+          checkState(){
+              for(let key in this.stateTree){
+                  this.stateTree[key]=false
+              }
+              // 新建/草稿单据
+              if(!this.flow.auditStatus || this.flow.auditStatus == 'DRAFT'){
+                  this.stateTree.submit = true
+              }
+              if(this.flow.auditStatus == 'APPROVAL'){
+                  
+              }
           }
       },
       watch:{
+        flow: {
+          handler: function (val, oldVal) {
+            this.checkState()
+          },
+          deep: true
+        },
       }
     }
 </script>

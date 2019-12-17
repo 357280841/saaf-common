@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-08-21 11:50:06
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 09:57:17
+ * @Last Modified time: 2019-12-13 16:42:02
  */
 // axios  ajax
 import axios from 'axios'
@@ -15,7 +15,7 @@ import { Spin, Message } from 'view-design'
 
 
 // axios 配置
-axios.defaults.timeout = 30000
+axios.defaults.timeout = 60000
 
 
 // 返回状态判断

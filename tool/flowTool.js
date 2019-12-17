@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-09 09:25:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-09 11:36:02
+ * @Last Modified time: 2019-12-12 14:12:46
  */
 
 import { fetchTool } from 'saaf-common'
@@ -159,6 +159,18 @@ export default class flowTool {
     static findTaskNodes(params){
         return new Promise((resolve, reject)=>{
             fetch.bpmHistoryService_findTaskNodes(params).then(res=>{
+                resolve(res)
+            }).catch(err=>{
+                reject(err)
+            })
+        })
+    }
+
+    // 根据流程code与职责，查询具体流程状态
+    // {"processDefinitionKey":"PROMOTION_OBJECT_APPLY","responsibilityId":"2258012"}
+    static getStartUrl(params){
+        return new Promise((resolve, reject)=>{
+            fetch.bpmProcessService_getStartUrl(params).then(res=>{
                 resolve(res)
             }).catch(err=>{
                 reject(err)

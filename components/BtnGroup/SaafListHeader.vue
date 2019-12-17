@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-04 16:59:30
+ * @Last Modified time: 2019-12-12 16:05:36
  */
 
 
@@ -66,13 +66,13 @@
             let val = this.pageHeader.functionList
             let functionList = {}
             for(let key in val){
-                if((key == 'btnModify') && !val[key].disabled){
+                if((key == 'btnModify') && val[key].disabled === undefined){
                     functionList[key] = {
                     fun: val[key],
                     disabled: ()=>{ return this.currentRow ? false : true },
                     ...val[key]
                     }
-                }else if((key == 'btnDel') && !val[key].disabled){
+                }else if((key == 'btnDel') && val[key].disabled === undefined){
                     let fun = null
                     if(val[key] && val[key].fun){
                     fun = val[key].fun

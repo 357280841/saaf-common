@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-05 17:52:33
+ * @Last Modified time: 2019-12-13 18:07:47
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -71,7 +71,8 @@ export default {
       // state.currentLanguage = {}
       // tabsTool.rootWindow.location.href = '/'
       // console.log(tabsTool.rootWindow)
-      tabsTool.goto({url:'/'})
+      // tabsTool.goto({url:'/'})
+      tabsTool.rootWindow.location = '/'
       // routerController.replace('/')
     },
     SET_CURRENT_RESP (state,data){
