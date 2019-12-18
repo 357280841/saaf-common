@@ -18,7 +18,7 @@
           </div> -->
         </div>
       </Poptip>
-      <div class="tree-box" v-if="type === 'tree'">
+      <div v-if="type === 'tree'">
         <!-- <Button size="small" type="primary" @click="getData">{{$i18n.t('刷新')}}<Icon size="16" type="ios-refresh" /></Button> -->
         <Icon class="refresh" @click="getData" type="md-refresh-circle" size="20" />
         <Tree :data="treeData" @on-select-change="selectChange" @on-check-change="checkChange" :show-checkbox="checkbox"></Tree>
