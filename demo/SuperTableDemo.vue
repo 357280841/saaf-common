@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-10-12 14:06:20 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 11:04:01
+ * @Last Modified time: 2019-12-25 09:15:53
  */
 <i18n>
 {
@@ -150,7 +150,12 @@ export default {
             'on-select-cancel':(selection, row)=>{debugger},
             'on-select-all':(selection)=>{debugger},
             'on-select-all-cancel':(selection)=>{debugger},
-            'on-selection-change':(selection)=>{debugger}
+            'on-selection-change':(selection)=>{debugger},
+            
+            'on-sort-change':(column, key, order)=>{debugger},
+            'on-filter-change':(selection)=>{debugger},
+            'on-row-click':(selection, index)=>{debugger},
+            'on-row-dblclick':(selection)=>{debugger},
           },
           tableColumns: [
             {

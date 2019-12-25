@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 16:28:12 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-09 14:46:14
+ * @Last Modified time: 2019-12-25 09:14:21
  */
 
 
@@ -24,6 +24,10 @@
           @on-select-all="onSelectAll"
           @on-select-all-cancel="onSelectAllCancel"
           @on-selection-change="onSelectionChange"
+          @on-sort-change="onSortChange"
+          @on-filter-change="onFilterChange"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
           ></Table>
           
         <Page 
@@ -208,7 +212,29 @@ import pageTool from '../../tool/pageTool'
           if(this.events && this.events['on-selection-change']){
             this.events['on-selection-change'](selection)
           }
-        }
+        },
+
+
+        onSortChange(column, key, order){
+          if(this.events && this.events['on-sort-change']){
+            this.events['on-sort-change'](column, key, order)
+          }
+        },
+        onFilterChange(selection){
+          if(this.events && this.events['on-filter-change']){
+            this.events['on-filter-change'](selection)
+          }
+        },
+        onRowClick(selection, index){
+          if(this.events && this.events['on-row-click']){
+            this.events['on-row-click'](selection, index)
+          }
+        },
+        onRowDblclick(selection){
+          if(this.events && this.events['on-row-dblclick']){
+            this.events['on-row-dblclick'](selection)
+          }
+        },
       },
       watch:{
         columns: {
