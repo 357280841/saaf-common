@@ -119,8 +119,11 @@ export default {
         }
     },
     watch:{
-        tableConfig(val){
-            this.watchTableConfig()
+        tableConfig: {
+            handler(newVal, oldVal) {
+                this.watchTableConfig()
+            },
+            deep: true
         }
     }
 }
