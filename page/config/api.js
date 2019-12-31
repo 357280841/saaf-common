@@ -12,6 +12,7 @@ let host = platform.host
 let api = {
     baseLookupTypeService_find: `${host}/baseServer/baseLookupTypeService/find`,
     baseLoginService_login: `${host}/baseServer/baseLoginService/login`,
+    baseLoginService_logout: `${host}/baseServer/baseLoginService/logoff`,
     baseLookupValuesService_findDic: `${host}/baseServer/baseLookupValuesService/findDic`, // 查询快码
     baseLookupValuesService_find: `${host}/baseServer/baseLookupValuesService/find`,
     baseLookupValuesService_saveOrUpdateALL: `${host}/baseServer/baseLookupValuesService/saveOrUpdateALL`,

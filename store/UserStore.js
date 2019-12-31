@@ -7,6 +7,7 @@
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
 import { fetch } from '@/page/pageConfig/index'
+import { fetch as _fetch } from '../page/config/index'
 import StoreCommon from './StoreCommon'
 import creatTree from '@/config/tree'
 import Vue from 'vue'
@@ -59,6 +60,9 @@ export default {
     LOGOUT (state) {
       // sessionStorage.clear()
       // localStorage.clear()
+      _fetch.baseLoginService_logout().then(res => {
+        console.log('登出', res)
+      })
       localStorageTool.remove('userInfo')
       StoreCommon.commit('CLEAN_TAB')
       // state.certificate = null
