@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2020-01-05 11:54:44 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-01-05 17:45:06
+ * @Last Modified time: 2020-01-05 17:51:54
  */
 /*
  * @Author: zhengxiaowen; 357280841@qq.com; 
@@ -51,9 +51,4 @@ import { mapState } from 'vuex'
     }
 </script>
 <style lang="less" scoped>
-.GooFlow_item.item_round.item_mark.end {
-    background: url('~/GooFlowImages/logo.png') no-repeat center;
-    width: 40px;
-    height: 40px;
-}
 </style>
