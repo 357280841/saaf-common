@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-13 16:07:27
+ * @Last Modified time: 2020-01-05 11:50:23
  */
 
 
@@ -167,7 +167,16 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.reject){
                   this.pageHeader.flowFunctionList.reject()
               }else{
-                  flowTool.reject()
+                  flowTool.reject({
+                    properties: {
+                        opinion: "驳回",
+                        option: "RJ",
+                        menucode: "DB"
+                    },
+                    responsibilityId: this.flow.responsibilityId,
+                    taskId: this.flow.taskId,
+                    saveonly: false
+                  })
               }
           },
           // 驳回重审
@@ -191,7 +200,16 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.pass){
                   this.pageHeader.flowFunctionList.pass()
               }else{
-                  flowTool.pass()
+                  flowTool.pass({
+                    properties: {
+                        opinion: "通过",
+                        option: "Y",
+                        menucode: "DB"
+                    },
+                    responsibilityId: this.flow.responsibilityId,
+                    taskId: this.flow.taskId,
+                    saveonly: false
+                  })
               }
           },
           // 增加助审
@@ -228,11 +246,17 @@
                   this.stateTree[key]=false
               }
               // 新建/草稿单据
-              if(!this.flow.auditStatus || this.flow.auditStatus == 'DRAFT'){
+              if(this.flow.auditStatus == 'DRAFT'){
                   this.stateTree.submit = true
               }
               if(this.flow.auditStatus == 'APPROVAL'){
-                  
+                this.stateTree = {
+                    ...this.stateTree,
+                    pass: true,
+                    reject: true,
+                    message: true,
+                    addSubTask: true
+                }
               }
           }
       },
