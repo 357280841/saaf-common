@@ -56,3 +56,6 @@ import SaafFlowHeader from './BtnGroup/SaafFlowHeader'
 Vue.component('SaafFlowHeader', SaafFlowHeader)
 import SaafListHeader from './BtnGroup/SaafListHeader'
 Vue.component('SaafListHeader', SaafListHeader)
+
+import FlowHistoricActivities from './Flow/FlowHistoricActivities'
+Vue.component('FlowHistoricActivities', FlowHistoricActivities)
