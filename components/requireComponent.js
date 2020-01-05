@@ -59,3 +59,5 @@ Vue.component('SaafListHeader', SaafListHeader)
 
 import FlowHistoricActivities from './Flow/FlowHistoricActivities'
 Vue.component('FlowHistoricActivities', FlowHistoricActivities)
+import SaafGooFlow from './Flow/SaafGooFlow'
+Vue.component('SaafGooFlow', SaafGooFlow)
