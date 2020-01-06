@@ -64,7 +64,10 @@ import { flowTool } from "saaf-common"
       },
       created(){
           flowTool.findHistoricActivities({
-              processInstanceId: this.flow.processInstanceId
+              processInstanceId: this.flow.processInstanceId,
+              processDefinitionKey: this.flow.processDefinitionKey,
+              processDefinitionId: this.flow.processDefinitionId,
+              businessKey: this.flow.businessKey
           }).then(res=>{
               this.list = res.data
           })
