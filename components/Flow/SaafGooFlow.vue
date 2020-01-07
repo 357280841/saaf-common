@@ -23,6 +23,7 @@
 <script>
 import * as GooFlow from '../../plugins/GooFlow/plugin/GooFlow.min'
 import '../../plugins/GooFlow/plugin/GooFlow.less'
+import api from '../../config/apiCommon'
 import { mapState } from 'vuex'
     export default {
       props:{
@@ -43,7 +44,7 @@ import { mapState } from 'vuex'
         
       },
       mounted () {
-          GooFlow.processImageDraw(this.certificate, 'SaafGooFlow', this.flow.processInstanceId, this.flow.processDefinitionKey, this.flow.processDefinitionId, this.flow.businessKey)
+          GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.flow.processInstanceId, this.flow.processDefinitionKey, this.flow.businessKey, this.flow.processDefinitionId)
       },
       methods: {
           

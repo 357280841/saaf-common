@@ -28,7 +28,10 @@ let api = {
     bpmHistoryService_findHistoricActivities: `${host}/bpmServer/bpmHistoryService/findHistoricActivities`,
 
     // 查询任务节点
-    bpmHistoryService_findTaskNodes: `${host}/bpmServer/bpmHistoryService/findTaskNodes`
+    bpmHistoryService_findTaskNodes: `${host}/bpmServer/bpmHistoryService/findTaskNodes`,
+
+    // 获取流程图
+    bpmProcessService_getGooflowProcessJSON: `${host}/bpmServer/bpmProcessService/getGooflowProcessJSON`
 
     /****** 流程 end ******/
 }
