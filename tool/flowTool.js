@@ -11,6 +11,18 @@ import fetch from '../config/fetchDataCommon'
 
 export default class flowTool {
 
+    //查询流程实例
+
+    static getFlowInstance(params){
+        return new Promise((resolve, reject) => {
+            fetch.bpmListService_getByParam(params).then(res => {
+                resolve(res)
+            }).catch(err=> {
+                reject(err)
+            })
+        })
+    }
+
     // 撤销
     // processInstanceId, taskId
     static revoke(params){

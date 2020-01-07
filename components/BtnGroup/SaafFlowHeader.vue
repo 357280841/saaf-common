@@ -87,6 +87,7 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex'
     import {btnGroupTool, flowTool} from 'saaf-common'
     // import {btnGroupTool} from 'saaf-flow'
     export default {
@@ -98,6 +99,12 @@
           flow: Object
       },
       components: {
+      },
+      computed: {
+        ...mapState({
+            currentResp: state => state.user.currentResp,
+            userInfo: state => state.user.userInfo,
+        }),
       },
       data () {
         return {
@@ -137,13 +144,30 @@
                 message: false,
                 addSubTask: false
             },
+            isStartUser: false,
             formItem: {
                 opinion:''
             }
         }
       },
       mounted () {
-          this.checkState()
+          flowTool.getFlowInstance({
+              procDefKey: this.flow.processDefinitionKey,
+              businessKey: this.flow.businessKey,
+              processInstanceId: this.flow.processInstanceId
+          }).then(res => {
+              let resArr = JSON.parse(res.data.variables)
+              let startUserId = 0
+              resArr.map(item => {
+                  if(item.name === 'startUserId') {
+                      startUserId = item.value
+                  }
+              })
+              if(startUserId == this.userInfo.userId) {
+                this.isStartUser = true
+              }
+              this.checkState()
+          })
       },
       methods: {
           // 提交
@@ -249,16 +273,17 @@
               if(this.flow.auditStatus == 'DRAFT'){
                   this.stateTree.submit = true
               }
+              console.log('stateTree',  this.revokeStatus)
               if(this.flow.auditStatus == 'APPROVAL'){
-                if(this.flow.revoke) {
-                      this.stateTree.revoke = true
+                if(this.isStartUser) {
+                    this.stateTree.revoke = true
                 } else {
                     this.stateTree = {
                         ...this.stateTree,
                         pass: true,
                         reject: true,
                         message: true,
-                        addSubTask: true
+                        addSubTask: true,
                     }
                 }
               }

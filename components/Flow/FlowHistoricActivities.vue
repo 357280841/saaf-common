@@ -70,7 +70,6 @@ import { flowTool } from "saaf-common"
               businessKey: this.flow.businessKey
           }).then(res=>{
               this.list = res.data
-              this.$emit('callback', res.data)
           })
       },
       mounted () {
