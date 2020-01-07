@@ -250,12 +250,16 @@
                   this.stateTree.submit = true
               }
               if(this.flow.auditStatus == 'APPROVAL'){
-                this.stateTree = {
-                    ...this.stateTree,
-                    pass: true,
-                    reject: true,
-                    message: true,
-                    addSubTask: true
+                if(this.flow.revoke) {
+                      this.stateTree.revoke = true
+                } else {
+                    this.stateTree = {
+                        ...this.stateTree,
+                        pass: true,
+                        reject: true,
+                        message: true,
+                        addSubTask: true
+                    }
                 }
               }
           }
