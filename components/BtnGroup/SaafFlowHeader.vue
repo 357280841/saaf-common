@@ -156,15 +156,17 @@
               businessKey: this.flow.businessKey,
               processInstanceId: this.flow.processInstanceId
           }).then(res => {
-              let resArr = JSON.parse(res.data.variables)
-              let startUserId = 0
-              resArr.map(item => {
-                  if(item.name === 'startUserId') {
-                      startUserId = item.value
-                  }
-              })
-              if(startUserId == this.userInfo.userId) {
-                this.isStartUser = true
+              if(res.data && res.data.variables) {
+                let resArr = JSON.parse(res.data.variables)
+                let startUserId = 0
+                resArr.map(item => {
+                    if(item.name === 'startUserId') {
+                        startUserId = item.value
+                    }
+                })
+                if(startUserId == this.userInfo.userId) {
+                    this.isStartUser = true
+                }
               }
               this.checkState()
           })
@@ -273,7 +275,6 @@
               if(this.flow.auditStatus == 'DRAFT'){
                   this.stateTree.submit = true
               }
-              console.log('stateTree',  this.revokeStatus)
               if(this.flow.auditStatus == 'APPROVAL'){
                 if(this.isStartUser) {
                     this.stateTree.revoke = true
