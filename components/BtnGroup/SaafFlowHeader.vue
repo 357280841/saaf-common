@@ -279,12 +279,14 @@
                 if(this.isStartUser) {
                     this.stateTree.revoke = true
                 } else {
-                    this.stateTree = {
-                        ...this.stateTree,
-                        pass: true,
-                        reject: true,
-                        message: true,
-                        addSubTask: true,
+                    if(this.flow.taskId) {
+                        this.stateTree = {
+                            ...this.stateTree,
+                            pass: true,
+                            reject: true,
+                            message: true,
+                            addSubTask: true,
+                        }
                     }
                 }
               }
