@@ -31,7 +31,7 @@ let api = {
     bpmHistoryService_findTaskNodes: `${host}/bpmServer/bpmHistoryService/findTaskNodes`,
 
     // 获取流程实例
-    bpmListService_getByParam: `${host}/bpmServer/bpmListService/getByParam`,
+    bpmListService_getByParam: `${host}/bpmServer/bpmListService/getBpmListByParam`,
 
     // 获取流程图
     bpmProcessService_getGooflowProcessJSON: `${host}/bpmServer/bpmProcessService/getGooflowProcessJSON`

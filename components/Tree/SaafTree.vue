@@ -106,6 +106,12 @@
         }
       },
       watch:{
+        config: {
+          handler(newVal, oldVal) {
+            this.getData()
+          },
+          deep: true
+        }
       }
     }
 </script>
