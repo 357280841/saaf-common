@@ -35,8 +35,8 @@
         v-model="modal"
         :title="typeObj[type].title"
         @on-ok="ok">
-            <Form :model="formItem" :label-width="80">
-                <FormItem label="意见">
+            <Form ref="formValidate" :model="formItem" :rules="ruleValidate" :label-width="80">
+                <FormItem label="意见" prop="opinion">
                     <Input v-model="formItem.opinion" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder=""></Input>
                 </FormItem>
                 <!-- <FormItem label="快捷回复">
@@ -44,9 +44,14 @@
                         <Option value="s">New</Option>
                     </Select>
                 </FormItem> -->
-                <FormItem label="选择节点" v-if="type == 'retrial'">
-                    <Select v-model="formItem.taskItem" clearable>
-                        <Option v-for="row in typeObj.retrial.nodes" :value="row.taskDefinitionId">{{row.taskName}}</Option>
+                <FormItem label="接收人" prop="receiverId" v-if="type == 'message'">
+                    <Select v-model="formItem.receiverId" clearable>
+                        <Option v-for="item in historyActivities" :value="item.userId" :key="item.userId">{{item.userName}} - {{item.userFullName}}</Option>
+                    </Select>
+                </FormItem>
+                <FormItem label="选择节点" prop="taskDefinitionId" v-if="type == 'retrial'">
+                    <Select v-model="formItem.taskDefinitionId" clearable>
+                        <Option v-for="row in typeObj.retrial.nodes" :value="row.taskDefinitionId" :key="row.taskDefinitionId">{{row.taskName}}</Option>
                     </Select>
                 </FormItem>
 
@@ -96,7 +101,13 @@
               type: Object,
               required: false
           },
-          flow: Object
+          flow: Object,
+          historyActivities: {
+              type: Array,
+              default() {
+                  return []
+              }
+          }
       },
       components: {
       },
@@ -146,7 +157,33 @@
             },
             isStartUser: false,
             formItem: {
-                opinion:''
+                opinion:'',
+                receiverId: '',
+                subTaskerId: '',
+                taskDefinitionId: ''
+            },
+            ruleValidate: {
+                opinion: [
+                    {
+                        required: true,
+                        message: '请输入内容',
+                        trigger: 'change'
+                    }
+                ],
+                receiverId: [
+                    {
+                        required: true,
+                        message: '请选择接收人',
+                        trigger: 'blur'
+                    }
+                ],
+                taskDefinitionId: [
+                    {
+                        required: true,
+                        message: '请选择节点人',
+                        trigger: 'blur'
+                    }
+                ]
             }
         }
       },
@@ -185,7 +222,18 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.revoke){
                   this.pageHeader.flowFunctionList.revoke()
               }else{
-                  flowTool.revoke()
+                  flowTool.revoke({
+                      processInstanceId: this.flow.processInstanceId
+                  }).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
+                  })
               }
           },
           // 驳回
@@ -195,13 +243,22 @@
               }else{
                   flowTool.reject({
                     properties: {
-                        opinion: "驳回",
+                        opinion: this.formItem.opinion,
                         option: "RJ",
                         menucode: "DB"
                     },
                     responsibilityId: this.flow.responsibilityId,
                     taskId: this.flow.taskId,
                     saveonly: false
+                  }).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
                   })
               }
           },
@@ -210,7 +267,26 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.retrial){
                   this.pageHeader.flowFunctionList.retrial()
               }else{
-                  flowTool.retrial()
+                  flowTool.retrial({
+                    properties: {
+                        opinion: this.formItem.opinion,
+                        option: "RT",
+                        menucode: "DB",
+                        taskDefinitionId: this.formItem.taskDefinitionId
+                    },
+                    responsibilityId: this.flow.responsibilityId,
+                    taskId: this.flow.taskId,
+                    saveonly: false
+                  }).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
+                  })
               }
           },
           // 发消息
@@ -218,7 +294,28 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.message){
                   this.pageHeader.flowFunctionList.message()
               }else{
-                  flowTool.message()
+                  let taskId = ''
+                  this.historyActivities.map(item => {
+                      if(item.userId === this.formItem.receiverId) {
+                          taskId = item.taskId
+                      }
+                  })
+                  let params = {
+                      taskId: taskId,
+                      type: 'COMMON',
+                      receiverId: this.formItem.receiverId,
+                      content: this.formItem.opinion
+                  }
+                  flowTool.message(params).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
+                  })
               }
           },
           // 通过
@@ -228,13 +325,22 @@
               }else{
                   flowTool.pass({
                     properties: {
-                        opinion: "通过",
+                        opinion: this.formItem.opinion,
                         option: "Y",
                         menucode: "DB"
                     },
                     responsibilityId: this.flow.responsibilityId,
                     taskId: this.flow.taskId,
                     saveonly: false
+                  }).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
                   })
               }
           },
@@ -243,25 +349,76 @@
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.addSubTask){
                   this.pageHeader.flowFunctionList.addSubTask()
               }else{
-                  flowTool.addSubTask()
+                  let taskName = ''
+                  this.historyActivities.map(item => {
+                      if(item.taskId === this.flow.taskId) {
+                          taskName = item.taskName
+                      }
+                  })
+                  let params = {
+                      taskId: this.flow.taskId,
+                      taskName: taskName,
+                      description: this.formItem.opinion,
+                      userId: this.formItem.subTaskerId
+                  }
+                  flowTool.addSubTask(params).then(res => {
+                      if(res.status === 'S') {
+                        this.$Message.success({
+                            content: '操作成功',
+                            duration: 2
+                        });
+                      }
+                  }).catch(err => {
+                      this.$Message.error(err.msg);
+                  })
               }
           },
           open(type){
+              type === 'pass' ? this.formItem.opinion = '审批通过' : this.formItem.opinion = ''
               this.type = type
+              if(type === 'retrial') {
+                  this.findTaskNodes()
+              }
               this.modal = true
           },
           ok(){
-              this[this.type]()
+              if(this.formValidate()) {
+                  this[this.type]()
+              } else {
+                  this.$Message.error('请检查必填项')
+              }
+          },
+          formValidate() {
+              switch(this.type) {
+                case 'pass':
+                    return this.formItem.opinion ? true : false
+                    break
+                case 'reject':
+                    return this.formItem.opinion ? true : false
+                    break
+                case 'message':
+                    return this.formItem.opinion && this.formItem.receiverId ? true : false
+                    break
+                case 'addSubTask':
+                    return this.formItem.opinion && this.formItem.subTaskerId ? true : false
+                    break
+                case 'retrial':
+                    return this.formItem.opinion && this.formItem.taskDefinitionId ? true : false
+                    break
+                default: 
+                    return false 
+              }
           },
           findTaskNodes(){
               flowTool.findTaskNodes({
-                  taskId: '',
+                  taskId: this.flow.taskId,
                   type: 1
               }).then(res=>{
                   this.typeObj.retrial.nodes = res.data
               })
           },
           addTaskMember(row){
+              this.formItem.subTaskerId = row.userId
               this.typeObj.addSubTask.member = row
           },
           getStartUrl(){
@@ -275,15 +432,21 @@
               if(this.flow.auditStatus == 'DRAFT'){
                   this.stateTree.submit = true
               }
+              // 驳回重新提交
+              if(this.flow.auditStatus == 'REFUSAL' && this.isStartUser){
+                  this.stateTree.submit = true
+              }
               if(this.flow.auditStatus == 'APPROVAL'){
                 if(this.isStartUser) {
                     this.stateTree.revoke = true
+                    this.stateTree.submit = true
                 } else {
                     if(this.flow.taskId) {
                         this.stateTree = {
                             ...this.stateTree,
                             pass: true,
                             reject: true,
+                            retrial: true,
                             message: true,
                             addSubTask: true,
                         }
