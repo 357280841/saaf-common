@@ -14,6 +14,7 @@
           :columns="tableColumns"
           :data="list"
           :loading="loading"
+          :row-class-name="rowClassFunc"
           highlight-row
           @on-current-change="currentChange"
           column
@@ -99,6 +100,10 @@ import pageTool from '../../tool/pageTool'
           type: Boolean,
           required: false,
           default: false
+        },
+        rowClassFunc:{
+          type: Function,
+          required: false
         }
       },
       components: {
