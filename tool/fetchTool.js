@@ -98,10 +98,15 @@ let fetch = {
                     'class': 'spin-icon-load',
                     props: {
                         type: 'ios-loading',
-                        size: 24
+                        size: 28,
+                        color:'#000'
                     }
                 }),
-                h('div', 'Loading')
+                h('div', {
+                  style:{
+                    color: '#000'
+                  }
+                },'Loading')
             ])
         }
     })
