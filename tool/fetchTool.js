@@ -91,11 +91,24 @@ let fetch = {
  
   post: (url, params = {}, v = null) => {
     // Vue.$vux.loading.show()
-    Spin.show();
+    Spin.show({
+        render: (h) => {
+            return h('div', [
+                h('Icon', {
+                    'class': 'spin-icon-load',
+                    props: {
+                        type: 'ios-loading',
+                        size: 24
+                    }
+                }),
+                h('div', 'Loading')
+            ])
+        }
+    })
     return new Promise((resolve, reject) => {
       fetch.postSimpleness(url, params, v).then(res => {
         resolve(res)
-        Spin.hide()
+          Spin.hide()
       }).catch(error => {
         Spin.hide()
         Message.error(error.msg)
