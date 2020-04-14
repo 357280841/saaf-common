@@ -17,9 +17,8 @@
         <Layout>
           <Header
             class="header"
-            :style="{background: '#2d8cf0',height: '50px', lineHeight: '50px'}"
-          >
-            <!-- <div class="system-name">{{platform.systemCode}}</div> -->
+            :style="{height: '50px', lineHeight: '50px'}"
+          >            <!-- <div class="system-name">{{platform.systemCode}}</div> -->
             <div class="user">
               <div class="user-item">{{platform.systemName}}</div>
               <div class="user-item" @click="pswdModal = true">{{$i18n.t('修改密码')}}</div>
@@ -52,25 +51,28 @@
             <Menu :theme="theme2" :open-names="['1']" accordion>
               <Submenu :name="index" v-for="(x,index) in menuList" :key="index">
                 <template slot="title">
-                  <span :class="x.imageLink"></span>
-                  {{x.name}}
+                  <span>
+                  <b :class="x.imageLink"></b>
+                    {{x.name}}</span>
                 </template>
                 <template v-for="(y,eq) in x.children">
                   <template v-if="!(y.children&&y.children.length>0)">
-                    <MenuItem :name="index+'-'+eq" :key="eq" @click.native="openTab(y)">{{y.name}}</MenuItem>
+                    <MenuItem :name="index+'-'+eq" :key="eq"  class="menuPosition" @click.native="openTab(y)"><span>{{y.name}}</span></MenuItem>
                   </template>
                   <template v-if="y.children&&y.children.length>0">
-                    <Submenu :name="index+'-'+eq" :key="eq">
+                    <Submenu :name="index+'-'+eq" :key="eq"  class="menuPosition">
                       <template slot="title">
-                        <span :class="y.imageLink"></span>
-                        {{y.name}}
+                        <span>
+                        <b :class="y.imageLink"></b>
+                        {{y.name}}</span>
                       </template>
                       <MenuItem
                         :name="index+'-'+eq+'-'+i"
                         v-for="(z,i) in y.children"
                         :key="i"
+                        class="menuPosition"
                         @click.native="openTab(z)"
-                      >{{z.name}}</MenuItem>
+                      ><span>{{z.name}}</span></MenuItem>
                     </Submenu>
                   </template>
                 </template>
@@ -85,7 +87,7 @@
        
       <Layout :class="{marginLeft:!isFullscreen,Fullscreen:isFullscreen}">
         
-        <div>
+        <div class="main-tag">
           
           <SaafAutoScroll v-show="!isFullscreen" type="x" :height="32" class="tab-box" id="tabs-tag-box">
             <div
