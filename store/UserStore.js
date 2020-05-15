@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-13 18:07:47
+ * @Last Modified time: 2020-05-15 10:51:01
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -13,6 +13,7 @@ import creatTree from '@/config/tree'
 import Vue from 'vue'
 import routerController from '@/page/pageConfig/routerController'
 import platform from '@/config/platform'
+import systemHook from '../../config/systemHook'
 
 export default {
   state: {
@@ -108,16 +109,21 @@ export default {
   },
   actions: {
     GET_LOOKUP:({ commit, state })=>{
-      fetch.baseLookupValuesService_findDic().then(res=>{
-        let obj = {}
-        res.data.map((item)=>{
-          if(!obj[item.lookupType]){
-            obj[item.lookupType] = []
-          }
-          obj[item.lookupType].push(item)
+      if(systemHook.STORE_GET_LOOKUP){
+        systemHook.STORE_GET_LOOKUP(commit, state)
+      }else{
+        fetch.baseLookupValuesService_findDic().then(res=>{
+          let obj = {}
+          res.data.map((item)=>{
+            if(!obj[item.lookupType]){
+              obj[item.lookupType] = []
+            }
+            obj[item.lookupType].push(item)
+          })
+          commit('SET_LOOKUP', obj)
         })
-        commit('SET_LOOKUP', obj)
-      })
+      }
+      
     },
     GET_MENU_BY_RESP: ({ commit, state })=>{
       fetch.baseAccreditService_findBaseMenuByRespId({
