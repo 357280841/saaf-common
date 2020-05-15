@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-05-15 10:51:01
+ * @Last Modified time: 2020-05-15 19:32:45
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -13,7 +13,7 @@ import creatTree from '@/config/tree'
 import Vue from 'vue'
 import routerController from '@/page/pageConfig/routerController'
 import platform from '@/config/platform'
-import systemHook from '../../config/systemHook'
+import systemHook from '@/config/systemHook'
 
 export default {
   state: {
