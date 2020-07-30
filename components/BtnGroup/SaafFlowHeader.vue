@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-12-02 18:00:16 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-01-05 11:50:23
+ * @Last Modified time: 2020-07-30 20:24:01
  */
 
 
@@ -439,7 +439,7 @@
               if(this.flow.auditStatus == 'APPROVAL'){
                 if(this.isStartUser) {
                     this.stateTree.revoke = true
-                    this.stateTree.submit = true
+                    // this.stateTree.submit = true
                 } else {
                     if(this.flow.taskId) {
                         this.stateTree = {
