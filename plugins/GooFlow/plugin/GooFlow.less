@@ -371,7 +371,7 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
     height: 9px;
     overflow: hidden;
     cursor: nw-resize;
-    // background: url(images/GooFlow/gooflow_tip.png) no-repeat 0 -8px
+    background: url(images/gooflow_tip.png) no-repeat 0 -8px
 }
 
 .GooFlow div .rs_close {
@@ -382,8 +382,7 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
     height: 7px;
     overflow: hidden;
     cursor: pointer;
-    // background: url(images/gooflow_tip.png) no-repeat 0 0
-
+    background: url(images/gooflow_tip.png) no-repeat 0 0
 }
 
 .GooFlow .rs_ghost {
@@ -450,19 +449,19 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
 }
 
 .GooFlow .GooFlow_line_oper .b_l1 {
-    // background: url(images/GooFlow_line_oper.png) no-repeat 1px 1px
+    background: url(images/GooFlow_line_oper.png) no-repeat 1px 1px
 }
 
 .GooFlow .GooFlow_line_oper .b_l2 {
-    // background: url(images/GooFlow_line_oper.png) no-repeat 1px -14px
+    background: url(images/GooFlow_line_oper.png) no-repeat 1px -14px
 }
 
 .GooFlow .GooFlow_line_oper .b_l3 {
-    // background: url(images/GooFlow_line_oper.png) no-repeat 1px -29px
+    background: url(images/GooFlow_line_oper.png) no-repeat 1px -29px
 }
 
 .GooFlow .GooFlow_line_oper .b_x {
-    // background: url(images/GooFlow_line_oper.png) no-repeat 1px -44px;
+    background: url(images/GooFlow_line_oper.png) no-repeat 1px -44px;
     margin-left: 10px
 }
 
@@ -632,37 +631,49 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
 
 /* 服务节点 */
 .GooFlow_item.service {
-    // background: url('./images/service.png') no-repeat center;
+    background: url('./images/service.png') no-repeat center;
+}
+
+.GooFlow_item.item_mark3.service {
+    background: url('./images/service3.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark1.service {
-    // background: url('./images/service1.png') no-repeat center;
+    background: url('./images/service1.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark.service {
-    // background: url('./images/service0.png') no-repeat center;
+    background: url('./images/serivce0.png') no-repeat center;
 }
 
 /* 子流程节点 */
 .GooFlow_item.activity {
-    // background: url('./images/activity.png') no-repeat center;
+    background: url('./images/activity.png') no-repeat center;
+}
+
+.GooFlow_item.item_mark3.activity {
+    background: url('./images/activity3.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark1.activity {
-    // background: url('./images/activity1.png') no-repeat center;
+    background: url('./images/activity1.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark.activity {
-    // background: url('./images/activity0.png') no-repeat center;
+    background: url('./images/activity0.png') no-repeat center;
 }
 
 /* 任务节点 */
 .GooFlow_item.task {
-    // background: url('./images/task.png') no-repeat center;
+    background: url('./images/task.png') no-repeat center;
+}
+
+.GooFlow_item.item_mark3.task {
+    background: url('./images/task3.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark1.task {
-    // background: url('./images/task1.png') no-repeat center;
+    background: url('./images/task1.png') no-repeat center;
 }
 
 .GooFlow_item_text {
@@ -704,34 +715,45 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
 /* 定位图 */
 .GooFlow_item.item_mark.task .node_location {
 
-    // background: url("./images/node_location0.png") no-repeat center;
+    background: url("./images/node_location0.png") no-repeat center;
     -webkit-animation: node_location 3s infinite;
     -o-animation: node_location 3s infinite;
     animation: node_location 3s infinite;
 }
 
 .GooFlow_item.item_mark2.task .node_location {
-    // background: url("./images/node_location2.png") no-repeat center;
+    background: url("./images/node_location2.png") no-repeat center;
     -webkit-animation: node_location 3s infinite;
     -o-animation: node_location 3s infinite;
     animation: node_location 3s infinite;
 }
 
+/*.GooFlow_item.item_mark3.task .node_location {*/
+/*    background: url("./images/node_location3.png") no-repeat center;*/
+/*    -webkit-animation: node_location 3s infinite;*/
+/*    -o-animation: node_location 3s infinite;*/
+/*    animation: node_location 3s infinite;*/
+/*}*/
+
 /*　三角箭头　*/
 .GooFlow_item.item_mark1.task .node_arrow {
-    // background: url("./images/node_arrow1.png") no-repeat center;
+    background: url("./images/node_arrow1.png") no-repeat center;
 }
 
 .GooFlow_item.item_mark.task .node_arrow {
-    // background: url("./images/node_arrow0.png") no-repeat center;
+    background: url("./images/node_arrow0.png") no-repeat center;
 }
 
 .GooFlow_item.item_mark2.task .node_arrow {
-    // background: url("./images/node_arrow2.png") no-repeat center;
+    background: url("./images/node_arrow2.png") no-repeat center;
+}
+
+.GooFlow_item.item_mark3.task .node_arrow {
+    background: url("./images/node_arrow3.png") no-repeat center;
 }
 
 .GooFlow_item.task .node_arrow {
-    // background: url("./images/node_arrow.png") no-repeat center;
+    background: url("./images/node_arrow.png") no-repeat center;
     height: 6px;
 }
 
@@ -772,6 +794,12 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
     border: none;
 }
 
+.GooFlow_item.item_mark3.task .node_name {
+    background: #9aa9e2;
+    color: #fff;
+    border: none;
+}
+
 .GooFlow_item.task .node_name {
     color: #333333;
     border: 1px solid #ccc;
@@ -779,74 +807,104 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
 
 .GooFlow_item.item_mark.task {
     border: 2px dashed #ff6600 !important;
-    // background: url('./images/task0.png') no-repeat center;
+    background: url('./images/task0.png') no-repeat center;
 }
 
 .GooFlow_item.item_mark2.task {
     border: 2px dashed #c03 !important;
-    // background: url('./images/task2.png') no-repeat center;
+    background: url('./images/task2.png') no-repeat center;
+}
+
+.GooFlow_item.item_mark3.task {
+    border: 2px dashed #9aa9e2 !important;
+    background: url('./images/task3.png') no-repeat center;
 }
 
 /* 流入节点 */
 .GooFlow_item.fork {
-    // background: url('./images/fork.png') no-repeat center;
+    background: url('./images/fork.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_mark1.fork {
-    // background: url('./images/fork1.png') no-repeat center;
+    background: url('./images/fork1.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_mark.fork {
-    // background: url('./images/fork0.png') no-repeat center;
+    background: url('./images/fork0.png') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+.GooFlow_item.item_mark3.fork {
+    background: url('./images/fork3.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 /* 流出节点 */
 .GooFlow_item.join {
-    // background: url('./images/join.png') no-repeat center;
+    background: url('./images/join.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_mark1.join {
-    // background: url('./images/join1.png') no-repeat center;
+    background: url('./images/join1.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_mark.join {
-    // background: url('./images/join0.png') no-repeat center;
+    background: url('./images/join0.png') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+.GooFlow_item.item_mark3.join {
+    background: url('./images/join3.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 /* 开始节点 */
 .GooFlow_item.item_round.item_mark1.start {
-    // background: url('./images/start1.png') no-repeat center;
+    background: url('./images/start1.png') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+.GooFlow_item.item_round.item_mark3.start {
+    background: url('./images/start3.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_round.start {
-    // background: url('./images/start.png') no-repeat center;
+    background: url('./images/start.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_round.item_mark.start {
-    // background: url('./images/start0.png') no-repeat center;
+    background: url('./images/start1.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 /* 结束节点 */
 .GooFlow_item.item_round.item_mark1.end {
-    // background: url('./images/end1.png') no-repeat center;
+    background: url('./images/end1.png') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+/* 结束节点 */
+.GooFlow_item.item_round.item_mark3.end {
+    background: url('./images/end3.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
@@ -868,13 +926,13 @@ v\:group, v\:imagedata, v\:line, v\:oval, v\:polyline, v\:rect, v\:stroke, v\:te
 }
 
 .GooFlow_item.item_round.end {
-    // background: url('./images/end.png') no-repeat center;
+    background: url('./images/end.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
 
 .GooFlow_item.item_round.item_mark.end {
-    // background: url('./images/end0.png') no-repeat center;
+    background: url('./images/end1.png') no-repeat center;
     width: 40px;
     height: 40px;
 }
