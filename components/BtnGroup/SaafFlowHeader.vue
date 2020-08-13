@@ -230,6 +230,7 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          this.checkState()
                         if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
                             this.pageHeader.flowFunctionList.refresh();
                         }
@@ -259,6 +260,7 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          this.checkState()
                         if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
                             this.pageHeader.flowFunctionList.refresh();
                         }
@@ -289,6 +291,7 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          this.checkState()
                           if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
                               this.pageHeader.flowFunctionList.refresh();
                           }
@@ -321,6 +324,7 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          this.checkState()
                           if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
                               this.pageHeader.flowFunctionList.refresh();
                           }
@@ -350,6 +354,7 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          this.checkState()
                           if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
                               this.pageHeader.flowFunctionList.refresh();
                           }
