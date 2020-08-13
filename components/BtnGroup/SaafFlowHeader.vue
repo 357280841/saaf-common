@@ -230,6 +230,9 @@
                             content: '操作成功',
                             duration: 2
                         });
+                        if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
+                            this.pageHeader.flowFunctionList.refresh();
+                        }
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -256,6 +259,9 @@
                             content: '操作成功',
                             duration: 2
                         });
+                        if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
+                            this.pageHeader.flowFunctionList.refresh();
+                        }
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -283,6 +289,9 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
+                              this.pageHeader.flowFunctionList.refresh();
+                          }
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -312,6 +321,9 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
+                              this.pageHeader.flowFunctionList.refresh();
+                          }
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -338,6 +350,9 @@
                             content: '操作成功',
                             duration: 2
                         });
+                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
+                              this.pageHeader.flowFunctionList.refresh();
+                          }
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);

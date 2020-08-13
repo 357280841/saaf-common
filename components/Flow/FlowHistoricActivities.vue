@@ -76,7 +76,17 @@ import { flowTool } from "saaf-common"
       mounted () {
       },
       methods: {
-          
+          refreshHistoric(){
+              flowTool.findHistoricActivities({
+                  processInstanceId: this.flow.processInstanceId,
+                  processDefinitionKey: this.flow.processDefinitionKey,
+                  processDefinitionId: this.flow.processDefinitionId,
+                  businessKey: this.flow.businessKey
+              }).then(res=>{
+                  this.list = res.data
+                  this.$emit('callback', res.data)
+              })
+          }
       }
     }
 </script>
