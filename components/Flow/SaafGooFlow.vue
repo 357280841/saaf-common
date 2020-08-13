@@ -44,7 +44,7 @@ import { mapState } from 'vuex'
         
       },
       mounted () {
-          GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.flow.processInstanceId, this.flow.processDefinitionKey, this.flow.businessKey, this.flow.processDefinitionId)
+          GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.flow)
       },
       methods: {
           refreshGooflow(){
