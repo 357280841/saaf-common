@@ -188,37 +188,58 @@
         }
       },
       mounted () {
-          flowTool.getFlowInstance({
-              procDefKey: this.flow.processDefinitionKey,
-              businessKey: this.flow.businessKey,
-              processInstanceId: this.flow.processInstanceId
-          }).then(res => {
-              if(res.data && res.data.variables) {
-                let resArr = JSON.parse(res.data.variables)
-                let startUserId = 0
-                resArr.map(item => {
-                    if(item.name === 'startUserId') {
-                        startUserId = item.value
-                    }
-                })
-                if(startUserId == this.userInfo.userId) {
-                    this.isStartUser = true
-                }
-              }
-              this.checkState()
-          })
+          this.getFlowInstance(true);
       },
       methods: {
+          //查询流程实例
+          getFlowInstance(isInit, action){
+              flowTool.getFlowInstance({
+                  procDefKey: this.flow.processDefinitionKey,
+                  businessKey: this.flow.businessKey,
+                  processInstanceId: this.flow.processInstanceId
+              }).then(res => {
+                  if(res.data && res.data.variables) {
+                      this.flow.processDefinitionKey = res.data.procDefKey;
+                      this.flow.businessKey = res.data.businessKey;
+                      this.flow.processInstanceId = res.data.procInstId;
+                      this.flow.auditStatus=res.data.result;
+                      let resArr = JSON.parse(res.data.variables)
+                      let startUserId = 0
+                      resArr.map(item => {
+                          if(item.name === 'startUserId') {
+                              startUserId = item.value
+                          }
+                      })
+                      if(startUserId == this.userInfo.userId) {
+                          this.isStartUser = true
+                      }
+                  }
+                  if(!isInit){
+                      if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.afterMethod){
+                          this.pageHeader.flowFunctionList.afterMethod(action);
+                      }
+                  }
+                  this.checkState();
+              })
+          },
           // 提交
           submit(){
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.submit){
-                  this.pageHeader.flowFunctionList.submit()
+                  this.pageHeader.flowFunctionList.submit();
               }else{
                   throw '请绑定提交程序'
               }
           },
           // 撤回
           revoke(){
+              let action = 'revoke';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.revoke){
                   this.pageHeader.flowFunctionList.revoke()
               }else{
@@ -230,10 +251,7 @@
                             content: '操作成功',
                             duration: 2
                         });
-                          this.checkState()
-                        if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
-                            this.pageHeader.flowFunctionList.refresh();
-                        }
+                        this.getFlowInstance(false, action);
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -242,6 +260,14 @@
           },
           // 驳回
           reject(){
+              let action = 'reject';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.reject){
                   this.pageHeader.flowFunctionList.reject()
               }else{
@@ -260,10 +286,7 @@
                             content: '操作成功',
                             duration: 2
                         });
-                          this.checkState()
-                        if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
-                            this.pageHeader.flowFunctionList.refresh();
-                        }
+                          this.getFlowInstance(false, action);
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -272,6 +295,14 @@
           },
           // 驳回重审
           retrial(){
+              let action = 'retrial';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.retrial){
                   this.pageHeader.flowFunctionList.retrial()
               }else{
@@ -291,10 +322,7 @@
                             content: '操作成功',
                             duration: 2
                         });
-                          this.checkState()
-                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
-                              this.pageHeader.flowFunctionList.refresh();
-                          }
+                          this.getFlowInstance(false, action);
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -303,6 +331,14 @@
           },
           // 发消息
           message(){
+              let action = 'message';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.message){
                   this.pageHeader.flowFunctionList.message()
               }else{
@@ -324,9 +360,8 @@
                             content: '操作成功',
                             duration: 2
                         });
-                          this.checkState()
-                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
-                              this.pageHeader.flowFunctionList.refresh();
+                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.afterMethod){
+                              this.pageHeader.flowFunctionList.afterMethod();
                           }
                       }
                   }).catch(err => {
@@ -336,6 +371,14 @@
           },
           // 通过
           pass(){
+              let action = 'pass';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.pass){
                   this.pageHeader.flowFunctionList.pass()
               }else{
@@ -354,10 +397,7 @@
                             content: '操作成功',
                             duration: 2
                         });
-                          this.checkState()
-                          if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.refresh){
-                              this.pageHeader.flowFunctionList.refresh();
-                          }
+                          this.getFlowInstance(false, action);
                       }
                   }).catch(err => {
                       this.$Message.error(err.msg);
@@ -366,6 +406,14 @@
           },
           // 增加助审
           addSubTask(){
+              let action = 'addSubTask';
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
+                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+                  if(result === false){
+                      return;
+                  }
+              }
+
               if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.addSubTask){
                   this.pageHeader.flowFunctionList.addSubTask()
               }else{
