@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-12-03 16:04:48
+ * @Last Modified time: 2020-08-28 17:29:11
  */
 
 import store from '../store/StoreCommon'
@@ -48,7 +48,12 @@ export default class tabsTool{
         
         let url = urlTool.getUrl(menu.url,params)
         let host = window.location.origin + window.location.pathname
-        menu.url = host+'/#/iframeBox'+url
+        if(url.includes('http')){
+            menu.url = url
+        }else{
+            menu.url = host+'/#/iframeBox'+url
+        }
+        
         // 打开过的放仓库
         this.rootWindow.tabsService.openTab(menu)
         // console.log('bbb',menu);
