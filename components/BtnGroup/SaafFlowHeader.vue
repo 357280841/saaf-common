@@ -214,12 +214,40 @@
                           this.isStartUser = true
                       }
                   }
-                  if(!isInit){
+                  if(!isInit){//执行审批动作后的操作
                       if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.afterMethod){
                           this.pageHeader.flowFunctionList.afterMethod(action);
                       }
+                      this.flow.taskId = null;//将任务id置空
                   }
-                  this.checkState();
+                  //按流程实例查询当前用户活动的任务
+                  if(this.flow.processInstanceId){
+                      flowTool.findTasksByProcInstId({
+                          processInstanceId: this.flow.processInstanceId
+                      }).then(res => {
+                          if(res.data) {
+                              if(!this.flow.taskId){
+                                  this.flow.taskId = res.data[0].taskId;
+                                  this.flow.editStatus = res.data[0].taskConfig.editStatus;
+                              }else{
+                                  let isActive = false;
+                                  for(let i in res.data){
+                                      if(this.flow.taskId == res.data[i].taskId){
+                                          this.flow.editStatus = res.data[i].taskConfig.editStatus;
+                                          isActive = true;
+                                      }
+                                  }
+                                  if(!isActive){
+                                      this.flow.taskId = null;
+                                  }
+                              }
+                          }
+
+                          this.checkState();
+                      })
+                  }else{
+                      this.checkState();
+                  }
               })
           },
           // 提交
@@ -233,8 +261,8 @@
           // 撤回
           revoke(){
               let action = 'revoke';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }
@@ -261,8 +289,8 @@
           // 驳回
           reject(){
               let action = 'reject';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }
@@ -296,8 +324,8 @@
           // 驳回重审
           retrial(){
               let action = 'retrial';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }
@@ -332,8 +360,8 @@
           // 发消息
           message(){
               let action = 'message';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }
@@ -372,8 +400,8 @@
           // 通过
           pass(){
               let action = 'pass';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }
@@ -407,8 +435,8 @@
           // 增加助审
           addSubTask(){
               let action = 'addSubTask';
-              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.befortMethod){
-                  let result = this.pageHeader.flowFunctionList.befortMethod(action);
+              if(this.pageHeader.flowFunctionList && this.pageHeader.flowFunctionList.beforeMethod){
+                  let result = this.pageHeader.flowFunctionList.beforeMethod(action);
                   if(result === false){
                       return;
                   }

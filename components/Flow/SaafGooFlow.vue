@@ -14,7 +14,6 @@
 
 <template>
     <div>
-        <h3>流程图</h3>
         <div>
             <div id="SaafGooFlow"></div>
         </div>
@@ -27,7 +26,9 @@ import api from '../../config/apiCommon'
 import { mapState } from 'vuex'
     export default {
       props:{
-        flow: Object
+        flow: Object,
+        width: String | Number,
+        height: String | Number
       },
       components: {
       },
@@ -44,11 +45,11 @@ import { mapState } from 'vuex'
         
       },
       mounted () {
-          GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.flow)
+          GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.width, this.height, this.flow)
       },
       methods: {
-          refreshGooflow(){
-              GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', this.flow)
+          refreshGooflow(width,height){
+              GooFlow.processImageDraw(api.bpmProcessService_getGooflowProcessJSON, this.certificate, 'SaafGooFlow', width, height, this.flow)
           }
       }
     }

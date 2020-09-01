@@ -77,7 +77,8 @@ export default {
       // tabsTool.rootWindow.location.href = '/'
       // console.log(tabsTool.rootWindow)
       // tabsTool.goto({url:'/'})
-      tabsTool.rootWindow.location = '/'
+      // tabsTool.rootWindow.location = '/'
+      tabsTool.rootWindow.location.href = tabsTool.rootWindow.location.href.substr(0,tabsTool.rootWindow.location.href.indexOf("/#/"))
       // routerController.replace('/')
     },
     SET_CURRENT_RESP (state,data){

@@ -8,7 +8,6 @@
 
 <template>
     <div>
-        <h3>审批历史</h3>
         <div>
             <Table
                 ref="Table"
@@ -27,13 +26,16 @@
 import { flowTool } from "saaf-common"
     export default {
       props:{
-        flow: Object
+        flow: Object,
+        height:{
+          type: Number,
+          required: false
+        },
       },
       components: {
       },
       data () {
         return {
-            height: 200,
             tableColumns:[{
               title: '节点名称',
               key: 'taskName',
@@ -87,6 +89,8 @@ import { flowTool } from "saaf-common"
                   this.$emit('callback', res.data)
               })
           }
+      },
+      watch:{
       }
     }
 </script>

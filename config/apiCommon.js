@@ -34,8 +34,10 @@ let api = {
     bpmListService_getByParam: `${host}/bpmServer/bpmListService/getBpmListByParam`,
 
     // 获取流程图
-    bpmProcessService_getGooflowProcessJSON: `${host}/bpmServer/bpmProcessService/getGooflowProcessJSON`
+    bpmProcessService_getGooflowProcessJSON: `${host}/bpmServer/bpmProcessService/getGooflowProcessJSON`,
 
+    // 根据流程实例ID查询当前用户的审批任务
+    bpmFindTasksByProcInstId: `${host}/bpmServer/bpmTaskService/findTasksByProcInstId`
     /****** 流程 end ******/
 }
 

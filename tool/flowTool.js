@@ -23,6 +23,17 @@ export default class flowTool {
         })
     }
 
+    // 根据流程实例ID查询当前用户的审批任务
+    static findTasksByProcInstId(params){
+        return new Promise((resolve, reject) => {
+            fetch.bpmFindTasksByProcInstId(params).then(res => {
+                resolve(res)
+            }).catch(err=> {
+                reject(err)
+            })
+        })
+    }
+
     // 撤销
     // processInstanceId, taskId
     static revoke(params){
