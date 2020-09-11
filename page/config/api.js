@@ -21,6 +21,8 @@ let api = {
     baseAccreditService_findBaseMenuByRespId: `${host}/baseServer/baseMenuService/findBaseMenuByRespId`, // 根据现职查菜单
     baseAccreditService_findMenuList: `${host}/baseServer/baseMenuService/findMenuList`, // 删除已收藏功能菜单
 
+    getImgCode: `${host}/baseServer/codeService/getImg`,// 获取图片验证码
+
     // /*员工维护*/
     // employee_findList: `${host}/baseServer/basePersonService/findPagination`,// 员工维护列表 
     // employee_save: `${host}/baseServer/basePersonService/save`,// 保存新建员工
