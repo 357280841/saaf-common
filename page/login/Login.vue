@@ -151,7 +151,7 @@
                 font-size: 20px;
             }
             .forget-pwd{
-                margin-top: -16px;
+                margin-top: -2px;
                 margin-bottom: 10px;
                 .fs-12{
                     font-size: 12px;
