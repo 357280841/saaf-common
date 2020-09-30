@@ -21,7 +21,7 @@
                 </div>
                 <Icon @click="close(file,index)" class="close" size="26" type="ios-close-circle" />
             </div>
-            <div class="img-item add-icon" @click="click()">
+            <div class="img-item add-icon" @click="click()" v-show="filesList.length<maximum">
                 <Icon type="ios-add" size="40"/>
             </div>
             <div class="cb"></div>
@@ -37,6 +37,7 @@
             :post-action="api"
             :multiple="true"
             :headers="headers"
+            :maximum="maximum"
             @input-file="inputFile"
             @input-filter="inputFilter"
         >上传文件</file-upload>
@@ -47,7 +48,15 @@ import api from '../../config/apiCommon'
 import systemHook from '@/config/systemHook'
 export default {
     props:{
-        value: Array,
+        value:{
+            type: Array,
+            default:()=>{
+                return new Array();
+            }
+        },
+        maximum: {
+            type: Number
+        },
         // files: Array,
     },
     model: {

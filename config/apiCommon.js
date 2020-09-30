@@ -9,13 +9,15 @@ import platform from '@/config/platform'
 let host = platform.host
 
 let api = {
-    images_upload: `${host}/saaf-file-server/v2/images/upload`,
-    v2_images: `${host}/saaf-file-server/v2/images/`,
-    v2_file_upload: `${host}/saaf-file-server/v2/file/upload`,
-    v2_file_download: `${host}/saaf-file-server/v2/file/download`,
+    images_upload: `${host}/fileServer/v2/images/upload`,
+    v2_images: `${host}/fileServer/v2/images/`,
+    v2_file_upload: `${host}/fileServer/v2/file/upload`,
+    v2_file_download: `${host}/fileServer/v2/file/download`,
+
+    editorActionCenter: `${host}/fileServer/ueditorService/actionCenter`,
+    editorScrawlUpload: `${host}/fileServer/ueditorService/scrawlUpload`,
 
     /****** 流程 start ******/
-    
     // 撤回
     bpmTaskService_revoke: `${host}/bpmServer/bpmTaskService/revoke`,
     // 驳回
