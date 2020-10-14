@@ -18,7 +18,9 @@
   "newPassword": "New password",
   "confirmPassword": "Confirm password",
   "passwordVerify": "Only 6-20 bits can be input, llow to input letters, numbers and underscores",
-  "enterPwdAgain":"Please enter the password again"
+  "enterPwdAgain":"Please enter the password again",
+  "twoPwdInconsistent ":"The two password inputs are inconsistent",
+  "pwdChangedSuccess":"Password changed successfully, please login again"
   },
   "CN": {
   "expressLane": "快速通道",
@@ -31,7 +33,9 @@
   "newPassword": "新密码",
   "confirmPassword": "确认密码",
   "passwordVerify": "只能输入6-20位,允许输入字母、数字、下划线",
-  "enterPwdAgain":"请再次输入密码"
+  "enterPwdAgain":"请再次输入密码",
+  "twoPwdInconsistent ":"两次密码输入不一致",
+  "pwdChangedSuccess":"密码修改成功，请重新登录"
   }
   }
 </i18n>
@@ -224,19 +228,19 @@ export default {
         oldPassword: [
           {
             required: true,
-            message: "必填",
+            message: this.$i18n.t('必填'),
             trigger: "blur"
           }
         ],
         newPassword: [
           {
             required: true,
-            message: "必填",
+            message: this.$i18n.t('必填'),
             trigger: "blur"
           },
           {
             type: "string",
-            message: "只能输入6-20位,可字母、数字、下划线",
+            message: this.$t('passwordVerify'),
             trigger: "blur",
             pattern: /^(\w){6,20}$/
           }
@@ -244,12 +248,12 @@ export default {
         newPassword2: [
           {
             required: true,
-            message: "必填",
+            message: this.$i18n.t('必填'),
             trigger: "blur"
           },
           {
             type: "string",
-            message: "只能输入6-20位,可字母、数字、下划线",
+            message: this.$t('passwordVerify'),
             trigger: "blur",
             pattern: /^(\w){6,20}$/
           }
@@ -289,7 +293,7 @@ export default {
     //   确认修改密码
     okChange() {
       if (this.formValidate.newPassword != this.formValidate.newPassword2) {
-        this.$Message.error("两次密码输入不一致");
+        this.$Message.error(this.$t('twoPwdInconsistent'));
         return;
       }
       this.$refs["formValidate"].validate(valid => {
@@ -308,7 +312,7 @@ export default {
 
           this.changePassword(pswd);
         } else {
-          this.$Message.error("请检查必填项!");
+          this.$Message.error(this.$i18n.t('请检查必填项'));
         }
       });
     },
@@ -324,7 +328,7 @@ export default {
       fetch.changePassword(pswd).then(res => {
         // if (status == "S") {
         this.pswdModal = false;
-        this.$Message.success("密码修改成功，需重新登录!");
+        this.$Message.success(this.$t('pwdChangedSuccess'));
         setTimeout(()=>{
            this.LOGOUT()
         },1500)

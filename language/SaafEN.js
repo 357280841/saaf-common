@@ -13,5 +13,7 @@ module.exports = {
     "修改密码": "Change password",
     "序号": "NO",
     "确认": "Confirm",
-    "取消": "Cancel"
+    "取消": "Cancel",
+    "必填": "Required",
+    "请检查必填项": "Please check the required items !"
 }
