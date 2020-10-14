@@ -10,12 +10,28 @@
   "EN": {
   "expressLane": "Express lane",
   "addMenu": "Add menu",
-  "menuList": "Menu list"
+  "menuList": "Menu list",
+  "tips": "Tips",
+  "exitSystemConfirm": "Are you sure exit the current system ?",
+  "confirmExit": "Confirm exit",
+  "oldPassword": "Old password",
+  "newPassword": "New password",
+  "confirmPassword": "Confirm password",
+  "passwordVerify": "Only 6-20 bits can be input, llow to input letters, numbers and underscores",
+  "enterPwdAgain":"Please enter the password again"
   },
   "CN": {
   "expressLane": "快速通道",
   "addMenu": "新增菜单",
-  "menuList": "菜单列表"
+  "menuList": "菜单列表",
+  "tips": "提示",
+  "exitSystemConfirm": "您确定要退出当前系统吗？",
+  "confirmExit": "确认退出",
+  "oldPassword": "旧密码",
+  "newPassword": "新密码",
+  "confirmPassword": "确认密码",
+  "passwordVerify": "只能输入6-20位,允许输入字母、数字、下划线",
+  "enterPwdAgain":"请再次输入密码"
   }
   }
 </i18n>
@@ -150,35 +166,35 @@
     <Modal v-model="modal" width="360">
       <p slot="header" style="color:#f60;text-align:center">
         <Icon type="ios-information-circle"></Icon>
-        <span>提示</span>
+        <span>{{$t('tips')}}</span>
       </p>
       <div style="text-align:center">
-        <p>您确定要退出当前系统吗？</p>
+        <p>{{$t('exitSystemConfirm')}}</p>
       </div>
       <div slot="footer">
-        <Button type="error" size="large" long @click="LOGOUT">确认退出</Button>
+        <Button type="error" size="large" long @click="LOGOUT">{{$t('confirmExit')}}</Button>
       </div>
     </Modal>
     <!-- 修改密码 -->
-    <Modal v-model="pswdModal" title="修改密码">
+    <Modal v-model="pswdModal" :title="$i18n.t('修改密码')">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <FormItem label="旧密码" prop="oldPassword">
+        <FormItem :label="$t('oldPassword')" prop="oldPassword">
           <Input type="password" password v-model="formValidate.oldPassword"></Input>
         </FormItem>
-        <FormItem label="新密码" prop="newPassword">
+        <FormItem :label="$t('newPassword')" prop="newPassword">
           <Input
             type="password" password
             v-model="formValidate.newPassword"
-            placeholder="只能输入6-20位,可字母、数字、下划线"
+            :placeholder="$t('passwordVerify')"
           ></Input>
         </FormItem>
-        <FormItem label="确认密码" prop="newPassword2">
-          <Input type="password" password v-model="formValidate.newPassword2" placeholder="请再次输入密码"></Input>
+        <FormItem :label="$t('confirmPassword')" prop="newPassword2">
+          <Input type="password" password v-model="formValidate.newPassword2" :placeholder="$t('enterPwdAgain')"></Input>
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button type="text" size="large" @click="modalCancel">取消</Button>
-        <Button type="primary" size="large" @click="okChange">确认</Button>
+        <Button type="text" size="large" @click="modalCancel">{{$i18n.t('取消')}}</Button>
+        <Button type="primary" size="large" @click="okChange">{{$i18n.t('确认')}}</Button>
       </div>
     </Modal>
   </div>

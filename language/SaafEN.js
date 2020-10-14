@@ -11,5 +11,7 @@ module.exports = {
     "重置": "Reset",
     "刷新": "Refresh",
     "修改密码": "Change password",
-    "序号": "NO"
+    "序号": "NO",
+    "确认": "Confirm",
+    "取消": "Cancel"
 }
