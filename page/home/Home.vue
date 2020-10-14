@@ -1,6 +1,21 @@
+<i18n>
+    {
+    "EN": {
+    "expressLane": "Express lane",
+    "addMenu": "Add menu",
+    "menuList": "Menu list"
+    },
+    "CN": {
+    "expressLane": "快速通道",
+    "addMenu": "新增菜单",
+    "menuList": "菜单列表"
+    }
+    }
+</i18n>
+
 <template>
     <div class="p30" style="position: relative">
-        <h3 style="margin: 20px 0 0 20px">快速通道</h3>
+        <h3 style="margin: 20px 0 0 20px">{{$t('expressLane')}}</h3>
         <div class="row">
             <div class="menu-item" v-for="row,index in userShortcut" :key="index">
                 <div class="cutblock" @click="goto(row)">
@@ -13,20 +28,20 @@
                 <div class="cutblock " @click="showMenuList()" style="background-color: transparent;border: 1px  dashed #ccc;">
                     <i class="fa fa-plus " style="color:#00a0e9"></i>
                 </div>
-                <div class="">新增菜单</div>
+                <div class="">{{$t('addMenu')}}</div>
             </div>
         </div>
         <SaafSelectModal
                 ref="respSelect"
                 type="checkbox"
-                :selectConfig="{ title: '菜单列表', key: 'menuName', pk: 'menuId', show:'menuName' }"
+                :selectConfig="{ title: $t('menuList'), key: 'menuName', pk: 'menuId', show:'menuName' }"
                 :tableConfig="{
             findApi: 'findMenuList',
             searchParams:{
                 systemCode: 'BASE'
             },
             tableColumns: [
-                { title: '菜单列表', key: 'menuName', sortable:true },
+                { title: $t('menuList'), key: 'menuName', sortable:true },
             ]
         }"
                 @on-change="respSelectChange"></SaafSelectModal>

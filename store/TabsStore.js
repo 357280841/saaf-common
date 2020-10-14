@@ -63,7 +63,7 @@ export default {
       state.activeTab = {}
       state.keyEnumerate = {}
       sessionStorageTool.remove('tabStore')
-      StoreCommon.commit('INIT_HOME')
+      // StoreCommon.commit('INIT_HOME')
     },
     INIT_HOME(state){
       tabsTool.openRouterTab({

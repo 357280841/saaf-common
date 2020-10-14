@@ -1,6 +1,6 @@
 <template>
     <div>
-        <script id="editor" type="text/plain"/>
+        <script :id="editorId" type="text/plain"/>
     </div>
 </template>
 
@@ -11,6 +11,7 @@
     import '../plugins/Ueditor/lang/zh-cn/zh-cn.js'
     import '../plugins/Ueditor/ueditor.parse.min.js'
     import api from '../config/apiCommon'
+    import uuid from 'uuid'
 
     export default {
         name: "SaafTextEditor",
@@ -39,6 +40,7 @@
         data() {
             return {
                 editor: null,
+                editorId: 'editor',
                 defaultToolbars: {
                     //简单模式
                     simple: [[
@@ -69,8 +71,8 @@
                 }
             }
         },
-        mounted() {
-            this.initEditor()
+        created() {
+            this.initEditor();
         },
         methods: {
             // 基本设置
@@ -81,8 +83,8 @@
                 config.serverUrl = api.editorActionCenter;
                 config.scrawlUpUrl = api.editorScrawlUpload;
                 config.UEDITOR_HOME_URL = '/plugins/Ueditor/'
-
-                this.editor = UE.getEditor('editor', config);
+                this.editorId = uuid();
+                this.editor = UE.getEditor(this.editorId, config);
 
                 this.editor.ready(() => {
                     this.editor.setContent(this.value);
@@ -117,7 +119,7 @@
                 this.editor.ready(() => {
                     this.editor.setContent(con)
                 })
-            }
+            },
         },
         destroyed() {
             this.editor.destroy()

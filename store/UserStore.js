@@ -35,18 +35,19 @@ export default {
         if(!state.userInfo){
           StoreCommon.commit('LOGOUT')
         }
-        state.userRespList = state.userInfo?state.userInfo.userRespList:null
+
         state.certificate = state.userInfo?state.userInfo.certificate:null
         state.languageList = state.userInfo?state.userInfo.languageList:[]
         StoreCommon.commit('INIT_LANGUAGE')
+        state.userRespList = state.userInfo?state.userInfo.userRespList[state.currentLanguage.lookupCode?state.currentLanguage.lookupCode:'CN']:null
         StoreCommon.commit('INIT_CURRENT_RESP')
       } catch (error) {
         localStorageTool.remove('userInfo')
       }
     },
-    SET_USER_INFO (state,data) {
+    SET_USER_INFO (state,data) {debugger
       state.userInfo = data
-      state.userRespList = data.userRespList
+      state.userRespList = data.userRespList[state.currentLanguage.lookupCode?state.currentLanguage.lookupCode:data.initLanguage]
       state.certificate = data.certificate
       StoreCommon.commit('SET_CURRENT_RESP', state.userRespList[0])
       localStorageTool.save('userInfo', data)
@@ -91,6 +92,7 @@ export default {
     CHANGE_CURRENT_RESP (state,data){
       StoreCommon.commit('SET_CURRENT_RESP',data)
       StoreCommon.commit('CLEAN_TAB')
+      StoreCommon.commit('INIT_TAB')
       StoreCommon.dispatch('GET_MENU_BY_RESP')
     },
     SET_MENU (state,data){

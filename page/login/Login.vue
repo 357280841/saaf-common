@@ -2,9 +2,41 @@
 * @Author: liujun
 * @Date: 2020-09-11 09:07:12
 */
-
+<i18n>
+    {
+    "EN": {
+    "language": "Language",
+    "inputUserName": "Please input username",
+    "inputPassword": "Please input password",
+    "inputVerifyCode": "Please input verify code",
+    "clickRefresh": "Click refresh",
+    "usernameNotNull": "Username cannot be empty",
+    "pwdNotNull": "Password cannot be empty",
+    "verifyCodeNotNull": "Verify code cannot be empty",
+    "minimumInput": "Minimum input 6 bits"
+    },
+    "CN": {
+    "language": "语言",
+    "inputUserName": "请输入用户名",
+    "inputPassword": "请输入密码",
+    "inputVerifyCode": "请输入验证码",
+    "clickRefresh": "点击刷新",
+    "usernameNotNull": "用户名不能为空",
+    "pwdNotNull": "密码不能为空",
+    "verifyCodeNotNull": "验证码不能为空",
+    "minimumInput": "最少输入6位"
+    }
+    }
+</i18n>
 <template>
     <div class="login-page">
+        <div style="position:fixed;top:10px;right:80px;">
+            <div style="float: left;margin: 4px;"><h3 style="color: white">{{$t('language')}}</h3></div>
+            <div style="width:70Px;float: left;">
+                    <Select v-model="language" @on-change="changeLanguage">
+                        <Option v-for="item in initLanguageList" :value="item.lookupCode" :key="item.lookupCode">{{ item.lookupCode }}</Option>
+                    </Select></div>
+        </div>
         <div class="login-box">
             <h1 class="main-title">{{systemName}}</h1>
             <div class="login-panel">
@@ -12,14 +44,14 @@
                 <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                     <div>
                         <FormItem prop="userName">
-                            <Input type="text" v-model="formInline.userName" placeholder="请输入用户名">
+                            <Input type="text" v-model="formInline.userName" :placeholder="$t('inputUserName')">
                                 <Icon type="ios-person-outline" slot="prepend"></Icon>
                             </Input>
                         </FormItem>
                     </div>
                     <div>
                         <FormItem prop="pwd">
-                            <Input type="password" v-model="formInline.pwd" placeholder="请输入密码"
+                            <Input type="password" v-model="formInline.pwd" :placeholder="$t('inputPassword')"
                                    @keydown.native.enter.prevent="handleSubmit('formInline')">
                                 <Icon type="ios-key-outline" slot="prepend"/>
                             </Input>
@@ -27,10 +59,10 @@
                     </div>
                     <div>
                         <FormItem prop="imgCode" style="width: 55%">
-                            <Input type="text" id="imgCodeInput" v-model="formInline.imgCode" placeholder="请输入验证码"
+                            <Input type="text" id="imgCodeInput" v-model="formInline.imgCode" :placeholder="$t('inputVerifyCode')"
                                    @keydown.native.enter.prevent="handleSubmit('formInline')">
                                 <a slot="append" class="code">
-                                    <img :src="imgSrc" class="code" alt="点击刷新" @click="refreshVerify"/>
+                                    <img :src="imgSrc" class="code" :alt="$t('clickRefresh')" :title="$t('clickRefresh')" @click="refreshVerify"/>
                                 </a>
                             </Input>
                         </FormItem>
@@ -67,17 +99,19 @@
                 },
                 ruleInline: {
                     userName: [
-                        {required: true, message: '用户名不能为空', trigger: 'blur'}
+                        {required: true, message: this.$t('usernameNotNull'), trigger: 'blur'}
                     ],
                     pwd: [
-                        {required: true, message: '密码不能为空', trigger: 'blur'},
-                        {type: 'string', min: 6, message: '最少6位', trigger: 'blur'}
+                        {required: true, message: this.$t('pwdNotNull'), trigger: 'blur'},
+                        {type: 'string', min: 6, message: this.$t('minimumInput'), trigger: 'blur'}
                     ],
-                    imgCode: [{required: true, message: '验证码不能为空', trigger: 'blur'}]
+                    imgCode: [{required: true, message: this.$t('verifyCodeNotNull'), trigger: 'blur'}]
                 },
                 imgSrc: null,
                 imgCodeKey: null,
-                systemName: this.$i18n.t(platform.systemName ? platform.systemName : 'SAAF平台管理系统')
+                systemName: this.$i18n.t(platform.systemName ? platform.systemName : 'SAAF平台管理系统'),
+                initLanguageList: platform.initLanguageList,
+                language: this.$i18n.locale
             }
         },
         created() {
@@ -106,6 +140,10 @@
                     return null;
                 }
             },
+            changeLanguage(item){
+                this.$i18n.locale = item
+                this.$store.commit('CHANGE_LANGUAGE', {lookupCode:item})
+            },
             handleSubmit(name) {
                 // 表单验证
                 this.$refs[name].validate((valid) => {
@@ -125,14 +163,15 @@
                         // md5加密时 前缀为'' 后缀为lo0.1l@g9v# （之前系统这样设置的）
                         pwd: Md5('' + this.formInline.pwd + 'lo0.1l@g9v#'),
                         domain: host,
-                        lan: 'CN',
+                        lan: this.language,
                         imgCode: this.formInline.imgCode,
                         imgCodeKey: this.imgCodeKey
                         // }
-                    }).then(res => {
+                    }).then(res => {debugger
+                        res.data.initLanguage = this.language;
                         let userInfo = res.data
                         let resp = []
-                        userInfo.userRespList.map((item) => {
+                        userInfo.userRespList[this.language].map((item) => {
                             if (item.systemCode == platform.systemCode) {
                                 resp.push(item)
                             }
@@ -142,9 +181,10 @@
                             this.refreshVerify();
                             return
                         }
-                        userInfo.userRespList = resp
+                        // userInfo.userRespList = resp
                         this.$store.commit("SET_USER_INFO", res.data)
                         this.$store.commit('CLEAN_TAB')
+                        this.$store.commit('INIT_TAB')
                         // this.$router.push("/main/home")
                     }).catch(err => {
                         this.refreshVerify();

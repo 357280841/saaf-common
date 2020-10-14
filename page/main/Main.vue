@@ -5,7 +5,20 @@
  * @Last Modified time: 2019-12-05 18:00:11
  */
 
-
+<i18n>
+  {
+  "EN": {
+  "expressLane": "Express lane",
+  "addMenu": "Add menu",
+  "menuList": "Menu list"
+  },
+  "CN": {
+  "expressLane": "快速通道",
+  "addMenu": "新增菜单",
+  "menuList": "菜单列表"
+  }
+  }
+</i18n>
 
 <template>
   <div class="main-box">
@@ -20,7 +33,7 @@
             :style="{height: '50px', lineHeight: '50px'}"
           >            <!-- <div class="system-name">{{platform.systemCode}}</div> -->
             <div class="user">
-              <div class="user-item">{{platform.systemName}}</div>
+              <div class="user-item">{{$i18n.t(platform.systemName ? platform.systemName : 'SAAF平台管理系统')}}</div>
               <div class="user-item" @click="pswdModal = true">{{$i18n.t('修改密码')}}</div>
               <div class="language user-item">
                 <SaafLanguageSelect />
@@ -176,7 +189,7 @@ import { mapState, mapMutations } from "vuex";
 import { stat } from "fs";
 import { fetch } from "@/page/pageConfig/index";
 import creatTree from "@/config/tree";
-import { tabsTool, onresizeTool, iframeTool, fetchTool } from "saaf-common";
+import {tabsTool, onresizeTool, iframeTool, fetchTool, store} from "saaf-common";
 import api from "../config/api"
 import Md5 from "js-md5";
 import platform from '@/config/platform'
