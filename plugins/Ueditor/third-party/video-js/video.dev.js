@@ -4414,13 +4414,12 @@ vjs.SeekBar.prototype.onMouseMove = function(event){
 };
 
 vjs.SeekBar.prototype.onMouseUp = function(event){
-    debugger
+     
   vjs.Slider.prototype.onMouseUp.call(this, event);
 
   this.player_.scrubbing = false;
   if (this.videoWasPlaying) {
-      debugger
-    this.player_.play();
+     this.player_.play();
   }
 };
 

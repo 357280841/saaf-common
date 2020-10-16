@@ -23828,7 +23828,7 @@ UE.plugin.register('autoupload', function (){
         xhr.open("post", url, true);
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr.addEventListener('load', function (e) {
-            try{
+            try{console.log(utils.trim(e.target.response));
                 var json = (new Function("return " + utils.trim(e.target.response)))();
                 if (json.state == 'SUCCESS' && json.url) {
                     successHandler(json);
@@ -24512,7 +24512,7 @@ UE.plugin.register('simpleupload', function (){
                 if(!input.value) return;
                 var loadingId = 'loading_' + (+new Date()).toString(36);
                 var params = utils.serializeParam(me.queryCommandValue('serverparam')) || '';
-
+                params += "&simpleUploader=true";
                 var imageActionUrl = me.getActionUrl(me.getOpt('imageActionName'));
                 var allowFiles = me.getOpt('imageAllowFiles');
 
@@ -28653,7 +28653,7 @@ UE.ui = baidu.editor.ui = {};
             var editor = this.editor,
                 me = this;
 
-            editor.addListener('ready', function () {
+            editor.addListener('ready', function ED() {
                 //提供getDialog方法
                 editor.getDialog = function (name) {
                     return editor.ui._dialogs[name + "Dialog"];
@@ -28673,7 +28673,7 @@ UE.ui = baidu.editor.ui = {};
                 if (editor.options.wordCount) {
                     function countFn() {
                         setCount(editor,me);
-                        domUtils.un(editor.document, "click", arguments.callee);
+                        domUtils.un(editor.document, "click", ED);
                     }
                     domUtils.on(editor.document, "click", countFn);
                     editor.ui.getDom('wordcount').innerHTML = editor.getLang("wordCountTip");

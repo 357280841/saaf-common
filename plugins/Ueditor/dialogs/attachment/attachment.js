@@ -180,7 +180,7 @@
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
                 var $li = $('<li id="' + file.id + '">' +
-                        '<p class="title">' + file.name + '</p>' +
+                        '<p class="title">' + decodeURIComponent(file.name ) + '</p>' +
                         '<p class="imgWrap"></p>' +
                         '<p class="progress"><span></span></p>' +
                         '</li>'),
@@ -555,7 +555,7 @@
                 data = this.fileList[i];
                 link = data.url;
                 list.push({
-                    title: data.original || link.substr(link.lastIndexOf('/') + 1),
+                    title: decodeURIComponent(data.original) || link.substr(link.lastIndexOf('/') + 1),
                     url: prefix + link
                 });
             }
@@ -739,7 +739,7 @@
             for (i = 0; i < lis.length; i++) {
                 if (domUtils.hasClass(lis[i], 'selected')) {
                     var url = lis[i].getAttribute('data-url');
-                    var title = lis[i].getAttribute('data-title') || url.substr(url.lastIndexOf('/') + 1);
+                    var title = decodeURIComponent(lis[i].getAttribute('data-title')) || url.substr(url.lastIndexOf('/') + 1);
                     list.push({
                         title: title,
                         url: url

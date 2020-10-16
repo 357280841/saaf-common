@@ -80,9 +80,10 @@
                 let toolbars = this.getToolbars();
                 let config = this.getConfig();
                 config.toolbars = toolbars;
-                config.serverUrl = api.editorActionCenter;
-                config.scrawlUpUrl = api.editorScrawlUpload;
-                config.UEDITOR_HOME_URL = '/plugins/Ueditor/'
+                config.UEDITOR_HOME_URL = (config.context?config.context:'')+'/plugins/Ueditor/';
+                let host = '?host=' + encodeURIComponent( config.UEDITOR_HOME_URL + 'ueditorResult.html');
+                config.serverUrl = api.editorActionCenter+host;
+                config.scrawlUpUrl = api.editorScrawlUpload+host;
                 this.editorId = uuid();
                 this.editor = UE.getEditor(this.editorId, config);
 

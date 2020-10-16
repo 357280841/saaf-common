@@ -2231,7 +2231,7 @@
              * @property name
              * @type {string}
              */
-            this.name = source.name || 'Untitled';
+            this.name = encodeURIComponent(source.name || 'Untitled');
     
             /**
              * 文件体积（字节）

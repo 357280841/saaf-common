@@ -45,7 +45,7 @@ export default {
         localStorageTool.remove('userInfo')
       }
     },
-    SET_USER_INFO (state,data) {debugger
+    SET_USER_INFO (state,data) {
       state.userInfo = data
       state.userRespList = data.userRespList[state.currentLanguage.lookupCode?state.currentLanguage.lookupCode:data.initLanguage]
       state.certificate = data.certificate
