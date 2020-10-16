@@ -72,6 +72,8 @@
             }
         },
         created() {
+        },
+        mounted(){
             this.initEditor();
         },
         methods: {
