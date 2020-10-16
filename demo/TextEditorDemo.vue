@@ -44,7 +44,7 @@
                     initialFrameHeight: 150,
                     initialFrameWidth: '100%',
                     zIndex: 1200,
-                    context: '/saafweb';
+                    context: '/saafweb'
                 },
                 toolbars: [[
                     'fullscreen', 'source', '|', 'undo', 'redo', '|',
