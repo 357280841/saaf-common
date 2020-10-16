@@ -83,7 +83,7 @@
                 let config = this.getConfig();
                 config.toolbars = toolbars;
                 config.UEDITOR_HOME_URL = (config.context?config.context:'')+'/plugins/Ueditor/';
-                let host = '?host=' + encodeURIComponent( config.UEDITOR_HOME_URL + 'ueditorResult.html');
+                let host = '?host=' + encodeURIComponent( window.location.protocol+'//'+window.location.host+config.UEDITOR_HOME_URL + 'ueditorResult.html');
                 config.serverUrl = api.editorActionCenter+host;
                 config.scrawlUpUrl = api.editorScrawlUpload+host;
                 this.editorId = uuid();
