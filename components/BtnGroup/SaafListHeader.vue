@@ -18,7 +18,8 @@
                 <slot name="btnGroup"></slot>
             </div>
             <SaafResourceButton
-            style="display: inline-block;" 
+            ref="SaafResourceButton"
+            style="display: inline-block;"
             :menuId="$route.query.menuId"
             :respId="$route.query.respId"
             :functionList="functionList">
@@ -91,6 +92,9 @@
                 }
             }
             this.functionList = functionList
+          },
+          getMenuResource(){
+              return this.$refs.SaafResourceButton.getMenuResource();
           }
       },
       watch:{

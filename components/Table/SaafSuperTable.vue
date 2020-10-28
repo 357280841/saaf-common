@@ -23,12 +23,19 @@
         </SaafResourceButton>
     </SaafListPageHeader> -->
 
-    <SaafListHeader 
+    <SaafListHeader
+      ref="SaafListHeader"
       :pageHeader="tableConfig.pageHeader" 
       @find="getFirstPage"
       @reset="resetFormValue"
       :currentRow="currentRow">
-      <template v-slot:btnGroup><slot name="btnGroup"></slot></template>
+<!--      <template v-slot:btnGroup><slot name="btnGroup"></slot></template>-->
+        <div style="display: inline-block">
+            <slot name="btnGroup"></slot>
+        </div>
+      <template slot="btnGroup">
+            <SaafTableExport :tableConfig="tableConfig" @getParamForm="getParamForm" v-show="showExportBtn"></SaafTableExport>
+      </template>
     </SaafListHeader>
 
     <SaafParamForm ref="SaafParamForm" :items="tableConfig.searchItems">
@@ -61,9 +68,10 @@
 
 <script>
   
-import {fetch,api} from '@/page/pageConfig/index'
-import { Promise, resolve, reject } from 'q';
-import { fetchTool, pageTool, tabsTool, gridButton, getUrl, btnGroupTool } from '../../index'
+// import {fetch,api} from '@/page/pageConfig/index'
+// import { Promise, resolve, reject } from 'q';
+// import { fetchTool, pageTool, tabsTool, gridButton, getUrl, btnGroupTool } from '../../index'
+import {pageTool, tabsTool} from '../../index'
 
 export default {
     props:{
@@ -80,13 +88,17 @@ export default {
         currentRow: null,
         tableHeight: null,
         functionList: {},
-        loading:false
+        loading:false,
+        showExportBtn: false
       }
     },
     created(){
     },
     mounted(){
       // this.formatFunctionList()
+        setTimeout(()=>{
+            this.initExportBtn();
+        },500)
     },
     methods:{
       refreshData(){
@@ -134,6 +146,14 @@ export default {
       getParamForm(f){
         f(this.$refs.SaafParamForm.getParams())
       },
+      initExportBtn(){debugger
+          let menuResource = this.$refs.SaafListHeader.getMenuResource();
+          let btnExport = this.tableConfig.pageHeader.btnExport?this.tableConfig.pageHeader.btnExport:'btnExport';
+          let exoprtResoure = menuResource[btnExport];
+          if(exoprtResoure){
+              this.showExportBtn = true;
+          }
+      }
       // resetTableHeight(){
       //   setTimeout(()=>{
       //     // this.tableHeight = this.$store.state.system.screenHeight-this.$refs.SaafListPageHeader.$el.clientHeight-this.$refs.SaafParamForm.$el.clientHeight-this.$refs.SaafTable.$refs.Page.$el.clientHeight-20-15

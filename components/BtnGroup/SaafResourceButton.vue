@@ -70,6 +70,9 @@ export default {
                     this.btnMap[item.resourceCode] = item
                 })
             })
+        },
+        getMenuResource(){
+            return this.btnMap;
         }
     }
 }

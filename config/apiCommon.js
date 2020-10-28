@@ -17,6 +17,9 @@ let api = {
     editorActionCenter: `${host}/fileServer/ueditorService/actionCenter`,
     editorScrawlUpload: `${host}/fileServer/ueditorService/scrawlUpload`,
 
+    exportData: `${host}/exportServer/dataExportService/export`, // 导出功能
+    exportDataStatus: `${host}/exportServer/dataExportService/getExportResult`, // 导出状态
+
     /****** 流程 start ******/
     // 撤回
     bpmTaskService_revoke: `${host}/bpmServer/bpmTaskService/revoke`,

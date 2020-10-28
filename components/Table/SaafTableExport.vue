@@ -1,37 +1,99 @@
+<i18n>
+    {
+    "EN": {
+    "export": "Export",
+    "exportTable": "Export table data",
+    "notExists": "not exists"
+    },
+    "CN": {
+    "export": "导出",
+    "exportTable": "导出表格数据",
+    "notExists": "不存在"
+    }
+    }
+</i18n>
 <template>
-    <Button type="text" size="small" @click="doExport"><span class="fa fa-file-excel-p pr5"></span>{{label}}</Button>
+    <ButtonGroup size="small">
+        <Button size="small" @click="doExport"><span class="fa fa-file-excel-o pr5"></span>{{label}}</Button>
+    </ButtonGroup>
 </template>
 
 <script>
+    import compApi from '../../config/apiCommon'
+    import {api} from '@/page/pageConfig/index'
+    import { mapState } from 'vuex'
+
     export default {
         name: "SaafTableExport",
         props:{
-            label: {
-                type: String,
-                default: 'Export'
-            },
             tableConfig:{
                 type: Object,
-                required: true,
+                required: true
             }
         },
         data () {
             return {
-
+                label: this.$t('export'),
+                fileName: this.$t('exportTable')
             }
         },
+        computed: {
+            ...mapState({
+                certificate: state => state.user.certificate
+            }),
+        },
         mounted () {
-
+            if(this.tableConfig.exportBtnName){
+                this.label = this.tableConfig.exportBtnName;
+            }
+            if(this.tableConfig.exportFileName){
+                this.fileName = this.tableConfig.exportFileName;
+            }
         },
         methods: {
             doExport(){
-                let tableColumns = tableConfig.tableColumns;
+                let tableColumns = this.tableConfig.tableColumns;
                 let labelName = [];
                 let name = [];
-                for (var i = 0; i < tableColumns.length; i++) {
+                for (let i = 0; i < tableColumns.length; i++) {
                     labelName.push(tableColumns[i].title)
                     name.push(tableColumns[i].key)
                 }
+                if(!api[this.tableConfig.findApi]){
+                    throw `tableConfig.findApi [${this.tableConfig.findApi}] ${this.$t('notExists')}`
+                }
+                let requestUrl = api[this.tableConfig.findApi];
+                let paramForm = {}
+                this.$emit('getParamForm',(val)=>{
+                    paramForm = val
+                })
+                let params = {
+                    ...paramForm,
+                    ...this.tableConfig.searchParams
+                }
+
+                let p = {
+                    labelName: labelName,
+                    attributeNames: name,
+                    sheetName: "sheet1",
+                    exportNum: -1,
+                    requestUrl: requestUrl,
+                    requestParam: params,
+                    emailSubject: this.fileName,
+                    post: true,
+                    pageIndexParamName: 'pageIndex',
+                    pageRowsParamName: 'pageRows',
+                    dataCount: 'count',  // 总记录
+                    structure: 'data',
+                    toakenAttributeName: 'certificate',
+                    token: this.certificate,
+                    exportApi: compApi.exportData, // 导出接口
+                    exportStatusApi: compApi.exportDataStatus // 查询导出状态
+                };
+
+                sessionStorage.setItem("downloadParams", JSON.stringify(p));
+
+                window.open("/export.html")
             }
         }
     }

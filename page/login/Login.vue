@@ -167,7 +167,7 @@
                         imgCode: this.formInline.imgCode,
                         imgCodeKey: this.imgCodeKey
                         // }
-                    }).then(res => {debugger
+                    }).then(res => {
                         res.data.initLanguage = this.language;
                         let userInfo = res.data
                         let resp = []
