@@ -115,10 +115,20 @@ export default {
               label:this.$t("lookup type"), type:"text", change:(val)=>{
                 // console.log(val)
                 console.log(this.$refs.SaafParamForm.getParams())
-              }
+              },
+              value: 'testValue'
             },
             meaning_like:{
               label:this.$t("meaning"), type:"text"
+            },
+            start:{
+              label:this.$t("start_date"), type:"datetime", value: '2020-02-02 10:00:00',change:()=>{
+                this.searchItems.end.value = '2020-02-10 10:00:00'
+                this.$refs.SaafParamForm.setFormValue(this.searchItems)
+              }
+            },
+            end:{
+              label:this.$t("end_date"), type:"datetime", value: ''
             },
             systemCode:{
               label:this.$t("system code"), type:"lookup", code: 'SYSTEM_CODE', value: 'BASE'
