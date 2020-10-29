@@ -26,6 +26,9 @@
     export default {
         name: "SaafTableExport",
         props:{
+            label: {
+                type: String
+            },
             tableConfig:{
                 type: Object,
                 required: true
@@ -33,7 +36,6 @@
         },
         data () {
             return {
-                label: this.$t('export'),
                 fileName: this.$t('exportTable')
             }
         },
@@ -43,11 +45,8 @@
             }),
         },
         mounted () {
-            if(this.tableConfig.exportBtnName){
-                this.label = this.tableConfig.exportBtnName;
-            }
-            if(this.tableConfig.exportFileName){
-                this.fileName = this.tableConfig.exportFileName;
+            if(this.tableConfig.pageHeader.title){
+                this.fileName = this.tableConfig.pageHeader.title;
             }
         },
         methods: {
@@ -56,8 +55,10 @@
                 let labelName = [];
                 let name = [];
                 for (let i = 0; i < tableColumns.length; i++) {
-                    labelName.push(tableColumns[i].title)
-                    name.push(tableColumns[i].key)
+                    if(tableColumns[i].title && tableColumns[i].key){
+                        labelName.push(tableColumns[i].title)
+                        name.push(tableColumns[i].key)
+                    }
                 }
                 if(!api[this.tableConfig.findApi]){
                     throw `tableConfig.findApi [${this.tableConfig.findApi}] ${this.$t('notExists')}`

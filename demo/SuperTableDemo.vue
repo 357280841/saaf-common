@@ -33,6 +33,12 @@
 
 <template>
   <div>
+    <div>
+      <span style="color:red">
+        注：导出功能默认可直接在菜单资源配置中选择“导出”按钮，若需要修改导出按钮名称及编码，
+      需要重新定义按钮资源并在前端页面配置tableConfig.pageHeader.btnExport的值，并与按钮资源对应
+      </span>
+    </div>
     <SaafSuperTable ref="SaafSuperTable" :tableConfig="tableConfig" :currentRow.sync="currentRow">
       <template v-slot:personId="scope">
         <!-- {{scope.formValue}} -->

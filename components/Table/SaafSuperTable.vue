@@ -28,13 +28,14 @@
       :pageHeader="tableConfig.pageHeader" 
       @find="getFirstPage"
       @reset="resetFormValue"
-      :currentRow="currentRow">
+      :currentRow="currentRow"
+      @changeResourceData="changeResourceData($event)">
 <!--      <template v-slot:btnGroup><slot name="btnGroup"></slot></template>-->
         <div style="display: inline-block">
             <slot name="btnGroup"></slot>
         </div>
       <template slot="btnGroup">
-            <SaafTableExport :tableConfig="tableConfig" @getParamForm="getParamForm" v-show="showExportBtn"></SaafTableExport>
+            <SaafTableExport :tableConfig="tableConfig" :label="exoprtBtn.resourceName" @getParamForm="getParamForm" v-show="showExportBtn"></SaafTableExport>
       </template>
     </SaafListHeader>
 
@@ -89,16 +90,18 @@ export default {
         tableHeight: null,
         functionList: {},
         loading:false,
-        showExportBtn: false
+        showExportBtn: false,
+        menuResource:{},
+        exoprtBtn:{}
       }
     },
     created(){
     },
     mounted(){
       // this.formatFunctionList()
-        setTimeout(()=>{
-            this.initExportBtn();
-        },500)
+      //   setTimeout(()=>{
+      //       this.initExportBtn();
+      //   },500)
     },
     methods:{
       refreshData(){
@@ -146,11 +149,10 @@ export default {
       getParamForm(f){
         f(this.$refs.SaafParamForm.getParams())
       },
-      initExportBtn(){debugger
-          let menuResource = this.$refs.SaafListHeader.getMenuResource();
+      changeResourceData(menuResource){
           let btnExport = this.tableConfig.pageHeader.btnExport?this.tableConfig.pageHeader.btnExport:'btnExport';
-          let exoprtResoure = menuResource[btnExport];
-          if(exoprtResoure){
+          this.exoprtBtn = menuResource[btnExport];
+          if(this.exoprtBtn){
               this.showExportBtn = true;
           }
       }

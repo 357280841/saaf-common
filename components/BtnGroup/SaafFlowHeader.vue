@@ -17,7 +17,8 @@
             style="display: inline-block;" 
             :menuId="$route.query.menuId"
             :respId="$route.query.respId"
-            :functionList="pageHeader.functionList">
+            :functionList="pageHeader.functionList"
+            @changeResourceData="changeResourceData($event)">
             </SaafResourceButton>
 
             <ButtonGroup size="small" class="pl10">
@@ -184,7 +185,8 @@
                         trigger: 'blur'
                     }
                 ]
-            }
+            },
+            menuResource: {}
         }
       },
       mounted () {
@@ -549,6 +551,9 @@
                     }
                 }
               }
+          },
+          changeResourceData(menuResource){
+              this.menuResource = menuResource
           }
       },
       watch:{
@@ -558,6 +563,12 @@
           },
           deep: true
         },
+        menuResource: {
+            handler(val, oldVal) {
+                this.$emit('changeResourceData', this.menuResource)
+            },
+            deep: true
+        }
       }
     }
 </script>

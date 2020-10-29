@@ -22,7 +22,8 @@
             style="display: inline-block;"
             :menuId="$route.query.menuId"
             :respId="$route.query.respId"
-            :functionList="functionList">
+            :functionList="functionList"
+            @changeResourceData="changeResourceData($event)">
             </SaafResourceButton>
         </SaafListPageHeader>
         <SaafDelModalV2 ref="SaafDelModalV2"></SaafDelModalV2>
@@ -54,6 +55,7 @@
       data () {
         return {
           functionList: {},
+          menuResource: {}
         }
       },
       mounted () {
@@ -93,13 +95,19 @@
             }
             this.functionList = functionList
           },
-          getMenuResource(){
-              return this.$refs.SaafResourceButton.getMenuResource();
+          changeResourceData(menuResource){
+              this.menuResource = menuResource
           }
       },
       watch:{
           'pageHeader.functionList': (val)=>{
               this.formatFunctionList()
+          },
+          menuResource: {
+              handler(val, oldVal) {
+                  this.$emit('changeResourceData', this.menuResource)
+              },
+              deep: true
           }
       }
     }

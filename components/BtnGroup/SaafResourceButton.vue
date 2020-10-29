@@ -43,6 +43,7 @@ export default {
         return {
             btnList: [],
             btnMap: {},
+            menuResource: {},
             currentMenu: null
         }
     },
@@ -69,10 +70,16 @@ export default {
                 res.data.map((item)=>{
                     this.btnMap[item.resourceCode] = item
                 })
+                this.menuResource = this.btnMap;
             })
-        },
-        getMenuResource(){
-            return this.btnMap;
+        }
+    },
+    watch: {
+        menuResource: {
+            handler(val, oldVal) {
+                this.$emit('changeResourceData', this.menuResource)
+            },
+            deep: true
         }
     }
 }
