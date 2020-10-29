@@ -35,7 +35,7 @@
             <slot name="btnGroup"></slot>
         </div>
       <template slot="btnGroup">
-            <SaafTableExport :tableConfig="tableConfig" :label="exoprtBtn.resourceName" @getParamForm="getParamForm" v-show="showExportBtn"></SaafTableExport>
+            <SaafTableExport :tableConfig="tableConfig" :label="exoprtBtn?exoprtBtn.resourceName:''" @getParamForm="getParamForm" v-show="showExportBtn"></SaafTableExport>
       </template>
     </SaafListHeader>
 

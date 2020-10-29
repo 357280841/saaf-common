@@ -22,6 +22,7 @@
     import compApi from '../../config/apiCommon'
     import {api} from '@/page/pageConfig/index'
     import { mapState } from 'vuex'
+    import platform from '@/config/platform'
 
     export default {
         name: "SaafTableExport",
@@ -93,8 +94,7 @@
                 };
 
                 sessionStorage.setItem("downloadParams", JSON.stringify(p));
-
-                window.open("/export.html")
+                window.open("/" + platform.systemContext + "/export.html")
             }
         }
     }

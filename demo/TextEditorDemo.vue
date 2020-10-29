@@ -43,8 +43,7 @@
                     autoHeightEnabled: false,
                     initialFrameHeight: 150,
                     initialFrameWidth: '100%',
-                    zIndex: 1200,
-                    context: '/saafweb'
+                    zIndex: 1200
                 },
                 toolbars: [[
                     'fullscreen', 'source', '|', 'undo', 'redo', '|',
