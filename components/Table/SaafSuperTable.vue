@@ -91,7 +91,6 @@ export default {
         functionList: {},
         loading:false,
         showExportBtn: false,
-        menuResource:{},
         exoprtBtn:{}
       }
     },
@@ -99,9 +98,6 @@ export default {
     },
     mounted(){
       // this.formatFunctionList()
-      //   setTimeout(()=>{
-      //       this.initExportBtn();
-      //   },500)
     },
     methods:{
       refreshData(){
