@@ -63,8 +63,10 @@
     </div>
 </template>
 <script>
-import { setTimeout } from 'timers';
-import pageTool from '../../tool/pageTool'
+// import { setTimeout } from 'timers';
+// import pageTool from '../../tool/pageTool'
+import systemHook from '@/config/systemHook'
+
     export default {
       props:{
         columns:{
@@ -104,6 +106,10 @@ import pageTool from '../../tool/pageTool'
         rowClassFunc:{
           type: Function,
           required: false
+        },
+        indexColumn:{
+          type: Object,
+          required: false
         }
       },
       components: {
@@ -114,7 +120,14 @@ import pageTool from '../../tool/pageTool'
           simple: false
         }
       },
-      created(){
+      created() {
+          if(!this.indexColumn){
+              this.indexColumn = {
+                  show: systemHook.showTableIndex?systemHook.showTableIndex:true,
+                  fixed: systemHook.fixedTableIndex?systemHook.fixedTableIndex:false
+              }
+          }
+
         // console.log(this.$refs.SaafTable.clientWidth)
       },
       mounted () {
@@ -125,15 +138,31 @@ import pageTool from '../../tool/pageTool'
       },
       methods: {
         initTable(){
-          let column = []
-          column = [
-            {
-              title: this.$i18n.t('序号'),
-              type: 'index',
-              width: 70,
-              align: 'center'
-            },
-          ]
+          let column = [];
+          if(this.indexColumn.show){
+              if(this.indexColumn.fixed){
+                  column = [
+                      {
+                          title: this.$i18n.t('序号'),
+                          type: 'index',
+                          width: 70,
+                          align: 'center',
+                          fixed: "left"
+                      },
+                  ]
+              }else{
+                  column = [
+                      {
+                          title: this.$i18n.t('序号'),
+                          type: 'index',
+                          width: 70,
+                          align: 'center'
+                      },
+                  ]
+              }
+          }
+
+
           this.columns.map((item)=>{
             if(item.showType == 'YN'){
               column.push({
