@@ -117,12 +117,13 @@ import systemHook from '@/config/systemHook'
       data () {
         return {
           tableColumns:[],
-          simple: false
+          simple: false,
+          indexObj: {}
         }
       },
       created() {
           if(!this.indexColumn){
-              this.indexColumn = {
+              this.indexObj = {
                   show: systemHook.showTableIndex?systemHook.showTableIndex:true,
                   fixed: systemHook.fixedTableIndex?systemHook.fixedTableIndex:false
               }
@@ -139,8 +140,8 @@ import systemHook from '@/config/systemHook'
       methods: {
         initTable(){
           let column = [];
-          if(this.indexColumn.show){
-              if(this.indexColumn.fixed){
+          if(this.indexObj && this.indexObj.show){
+              if(this.indexObj.fixed){
                   column = [
                       {
                           title: this.$i18n.t('序号'),
