@@ -116,13 +116,13 @@ export default {
             }
           },
           searchItems:{
-            lookupType_like:{
+            lookupTypeLike:{
               label:this.$t("lookup type"), type:"text", change:(val)=>{
                 // console.log(val)
                 console.log(this.$refs.SaafSuperTable.searchParams)
               }
             },
-            meaning_like:{
+            meaningLike:{
               label:this.$t("meaning"), type:"text"
             },
             systemCode:{

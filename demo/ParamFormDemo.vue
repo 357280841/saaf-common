@@ -111,14 +111,14 @@ export default {
     data() {
       return {
         searchItems:{
-            lookupType_like:{
+            lookupTypeLike:{
               label:this.$t("lookup type"), type:"text", change:(val)=>{
                 // console.log(val)
                 console.log(this.$refs.SaafParamForm.getParams())
               },
               value: 'testValue'
             },
-            meaning_like:{
+            meaningLike:{
               label:this.$t("meaning"), type:"text"
             },
             start:{

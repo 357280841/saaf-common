@@ -101,7 +101,8 @@ export default {
         },
         watchTableConfig(){
             let tableConfig = JSON.parse(JSON.stringify(this.tableConfig))
-            let tableColumns = []
+            let tableColumns = this.tableConfig.tableColumns
+            tableConfig.tableColumns = tableColumns;
             if(this.type=="radio"){
                 
             }else  if(this.type=="checkbox"){
