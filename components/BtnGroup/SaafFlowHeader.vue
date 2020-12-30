@@ -228,7 +228,7 @@
                           processInstanceId: this.flow.processInstanceId
                       }).then(res => {
                           if(res.data) {
-                              if(!this.flow.taskId){
+                              if(!this.flow.taskId && res.data.length){
                                   this.flow.taskId = res.data[0].taskId;
                                   this.flow.editStatus = res.data[0].taskConfig.editStatus;
                               }else{
