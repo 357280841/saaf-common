@@ -14,7 +14,7 @@
         </Input>
         <Modal
             v-model="modal"
-            :title="selectConfig.title"
+            :title="modalTitle || selectConfig.title"
             @on-ok="ok"
             @on-cancel="cancel"
             footer-hide
@@ -26,6 +26,8 @@
                         :type="type"
                         :tableConfig="sTableConfig" 
                         :selectConfig="selectConfig"
+                        :searchList="searchList"
+                        :searchSpan="searchSpan"
                         :currentRow.sync="currentRow"></SaafModalTableList>
                 <div class="modal-btn">
                     <Button class="mr10" @click="clear">清空</Button>
@@ -61,6 +63,20 @@ export default {
             type: Boolean,
             required: false
         },
+        searchList: {
+            type: Array,
+            default: () => {return []},
+            required: false
+        },
+        searchSpan: {
+            type: Number,
+            default: 7,
+            required: false
+        },
+        modalTitle: {
+            type: String,
+            required: false
+        }
     },
     components: {
     },

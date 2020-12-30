@@ -7,9 +7,17 @@
 
 <template>
   <div ref="SaafModalTableList">
-    <div style="margin-bottom: 10px" v-if="selectConfig.key">
+    <div style="margin-bottom: 10px" v-if="selectConfig.key && !searchList.length">
       <Input v-model="value" search enter-button @on-enter="getFirstPage" @on-search="getFirstPage" :placeholder="selectConfig.title" />
     </div>
+    <Row v-if="searchList.length">
+      <Col :span="searchSpan" v-for="(item, index) in searchList" style="margin-bottom: 10px;padding-left: 10px">
+        <Input v-model="item.value" @on-enter="getFirstPage" :placeholder="item.title" />
+      </Col>
+      <Col span="3" style="margin-bottom: 10px;padding-left: 10px">
+        <Button type="primary" icon="ios-search" @click="getFirstPage">搜索</Button>
+      </Col>
+    </Row>
     <div v-if="type=='checkbox'&&selectList.length>0" style="margin-bottom: 10px; border: #2d8cf0 solid 1px; padding:5px;">
       <span style="color: #2d8cf0; font-weight: bold;">选中：</span>
       <Tag color="primary" v-for="(item,key) of selectList" :key="key" closable @click.native="closeTag(item,key)" @on-close="closeTag(item,key)">{{item[selectConfig.show]}}</Tag>
@@ -46,6 +54,16 @@ export default {
       selectConfig:{
         type: Object,
         required: true,
+      },
+      searchList: {
+        type: Array,
+        default: () => {return []},
+        required: false
+      },
+      searchSpan: {
+        type: Number,
+        default: 7,
+        required: false
       },
     },
     data(){
@@ -93,8 +111,14 @@ export default {
             pageIndex: page.nextIndex,
             pageRows: page.pageSize,
           }
-          if(this.selectConfig.key){
+          if(this.selectConfig.key && !this.searchList.length){
             params[this.selectConfig.key] = this.value
+          }
+
+          if(this.searchList.length) {
+            this.searchList.map(item => {
+              params[item.key] = item.value
+            })
           }
           
         return new Promise((resolve, reject)=>{
