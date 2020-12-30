@@ -89,7 +89,7 @@ let router = [
             {
                 path: 'iframeToolDemo',
                 urlName: '全局操作函数，跨iframe可运行',
-                component: () => import('../IframeToolDemo')
+                component: () => import('../iframeToolDemo')
             },
             {
                 path: 'TextEditorDemo',
