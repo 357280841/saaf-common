@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen 
  * @Date: 2019-05-24 17:37:33 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-11-05 16:42:06
+ * @Last Modified time: 2021-01-09 21:05:48
  */
 
 
@@ -89,7 +89,7 @@ let router = [
             {
                 path: 'iframeToolDemo',
                 urlName: '全局操作函数，跨iframe可运行',
-                component: () => import('../iframeToolDemo')
+                component: () => import('../IframeToolDemo')
             },
             {
                 path: 'TextEditorDemo',
