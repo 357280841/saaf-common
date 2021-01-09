@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen; 357280841@qq.com; 
  * @Date: 2019-07-17 17:13:43 
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-08-28 17:29:11
+ * @Last Modified time: 2021-01-09 23:49:04
  */
 
 import store from '../store/StoreCommon'
@@ -51,7 +51,7 @@ export default class tabsTool{
         if(url.includes('http')){
             menu.url = url
         }else{
-            menu.url = host+'/#/iframeBox'+url
+            menu.url = host+'#/iframeBox'+url
         }
         
         // 打开过的放仓库
