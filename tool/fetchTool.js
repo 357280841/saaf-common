@@ -116,7 +116,10 @@ let fetch = {
           Spin.hide()
       }).catch(error => {
         Spin.hide()
-        Message.error(error.msg)
+        Message.error({
+          content: error.msg,
+          duration: 5
+        })
         reject(error, {})
       })
     })
@@ -205,7 +208,10 @@ let fetch = {
         Spin.hide()
       }).catch(error => {
         Spin.hide()
-        Message.error(error.msg)
+        Message.error({
+          content: error.msg,
+          duration: 5
+        })
         reject(error, {})
       })
     })

@@ -231,6 +231,7 @@
                               if(!this.flow.taskId && res.data.length){
                                   this.flow.taskId = res.data[0].taskId;
                                   this.flow.editStatus = res.data[0].taskConfig.editStatus;
+                                  this.flow.assignee = res.data[0].assignee;
                               }else{
                                   let isActive = false;
                                   for(let i in res.data){
@@ -538,16 +539,15 @@
                 if(this.isStartUser) {
                     this.stateTree.revoke = true
                     // this.stateTree.submit = true
-                } else {
-                    if(this.flow.taskId) {
-                        this.stateTree = {
-                            ...this.stateTree,
-                            pass: true,
-                            reject: true,
-                            retrial: true,
-                            message: true,
-                            addSubTask: true,
-                        }
+                } 
+                if(this.flow.taskId && this.flow.assignee == this.userInfo.userName) {
+                    this.stateTree = {
+                        ...this.stateTree,
+                        pass: true,
+                        reject: true,
+                        retrial: true,
+                        message: true,
+                        addSubTask: true,
                     }
                 }
               }
