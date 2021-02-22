@@ -11,7 +11,7 @@
     import '../plugins/Ueditor/lang/zh-cn/zh-cn.js'
     import '../plugins/Ueditor/ueditor.parse.min.js'
     import api from '../config/apiCommon'
-    import uuid from 'uuid'
+    import { v4 as uuidv4 } from 'uuid'
     import platform from '@/config/platform'
 
     export default {
@@ -87,7 +87,7 @@
                 let host = '?host=' + encodeURIComponent( window.location.protocol+'//'+window.location.host+config.UEDITOR_HOME_URL + 'ueditorResult.html');
                 config.serverUrl = api.editorActionCenter+host;
                 config.scrawlUpUrl = api.editorScrawlUpload+host;
-                this.editorId = uuid();
+                this.editorId = uuidv4();
                 this.editor = UE.getEditor(this.editorId, config);
 
                 this.editor.ready(() => {
