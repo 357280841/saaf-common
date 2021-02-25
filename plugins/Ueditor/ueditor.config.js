@@ -340,9 +340,32 @@
 
         //iframeUrlMap
         //dialog内容的路径 ～会被替换成URL,垓属性一旦打开，将覆盖所有的dialog的默认路径
-        //,iframeUrlMap:{
-        //    'anchor':'~/dialogs/anchor/anchor.html',
-        //}
+        ,iframeUrlMap:{
+            'anchor':'plugins/Ueditor/dialogs/anchor/anchor.html',
+            'insertimage':'plugins/Ueditor/dialogs/image/image.html',
+            'link':'plugins/Ueditor/dialogs/link/link.html',
+            'spechars':'plugins/Ueditor/dialogs/spechars/spechars.html',
+            'searchreplace':'plugins/Ueditor/dialogs/searchreplace/searchreplace.html',
+            'map':'plugins/Ueditor/dialogs/map/map.html',
+            'gmap':'plugins/Ueditor/dialogs/gmap/gmap.html',
+            'insertvideo':'plugins/Ueditor/dialogs/video/video.html',
+            'help':'plugins/Ueditor/dialogs/help/help.html',
+            'preview':'plugins/Ueditor/dialogs/preview/preview.html',
+            'emotion':'plugins/Ueditor/dialogs/emotion/emotion.html',
+            'wordimage':'plugins/Ueditor/dialogs/wordimage/wordimage.html',
+            'attachment':'plugins/Ueditor/dialogs/attachment/attachment.html',
+            'insertframe':'plugins/Ueditor/dialogs/insertframe/insertframe.html',
+            'edittip':'plugins/Ueditor/dialogs/table/edittip.html',
+            'edittable':'plugins/Ueditor/dialogs/table/edittable.html',
+            'edittd':'plugins/Ueditor/dialogs/table/edittd.html',
+            'webapp':'plugins/Ueditor/dialogs/webapp/webapp.html',
+            'snapscreen':'plugins/Ueditor/dialogs/snapscreen/snapscreen.html',
+            'scrawl':'plugins/Ueditor/dialogs/scrawl/scrawl.html',
+            'music':'plugins/Ueditor/dialogs/music/music.html',
+            'template':'plugins/Ueditor/dialogs/template/template.html',
+            'background':'plugins/Ueditor/dialogs/background/background.html',
+            'charts': 'plugins/Ueditor/dialogs/charts/charts.html'
+        }
 
         //allowLinkProtocol 允许的链接地址，有这些前缀的链接地址不会自动添加http
         //, allowLinkProtocols: ['http:', 'https:', '#', '/', 'ftp:', 'mailto:', 'tel:', 'git:', 'svn:']
