@@ -12,6 +12,9 @@ export default class urlTool {
             hasGetParams = true
         }
         for (const key in params) {
+            if(params[key] === undefined || params[key] === null) {
+                continue
+            }
             if(hasGetParams){
                 url += `&${key}=${params[key]}`
             }else{
