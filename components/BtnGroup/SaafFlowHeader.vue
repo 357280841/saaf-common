@@ -237,6 +237,7 @@
                                   for(let i in res.data){
                                       if(this.flow.taskId == res.data[i].taskId){
                                           this.flow.editStatus = res.data[i].taskConfig.editStatus;
+                                          this.flow.assignee = res.data[i].assignee;
                                           isActive = true;
                                       }
                                   }
