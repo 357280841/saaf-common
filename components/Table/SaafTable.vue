@@ -124,8 +124,9 @@ import systemHook from '@/config/systemHook'
       created() {
           if(!this.indexColumn){
               this.indexObj = {
-                  show: systemHook.showTableIndex?systemHook.showTableIndex:true,
-                  fixed: systemHook.fixedTableIndex?systemHook.fixedTableIndex:false
+                  show: systemHook.showTableIndex === undefined || systemHook.showTableIndex === null ? true : systemHook.showTableIndex,
+                  fixed: systemHook.fixedTableIndex === undefined || systemHook.fixedTableIndex === null ? false : systemHook.fixedTableIndex,
+                  continue: systemHook.continueTableIndex === undefined || systemHook.continueTableIndex === null ? true : systemHook.continueTableIndex,
               }
           }
 
@@ -142,7 +143,26 @@ import systemHook from '@/config/systemHook'
           let column = [];
           if(this.indexObj && this.indexObj.show){
               if(this.indexObj.fixed){
-                  column = [
+                  column = this.indexObj.continue 
+                  ? [
+                    {
+                      title: this.$i18n.t("序号"),
+                      key: "index",
+                      width: 70,
+                      align: "center",
+                      fixed: "left",
+                      render: (h, params) => {
+                        return h(
+                          "span",
+                          {},
+                          (this.page.curIndex - 1) * this.page.pageSize +
+                            params.index +
+                            1
+                        );
+                      },
+                    },
+                  ] 
+                  : [
                       {
                           title: this.$i18n.t('序号'),
                           type: 'index',
@@ -150,16 +170,34 @@ import systemHook from '@/config/systemHook'
                           align: 'center',
                           fixed: "left"
                       },
-                  ]
+                    ]
               }else{
-                  column = [
+                  column = this.indexObj.continue 
+                  ? [
+                      {
+                        title: this.$i18n.t("序号"),
+                        key: "index",
+                        width: 70,
+                        align: "center",
+                        render: (h, params) => {
+                          return h(
+                            "span",
+                            {},
+                            (this.page.curIndex - 1) * this.page.pageSize +
+                              params.index +
+                              1
+                          );
+                        },
+                      },
+                    ]
+                  : [
                       {
                           title: this.$i18n.t('序号'),
                           type: 'index',
                           width: 70,
                           align: 'center'
                       },
-                  ]
+                    ]
               }
           }
 
