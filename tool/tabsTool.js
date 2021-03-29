@@ -35,10 +35,10 @@ export default class tabsTool{
         menu.close = menu.close===false?false:true
         let params = {menuId:item.menuId,respId:store.state.user.currentResp.responsibilityId}
         let query = routerController.history.current.query
-        if(query.menuId){
-            params.menuId = query.menuId
-        }else{
+        if(item.menuId){
             params.menuId = item.menuId
+        }else{
+            params.menuId = query.menuId
         }
         if(query.respId){
             params.respId = query.respId
