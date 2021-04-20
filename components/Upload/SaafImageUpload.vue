@@ -19,7 +19,7 @@
                     <div class="text" v-if="!file.error">{{file.progress}}%</div>
                     <div class="text" v-else="file.error">{{file.error.msg}}</div>
                 </div>
-                <Icon @click="close(file,index)" class="close" size="26" type="ios-close-circle" />
+                <Icon v-if="!hideClose" @click="close(file,index)" class="close" size="26" type="ios-close-circle" />
             </div>
             <div class="img-item add-icon" @click="click()" v-show="filesList.length<maximum">
                 <Icon type="ios-add" size="40"/>
@@ -57,6 +57,10 @@ export default {
         maximum: {
             type: Number
         },
+        hideClose: {
+            type: Boolean,
+            default: false
+        }
         // files: Array,
     },
     model: {
