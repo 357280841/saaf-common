@@ -11,8 +11,8 @@
     <div>
         <SaafListPageHeader ref="SaafListPageHeader">
             <ButtonGroup size="small" class="mr10" v-if="!pageHeader.hideQueryBtn">
-                <Button size="small" @click="$emit('find')"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
-                <Button size="small" @click="$emit('reset')"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
+                <Button size="small" @click="find()"><span class="fa fa-search pr5"></span>{{$i18n.t('搜索')}}</Button>
+                <Button size="small" @click="reset()"><span class="fa fa-undo pr5"></span>{{$i18n.t('重置')}}</Button>
             </ButtonGroup>
             <div style="display: inline-block">
                 <slot name="btnGroup"></slot>
@@ -31,6 +31,8 @@
 </template>
 <script>
     import {btnGroupTool} from 'saaf-common'
+    import * as lodash from 'lodash'
+    import systemHook from "@/config/systemHook";
     export default {
       props:{
           pageHeader: {
@@ -55,7 +57,7 @@
       data () {
         return {
           functionList: {},
-          menuResource: {}
+          menuResource: {},
         }
       },
       mounted () {
@@ -64,6 +66,12 @@
         this.formatFunctionList()
       },
       methods: {
+          find:lodash.debounce(function() {
+            this.$emit('find')
+          },systemHook.debounceTime?systemHook.debounceTime:500,{leading: true,trailing: false}),
+          reset:lodash.debounce(function() {
+            this.$emit('reset')
+          },1500,{leading: true,trailing: false}),
           formatFunctionList(){
             //   this.functionList = btnGroupTool.formatFunctionList(this.pageHeader.functionList, this.currentRow, this.$refs.SaafDelModalV2)
             let val = this.pageHeader.functionList

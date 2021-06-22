@@ -14,7 +14,7 @@
         v-for="(item,key) in btnList" 
         v-if="functionList[item.resourceCode]&&(functionList[item.resourceCode].show?functionList[item.resourceCode].show():true)"
         :disabled="functionList[item.resourceCode].disabled?functionList[item.resourceCode].disabled():false"
-        @click="functionList[item.resourceCode].fun?functionList[item.resourceCode].fun():functionList[item.resourceCode]()"
+        @click="btnFun(item)"
         :key="key"
         ><span class="pr5" :class="item.resIcon"></span>{{item.resourceName}}</Button>
     </ButtonGroup>
@@ -22,6 +22,8 @@
 <script>
 import {fetch} from '@/page/pageConfig/index'
 import { mapState, mapMutations } from 'vuex'
+import * as lodash from 'lodash'
+import systemHook from "@/config/systemHook";
 export default {
     props:{
         menuId: {
@@ -60,6 +62,9 @@ export default {
         this.findBaseResourceByRespMenuId()
     },
     methods: {
+        btnFun:lodash.debounce(function(item) {
+            this.functionList[item.resourceCode].fun?this.functionList[item.resourceCode].fun():this.functionList[item.resourceCode]()
+        },systemHook.debounceTime?systemHook.debounceTime:500,{leading: true,trailing: false}),
         findBaseResourceByRespMenuId(){
             // let query = this.$route.query
             fetch.baseResourceService_findBaseResourceByRespMenuId({
