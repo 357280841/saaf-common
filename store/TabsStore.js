@@ -2,12 +2,13 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:05
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2019-11-22 10:36:00
+ * @Last Modified time: 2021-07-08 10:10:52
  */
 
 import Vue from 'vue'
 import StoreCommon from './StoreCommon'
 import { sessionStorageTool,tabsTool } from '../index'
+import localStorageTool from '../tool/localStorageTool'
 export default {
   state: {
     tabList:  {},
@@ -35,7 +36,7 @@ export default {
       }else if(typeof item == 'string'){
         state.activeTab = state.tabList[item]
       }
-      sessionStorageTool.save('tabStore',state)
+      localStorageTool.save('tabStore',state)
     },
     UPDATE_TAB_KEY_LIST(state){
       let em = {}
@@ -46,10 +47,10 @@ export default {
         i++
       }
       state.keyEnumerate = em;
-      sessionStorageTool.save('tabStore',state)
+      localStorageTool.save('tabStore',state)
     },
     INIT_TAB(state){
-      let tabStore = sessionStorageTool.get('tabStore')
+      let tabStore = localStorageTool.get('tabStore')
       if(tabStore){
         state.tabList = tabStore.tabList
         state.activeTab = tabStore.activeTab
@@ -62,7 +63,7 @@ export default {
       state.tabList = {}
       state.activeTab = {}
       state.keyEnumerate = {}
-      sessionStorageTool.remove('tabStore')
+      localStorageTool.remove('tabStore')
       // StoreCommon.commit('INIT_HOME')
     },
     INIT_HOME(state){

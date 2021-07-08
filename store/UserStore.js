@@ -2,7 +2,7 @@
  * @Author: zhengxiaowen
  * @Date: 2018-09-21 09:22:09
  * @Last Modified by: zhengxiaowen
- * @Last Modified time: 2020-05-15 19:32:45
+ * @Last Modified time: 2021-07-08 10:11:19
  */
 
 import { localStorageTool, sessionStorageTool, tabsTool } from '../index'
@@ -99,12 +99,12 @@ export default {
       state.menuList = data
     },
     INIT_LANGUAGE(state) {
-      state.currentLanguage = sessionStorageTool.get('currentLanguage')?sessionStorageTool.get('currentLanguage'):state.languageList[0]
+      state.currentLanguage = localStorageTool.get('currentLanguage')?localStorageTool.get('currentLanguage'):state.languageList[0]
     },
     CHANGE_LANGUAGE(state,data) {
       state.currentLanguage = data
       StoreCommon.commit('CLEAN_TAB')
-      sessionStorageTool.save('currentLanguage', data)
+      localStorageTool.save('currentLanguage', data)
       // window.location.href = '/#/main'
       // routerController.replace('/main')
       window.location.reload()

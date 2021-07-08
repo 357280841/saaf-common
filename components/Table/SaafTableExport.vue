@@ -94,6 +94,7 @@
                 };
 
                 sessionStorage.setItem("downloadParams", JSON.stringify(p));
+                localStorage.setItem("downloadParams", JSON.stringify(p));
                 window.open("/" + platform.systemContext + "/export.html")
             }
         }
