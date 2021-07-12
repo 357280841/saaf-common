@@ -12,7 +12,7 @@
         <div class="pb50">
             <h3>SaafImageUpload</h3>
             
-            <SaafImageUpload ref="SaafImageUpload" v-model="files" />
+            <SaafImageUpload ref="SaafImageUpload" v-model="files" :maximum="5"/>
             <div class="pt10">
                 <div v-for="item in files">
                     <span class="pr10">id: {{item.id}}</span>
@@ -45,22 +45,22 @@ export default {
                     "lastUpdatedBy": null,
                     "lastUpdateDate": null,
                     "id": 64,
-                    "fileId": "B1029C645068A11AA929E78A586FFFC8",
-                    "fileName": "0",
-                    "fileType": "image/png",
+                    "filesId": "B1029C645068A11AA929E78A586FFFC8",
+                    "filesName": "0",
+                    "filesType": "image/png",
                     "suffixName": null,
                     "functionId": null,
                     "businessId": null,
                     "originalFileName": "0.png",
-                    "fileStoreSystem": null,
-                    "fileStoreType": null,
-                    "filePath": null,
+                    "filesStoreSystem": null,
+                    "filesStoreType": null,
+                    "filesPath": null,
                     "rootPath": null,
                     "bucketName": null,
                     "status": null,
-                    "fileSize": null,
-                    "fileDesc": null,
-                    "fileUrl": "http://121.36.159.44/11/1/0000/B1029C645068A11AA929E78A586FFFC8.png",
+                    "filesSize": null,
+                    "filesDesc": null,
+                    "filesUrl": "http://121.36.159.44/11/1/0000/B1029C645068A11AA929E78A586FFFC8.png",
                     "deleteFlag": 0
                 },
                 {
@@ -70,22 +70,22 @@ export default {
                     "lastUpdatedBy": null,
                     "lastUpdateDate": null,
                     "id": 66,
-                    "fileId": "F73B1920CEEE4ADEB5E9A23803FC4349",
-                    "fileName": "0 (1)",
-                    "fileType": "image/png",
+                    "filesId": "F73B1920CEEE4ADEB5E9A23803FC4349",
+                    "filesName": "0 (1)",
+                    "filesType": "image/png",
                     "suffixName": null,
                     "functionId": null,
                     "businessId": null,
                     "originalFileName": "0 (1).png",
-                    "fileStoreSystem": null,
-                    "fileStoreType": null,
-                    "filePath": null,
+                    "filesStoreSystem": null,
+                    "filesStoreType": null,
+                    "filesPath": null,
                     "rootPath": null,
                     "bucketName": null,
                     "status": null,
-                    "fileSize": null,
-                    "fileDesc": null,
-                    "fileUrl": "http://121.36.159.44/11/1/0000/F73B1920CEEE4ADEB5E9A23803FC4349.png",
+                    "filesSize": null,
+                    "filesDesc": null,
+                    "filesUrl": "http://121.36.159.44/11/1/0000/F73B1920CEEE4ADEB5E9A23803FC4349.png",
                     "deleteFlag": 0
                 }
             ],

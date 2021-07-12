@@ -9,11 +9,11 @@
 
 <template>
     <div>
-        <h3>图片上传：</h3>
+<!--        <h3>图片上传：</h3>-->
         <div class="img-box">
             <div class="img-item" v-for="(file,index) in filesList">
                 <img v-if="file.thumb" :src="file.thumb" />
-                <img v-else="file.fileObj.id" :src="`${getImg}?id=${file.fileObj.id}`" />
+                <img v-else="file.fileObj.previewUrl" :src="`${file.fileObj.previewUrl}`" />
                 <div class="progress-box" v-if="file.active || (file.progress !== '0.00' && file.progress !== '100.00')">
                     <div class="progress" :style="{width: file.progress + '%'}" role="progressbar"></div>
                     <div class="text" v-if="!file.error">{{file.progress}}%</div>
